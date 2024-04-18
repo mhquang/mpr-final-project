@@ -1,37 +1,38 @@
-import { useContext, useEffect, useState } from "react";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar } from "expo-status-bar";
-import HowToPlayScreen from "./screens/HowToPlayScreen";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import LoginScreen from "./screens/LoginScreen";
-import SignupScreen from "./screens/SignupScreen";
-import WelcomeScreen from "./screens/WelcomeScreen";
-import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import IconButton from "./components/ui/IconButton";
-import * as SplashScreen from "expo-splash-screen";
+import { useContext, useEffect, useState } from 'react';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from 'expo-status-bar';
+import HowToPlayScreen from './screens/HowToPlayScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
+import AuthContextProvider, { AuthContext } from './store/auth-context';
+import IconButton from './components/ui/IconButton';
+import * as SplashScreen from 'expo-splash-screen';
+import SetupPlayerScreen from './screens/SetupPlayerScreen';
 
 const Stack = createNativeStackNavigator();
 function AuthStack() {
   const navigation = useNavigation();
   function handlePress() {
-    navigation.navigate("HowtoPlay");
+    navigation.navigate('HowtoPlay');
   }
 
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: "#1A1A1A" },
-        headerTintColor: "#1A1A1A",
+        headerTintColor: '#1A1A1A',
         contentStyle: { backgroundColor: "#1A1A1A" },
         headerRight: () => (
           <IconButton
-            icon={"questioncircleo"}
+            icon={'questioncircleo'}
             size={30}
-            color={"#D3FD25"}
+            color={'#D3FD25'}
             onPress={handlePress}
           />
-        ),
+        )
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -47,10 +48,24 @@ function AuthenticatedStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: "#1A1A1A" },
-        headerTintColor: "white",
+        headerTintColor: '#1A1A1A',
         contentStyle: { backgroundColor: "#1A1A1A" },
       }}
     >
+      <Stack.Screen
+        name="Setup"
+        component={SetupPlayerScreen}
+        options={{
+          headerRight: () => (
+            <IconButton
+              icon={"logout"}
+              color={'#D3FD25'}
+              size={30}
+              onPress={authCtx.logout}
+            />
+          ),
+        }}
+      />
       <Stack.Screen
         name="Welcome"
         component={WelcomeScreen}
@@ -58,7 +73,7 @@ function AuthenticatedStack() {
           headerRight: () => (
             <IconButton
               icon={"logout"}
-              color={"#D3FD25"}
+              color={'#D3FD25'}
               size={30}
               onPress={authCtx.logout}
             />
@@ -87,7 +102,7 @@ function Root() {
 
   useEffect(() => {
     async function fetchToken() {
-      const storedToken = await AsyncStorage.getItem("token");
+      const storedToken = await AsyncStorage.getItem('token');
 
       if (storedToken) {
         authCtx.authenticate(storedToken);

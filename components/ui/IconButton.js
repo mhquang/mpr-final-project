@@ -1,5 +1,5 @@
-import { Pressable, StyleSheet } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { Pressable, StyleSheet } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 function IconButton({ icon, color, size, onPress }) {
   return (

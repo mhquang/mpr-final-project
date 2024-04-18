@@ -1,9 +1,18 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 
-function Input({ label, keyboardType, secure, onUpdateValue, value }) {
+
+function Input({
+  label,
+  keyboardType,
+  secure,
+  onUpdateValue,
+  value,
+}) {
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.label}>
+        {label}
+      </Text>
       <TextInput
         style={styles.input}
         // autoCapitalize={false}
@@ -24,14 +33,14 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   label: {
-    color: "white",
+    color: 'white',
     marginBottom: 6,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
   input: {
     paddingVertical: 8,
     paddingHorizontal: 6,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 30,
     fontSize: 25,
   },

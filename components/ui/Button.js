@@ -1,4 +1,5 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+
 
 function Button({ children, onPress }) {
   return (
@@ -21,9 +22,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingVertical: 20,
     paddingHorizontal: 12,
-    backgroundColor: "#D3FD25",
+    backgroundColor: '#D3FD25',
     elevation: 2,
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -32,9 +33,9 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   buttonText: {
-    textAlign: "center",
-    color: "black",
+    textAlign: 'center',
+    color: 'black',
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: 'bold'
   },
 });

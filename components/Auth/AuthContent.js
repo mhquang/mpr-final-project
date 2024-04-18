@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Alert, StyleSheet, View, Text } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useState } from 'react';
+import { Alert, StyleSheet, View, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import FlatButton from "../ui/FlatButton";
-import AuthForm from "./AuthForm";
+import FlatButton from '../ui/FlatButton';
+import AuthForm from './AuthForm';
 
 function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
@@ -11,35 +11,33 @@ function AuthContent({ isLogin, onAuthenticate }) {
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     email: false,
     password: false,
-    confirmEmail: false,
     confirmPassword: false,
   });
 
   function switchAuthModeHandler() {
     if (isLogin) {
-      navigation.replace("Signup");
+      navigation.replace('Signup');
     } else {
-      navigation.replace("Login");
+      navigation.replace('Login');
     }
   }
 
   function submitHandler(credentials) {
-    let { email, confirmEmail, password, confirmPassword } = credentials;
+    let { email, password, confirmPassword } = credentials;
 
     email = email.trim();
     password = password.trim();
 
-    const emailIsValid = email.includes("@");
+    const emailIsValid = email.includes('@');
     const passwordIsValid = password.length > 6;
-    const emailsAreEqual = email === confirmEmail;
     const passwordsAreEqual = password === confirmPassword;
 
     if (
       !emailIsValid ||
       !passwordIsValid ||
-      (!isLogin && (!emailsAreEqual || !passwordsAreEqual))
+      (!isLogin && !passwordsAreEqual)
     ) {
-      Alert.alert("Invalid input", "Please check your entered credentials.");
+      Alert.alert('Invalid input', 'Please check your entered credentials.');
       setCredentialsInvalid({
         email: !emailIsValid,
         confirmEmail: !emailIsValid || !emailsAreEqual,
@@ -55,7 +53,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
     <View style={styles.authContent}>
       <View style={styles.loginContainer}>
         <Text style={styles.login}>
-          {isLogin ? "Log in" : "Create account"}
+          {isLogin ? 'Log in' : 'Create account'}
         </Text>
       </View>
       <AuthForm
@@ -65,7 +63,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
       />
       <View style={styles.buttons}>
         <FlatButton onPress={switchAuthModeHandler}>
-          {isLogin ? "Create an account" : "Log in now"}
+          {isLogin ? 'Create an account' : 'Log in now'}
         </FlatButton>
       </View>
     </View>
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 32,
     padding: 10,
     elevation: 2,
-    shadowColor: "black",
+    shadowColor: 'black',
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.35,
     shadowRadius: 4,
@@ -89,12 +87,12 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   loginContainer: {
-    alignItems: "center",
+    alignItems: 'center',
     paddingVertical: 85,
   },
   login: {
-    color: "white",
+    color: 'white',
     fontSize: 45,
-    fontWeight: "bold",
-  },
+    fontWeight: 'bold'
+  }
 });

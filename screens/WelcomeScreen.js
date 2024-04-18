@@ -1,10 +1,11 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { AuthContext } from "../store/auth-context";
+import axios from 'axios';
+import { useContext, useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { AuthContext } from '../store/auth-context';
+
 
 function WelcomeScreen() {
-  const [fetchedMessage, setFetchedMesssage] = useState("");
+  const [fetchedMessage, setFetchedMesssage] = useState('');
   const [error, setError] = useState(null);
 
   const authCtx = useContext(AuthContext);
@@ -34,8 +35,8 @@ function WelcomeScreen() {
   return (
     <View style={styles.rootContainer}>
       <Text style={styles.title}>Welcome!</Text>
-      <Text style={{ color: "white" }}>You authenticated successfully!</Text>
-      <Text style={{ color: "white" }}>Email: {authCtx.userData?.name}</Text>
+      <Text style={{ color: 'white' }}>You authenticated successfully!</Text>
+      <Text style={{ color: 'white' }}>Name: {authCtx.userData?.name}</Text>
     </View>
   );
 }
@@ -45,24 +46,24 @@ export default WelcomeScreen;
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 32,
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginBottom: 8,
-    color: "white",
+    color: 'white'
   },
   errorContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   errorText: {
-    color: "red",
+    color: 'red',
     fontSize: 16,
-    textAlign: "center",
+    textAlign: 'center',
   },
 });

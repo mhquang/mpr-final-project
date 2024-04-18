@@ -1,15 +1,15 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { createContext, useEffect, useState } from "react";
-import { getUserData } from "../util/firebase";
+import { createContext, useEffect, useState } from 'react';
+import { getUserData } from '../util/firebase';
 
 export const AuthContext = createContext({
   userData: undefined,
-  token: "",
+  token: '',
   isAuthenticated: false,
-  getUserData: (userData) => {},
-  authenticate: (token) => {},
-  logout: () => {},
+  getUserData: (userData) => { },
+  authenticate: (token) => { },
+  logout: () => { },
 });
 
 function AuthContextProvider({ children }) {
@@ -18,7 +18,7 @@ function AuthContextProvider({ children }) {
 
   function authenticate(token) {
     setAuthToken(token);
-    AsyncStorage.setItem("token", token);
+    AsyncStorage.setItem('token', token);
   }
 
   function getUserData(userData) {
@@ -28,7 +28,7 @@ function AuthContextProvider({ children }) {
   function logout() {
     setAuthToken(null);
     setUserData(null);
-    AsyncStorage.removeItem("token");
+    AsyncStorage.removeItem('token');
   }
 
   const value = {
