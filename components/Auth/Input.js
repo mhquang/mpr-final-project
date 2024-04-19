@@ -1,5 +1,6 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native';
-
+import { View, Text, TextInput, StyleSheet } from "react-native";
+import { useFonts } from "expo-font";
+import { Colors } from "../../constants/styles";
 
 function Input({
   label,
@@ -7,20 +8,28 @@ function Input({
   secure,
   onUpdateValue,
   value,
+  placeholder,
 }) {
+  const [fontsLoaded] = useFonts({
+    Oddval: require("../../assets/fonts/oddval.semibold.ttf"),
+    NTSomicSemibold: require("../../assets/fonts/NTSomic-Semibold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.label}>
-        {label}
-      </Text>
+      <Text style={styles.label}>{label}</Text>
       <TextInput
         style={styles.input}
-        // autoCapitalize={false}
         autoCapitalize="none"
         keyboardType={keyboardType}
         secureTextEntry={secure}
         onChangeText={onUpdateValue}
         value={value}
+        textAlignVertical="center"
+        placeholder={placeholder}
       />
     </View>
   );
@@ -33,15 +42,19 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   label: {
-    color: 'white',
+    color: Colors.white,
     marginBottom: 6,
-    fontWeight: 'bold'
+    fontWeight: "bold",
+    fontFamily: "Oddval",
+    fontSize: 20,
   },
   input: {
-    paddingVertical: 8,
-    paddingHorizontal: 6,
-    backgroundColor: 'white',
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    backgroundColor: Colors.white,
     borderRadius: 30,
-    fontSize: 25,
+    fontSize: 15,
+    fontFamily: "NTSomicSemibold",
+    color: Colors.lightGray,
   },
 });

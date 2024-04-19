@@ -46,6 +46,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           value={enteredEmail}
           keyboardType="email-address"
           isInvalid={emailIsInvalid}
+          placeholder={'username@gmail.com'}
         />
         <Input
           label="Password"
@@ -53,6 +54,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
           secure
           value={enteredPassword}
           isInvalid={passwordIsInvalid}
+          placeholder={'password'}
         />
         {!isLogin && (
           <Input
@@ -64,11 +66,12 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
             secure
             value={enteredConfirmPassword}
             isInvalid={passwordsDontMatch}
+            placeholder={'confirm password'}
           />
         )}
         <View style={styles.buttons}>
           <Button onPress={submitHandler}>
-            {isLogin ? 'Log In' : 'Create an account'}
+            {isLogin ? 'Log in' : 'Create an account'}
           </Button>
         </View>
       </View>
@@ -80,6 +83,6 @@ export default AuthForm;
 
 const styles = StyleSheet.create({
   buttons: {
-    marginTop: 12,
+    marginTop: 15,
   },
 });

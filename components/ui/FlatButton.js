@@ -1,8 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-
+import { useFonts } from "expo-font";
 import { Colors } from '../../constants/styles';
 
 function FlatButton({ children, onPress }) {
+  const [fontsLoaded] = useFonts({
+    NTSomicSemibold: require("../../assets/fonts/NTSomic-Semibold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <Pressable
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
@@ -19,8 +25,7 @@ export default FlatButton;
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 18,
-    marginHorizontal: 60,
+    paddingVertical: 5,
     borderRadius: 30,
   },
   pressed: {
@@ -28,7 +33,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    color: Colors.primary100,
-    fontWeight: 'bold'
+    color: Colors.white,
+    fontFamily: "NTSomicSemibold",
+    fontSize: 16
   },
 });

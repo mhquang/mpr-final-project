@@ -1,9 +1,12 @@
-import { useState } from 'react';
-import { Alert, StyleSheet, View, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useState } from "react";
+import { Alert, StyleSheet, View, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { Colors } from "../../constants/styles";
 
-import FlatButton from '../ui/FlatButton';
-import AuthForm from './AuthForm';
+import FlatButton from "../ui/FlatButton";
+import AuthForm from "./AuthForm";
+
 
 function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
@@ -14,11 +17,18 @@ function AuthContent({ isLogin, onAuthenticate }) {
     confirmPassword: false,
   });
 
+  const [fontsLoaded] = useFonts({
+    Oddval: require("../../assets/fonts/oddval.semibold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   function switchAuthModeHandler() {
     if (isLogin) {
-      navigation.replace('Signup');
+      navigation.navigate("Signup");
     } else {
-      navigation.replace('Login');
+      navigation.navigate("Login");
     }
   }
 
@@ -28,16 +38,12 @@ function AuthContent({ isLogin, onAuthenticate }) {
     email = email.trim();
     password = password.trim();
 
-    const emailIsValid = email.includes('@');
+    const emailIsValid = email.includes("@");
     const passwordIsValid = password.length > 6;
     const passwordsAreEqual = password === confirmPassword;
 
-    if (
-      !emailIsValid ||
-      !passwordIsValid ||
-      (!isLogin && !passwordsAreEqual)
-    ) {
-      Alert.alert('Invalid input', 'Please check your entered credentials.');
+    if (!emailIsValid || !passwordIsValid || (!isLogin && !passwordsAreEqual)) {
+      Alert.alert("Invalid input", "Please check your entered credentials.");
       setCredentialsInvalid({
         email: !emailIsValid,
         confirmEmail: !emailIsValid || !emailsAreEqual,
@@ -53,7 +59,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
     <View style={styles.authContent}>
       <View style={styles.loginContainer}>
         <Text style={styles.login}>
-          {isLogin ? 'Log in' : 'Create account'}
+          {isLogin ? "Log in" : "Create Account"}
         </Text>
       </View>
       <AuthForm
@@ -63,7 +69,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
       />
       <View style={styles.buttons}>
         <FlatButton onPress={switchAuthModeHandler}>
-          {isLogin ? 'Create an account' : 'Log in now'}
+          {isLogin ? "Create an account" : "Log in now"}
         </FlatButton>
       </View>
     </View>
@@ -75,24 +81,21 @@ export default AuthContent;
 const styles = StyleSheet.create({
   authContent: {
     flex: 1,
-    marginHorizontal: 32,
-    padding: 10,
-    elevation: 2,
-    shadowColor: 'black',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.35,
-    shadowRadius: 4,
+    marginHorizontal: 25,
   },
   buttons: {
-    marginTop: 8,
+    marginTop: 10
   },
   loginContainer: {
-    alignItems: 'center',
-    paddingVertical: 85,
+    alignItems: "center",
+    marginTop: 100,
+    marginBottom:30
   },
   login: {
-    color: 'white',
-    fontSize: 45,
-    fontWeight: 'bold'
-  }
+    color: Colors.white,
+    fontSize: 36,
+    fontWeight: "bold",
+    fontFamily: "Oddval",
+    textAlign: "center"
+  },
 });

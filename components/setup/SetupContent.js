@@ -1,39 +1,47 @@
-import { useState } from 'react';
-import { Alert, StyleSheet, View, Text } from 'react-native';
+import { useState } from "react";
+import { Alert, StyleSheet, View, Text } from "react-native";
+import { useFonts } from "expo-font";
 
-import SetupUser from './SetupUser';
+import SetupUser from "./SetupUser";
+import { Colors } from "../../constants/styles";
 
 function SetupContent({ onSetup }) {
-
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     userName: false,
+    gender: false,
   });
 
+  const [fontsLoaded] = useFonts({
+    Oddval: require("../../assets/fonts/oddval.semibold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   function submitHandler(credentials) {
-    let { userName } = credentials;
+    let { userName, gender } = credentials;
 
     userName = userName.trim();
+    gender = gender.trim();
 
     const userNameIsValid = userName.length > 3;
-
-    if (
-      !userNameIsValid
-    ) {
-      Alert.alert('Invalid input', 'Please check your entered credentials.');
+    const genderIsValid =
+      gender.length > 0 && (gender === "Male" || gender === "Female");
+    if (!userNameIsValid || !genderIsValid) {
+      Alert.alert("Invalid input", "Please check your entered input.");
       setCredentialsInvalid({
         userName: !userNameIsValid,
+        gender: !genderIsValid,
       });
       return;
     }
-    onSetup({ userName });
+    onSetup({ userName, gender });
   }
 
   return (
     <View style={styles.authContent}>
       <View style={styles.loginContainer}>
-        <Text style={styles.login}>
-          Setup
-        </Text>
+        <Text style={styles.login}>Setup</Text>
       </View>
       <SetupUser
         onSubmit={submitHandler}
@@ -48,24 +56,21 @@ export default SetupContent;
 const styles = StyleSheet.create({
   authContent: {
     flex: 1,
-    marginHorizontal: 32,
-    padding: 10,
-    elevation: 2,
-    shadowColor: 'black',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.35,
-    shadowRadius: 4,
+    marginHorizontal: 25,
   },
   buttons: {
-    marginTop: 8,
+    marginTop: 10,
   },
   loginContainer: {
-    alignItems: 'center',
-    paddingVertical: 85,
+    alignItems: "center",
+    marginTop: 100,
+    marginBottom: 30,
   },
   login: {
-    color: 'white',
-    fontSize: 45,
-    fontWeight: 'bold'
-  }
+    color: Colors.white,
+    fontSize: 36,
+    fontWeight: "bold",
+    fontFamily: "Oddval",
+    textAlign: "center",
+  },
 });

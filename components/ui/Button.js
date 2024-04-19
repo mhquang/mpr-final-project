@@ -1,7 +1,14 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useFonts } from "expo-font";
+import { Colors } from "../../constants/styles";
 
 function Button({ children, onPress }) {
+  const [fontsLoaded] = useFonts({
+    Oddval: require("../../assets/fonts/oddval.semibold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <Pressable
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
@@ -22,20 +29,15 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     paddingVertical: 20,
     paddingHorizontal: 12,
-    backgroundColor: '#D3FD25',
-    elevation: 2,
-    shadowColor: 'black',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
+    backgroundColor: Colors.lightGreen,
   },
   pressed: {
     opacity: 0.7,
   },
   buttonText: {
-    textAlign: 'center',
-    color: 'black',
-    fontSize: 16,
-    fontWeight: 'bold'
+    textAlign: "center",
+    color: Colors.black,
+    fontSize: 20,
+    fontFamily: "Oddval",
   },
 });
