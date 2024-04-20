@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../store/auth-context";
 import { Colors } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
@@ -9,7 +9,6 @@ import { useFonts } from "expo-font";
 import IconButton from "./IconButton";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import * as Progress from "react-native-progress";
 
 function Header() {
   const authCtx = useContext(AuthContext);

@@ -1,16 +1,35 @@
-import { useContext, useState } from "react";
+import { useContext, useLayoutEffect, useState } from "react";
 import { Alert } from "react-native";
-import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { AuthContext } from "../store/auth-context";
-import { getUserData, updateUserData } from "../util/firebase";
-import SetupContent from "../components/setup/SetupContent";
 import { useNavigation } from "@react-navigation/native";
+import { getUserData, updateUserData } from "../util/firebase";
+
+import LoadingOverlay from "../components/ui/LoadingOverlay";
+import SetupContent from "../components/setup/SetupContent";
 import HomeScreen from "./HomeScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function SetupPlayerScreen() {
   const [isSettingup, setIsSettingup] = useState(false);
   const navigation = useNavigation();
   const authCtx = useContext(AuthContext);
+
+  useLayoutEffect(() => {
+    async function fetchUserData() {
+      try {
+        const value = await AsyncStorage.getItem("userData");
+        if (value !== null) {
+          // We have data!!
+          console.log(value);
+          authCtx.getUserData(JSON.parse(value));
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchUserData();
+  }, []);
+
   const email = authCtx.userData?.userId;
   const name = authCtx.userData?.name;
   const isName = !!name;

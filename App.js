@@ -5,7 +5,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StatusBar } from "expo-status-bar";
 import { Colors } from "./constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 import HowToPlayScreen from "./screens/HowToPlayScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
