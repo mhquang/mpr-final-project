@@ -1,11 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StatusBar } from "expo-status-bar";
 import { Colors } from "./constants/styles";
-import { Ionicons } from "@expo/vector-icons";
-
 import HowToPlayScreen from "./screens/HowToPlayScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoginScreen from "./screens/LoginScreen";
@@ -14,18 +11,9 @@ import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import IconButton from "./components/ui/IconButton";
 import * as SplashScreen from "expo-splash-screen";
 import SetupPlayerScreen from "./screens/SetupPlayerScreen";
-import HomeScreen from "./screens/HomeScreen";
-import LearningScreen from "./screens/LearningScreen";
-import HealthScreen from "./screens/HealthScreen";
-import WorkScreen from "./screens/WorkScreen";
-import FriendsScreen from "./screens/FriendsScreen";
-import RelaxScreen from "./screens/RelaxScreen";
-import InvestmentScreen from "./screens/InvestmentScreen";
-import Header from "./components/ui/Header";
+import MainScreen from "./screens/MainScreen";
 
 const Stack = createNativeStackNavigator();
-const BottomTab = createBottomTabNavigator();
-
 function AuthStack() {
   const navigation = useNavigation();
   function handlePress() {
@@ -54,6 +42,9 @@ function AuthStack() {
               onPress={handlePress}
             />
           ),
+          headerLeft: () => null,
+          headerBackVisible: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -78,9 +69,11 @@ function AuthStack() {
               onPress={handlePress}
             />
           ),
+          headerLeft: () => null,
+          headerBackVisible: false,
+          gestureEnabled: false,
         }}
       />
-      <Stack.Screen name="Setup" component={SetupPlayerScreen} />
     </Stack.Navigator>
   );
 }
@@ -93,7 +86,16 @@ function Authenticated() {
         contentStyle: { backgroundColor: Colors.background },
       }}
     >
-      <Stack.Screen name="MainScreen" component={MainScreen} />
+      <Stack.Screen name="Setup" component={SetupPlayerScreen} />
+      <Stack.Screen
+        name="MainScreen"
+        component={MainScreen}
+        options={{
+          headerLeft: () => null,
+          headerBackVisible: false,
+          gestureEnabled: false,
+        }}
+      />
       <Stack.Screen
         name="HowtoPlay"
         component={HowToPlayScreen}
@@ -103,108 +105,10 @@ function Authenticated() {
           headerShown: true,
           headerStyle: { backgroundColor: Colors.background },
           headerShadowVisible: false,
-          headerTintColor: Colors.white
+          headerTintColor: Colors.white,
         }}
       />
     </Stack.Navigator>
-  );
-}
-
-function MainScreen() {
-
-  return (
-    <BottomTab.Navigator
-      initialRouteName="Home"
-      sceneContainerStyle={{ backgroundColor: Colors.background, paddingBottom: 80,}}
-      screenOptions={{
-        header: () => {
-          return <Header />;
-        },
-        tabBarShowLabel: false,
-        tabBarInactiveTintColor: Colors.lightGray,
-        tabBarActiveTintColor: Colors.white,
-        tabBarStyle: {
-          position: "absolute",
-          backgroundColor: Colors.black,
-          marginBottom: 10,
-          left: 20,
-          right: 20,
-          borderRadius: 40,
-          paddingBottom: 0,
-          height: 70,
-          paddingHorizontal: 10,
-          borderTopWidth: 0,
-        },
-      }}
-    >
-      <BottomTab.Screen
-        name="Health"
-        component={HealthScreen}
-        options={{
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="heart" color={color} size={focused ? 40 : 30} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Work"
-        component={WorkScreen}
-        options={{
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="briefcase" color={color} size={focused ? 40 : 30} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Learning"
-        component={LearningScreen}
-        options={{
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="book" color={color} size={focused ? 38 : 30} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name="person-circle"
-              color={color}
-              size={focused ? 45 : 30}
-            />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Friends"
-        component={FriendsScreen}
-        options={{
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="people" color={color} size={focused ? 40 : 30} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Relax"
-        component={RelaxScreen}
-        options={{
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="happy" color={color} size={focused ? 40 : 30} />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="Investment"
-        component={InvestmentScreen}
-        options={{
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name="wallet" color={color} size={focused ? 40 : 30} />
-          ),
-        }}
-      />
-    </BottomTab.Navigator>
   );
 }
 

@@ -8,6 +8,7 @@ import LoadingOverlay from "../components/ui/LoadingOverlay";
 import SetupContent from "../components/setup/SetupContent";
 import HomeScreen from "./HomeScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import MainScreen from "./MainScreen";
 
 function SetupPlayerScreen() {
   const [isSettingup, setIsSettingup] = useState(false);
@@ -40,11 +41,11 @@ function SetupPlayerScreen() {
     setIsSettingup(true);
     try {
       await updateUserData("userCharacteristics", email, {
-        level: 1,
+        savings: 0,
         age: 0,
         userId: email,
         health: 100,
-        iq: 110,
+        iq: 100,
         money: 1000,
         happiness: 100,
         name: userName,
@@ -53,7 +54,7 @@ function SetupPlayerScreen() {
       const userData = await getUserData("userCharacteristics", email);
       authCtx.getUserData(userData);
       console.log(userData);
-      navigation.navigate("Home");
+      navigation.navigate("MainScreen");
     } catch (error) {
       Alert.alert(
         "Authentication failed!",
@@ -66,7 +67,7 @@ function SetupPlayerScreen() {
     return <LoadingOverlay message="Get starting..." />;
   }
   if (isName) {
-    return <HomeScreen />;
+    return <MainScreen />;
   }
   return <SetupContent onSetup={handleSetup} />;
 }
