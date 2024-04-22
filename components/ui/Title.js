@@ -1,38 +1,40 @@
 import { View, Text, StyleSheet } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { Children } from "react";
+import { useFonts } from "expo-font";
+import { Colors } from "../../constants/styles";
 
 function Title({ children }) {
-    return (
-        <View style={styles.container}>
-            <Ionicons
-                name="water-outline"
-                size={20}
-                color={'white'}
-            />
-            <Text style={styles.title}>
-                {children}
-            </Text>
-            <Ionicons
-                name="water-outline"
-                size={20}
-                color={'white'}
-            />
-        </View>
-    )
+  const [fontsLoaded] = useFonts({
+    Oddval: require("../../assets/fonts/oddval.semibold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>{children}</Text>
+      <View style={styles.line}></View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 25,
-        color: 'white',
-        fontWeight: 'bold',
-    }
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: 20
+  },
+  title: {
+    fontSize: 25,
+    color: Colors.white,
+    fontFamily: "Oddval",
+    textAlign: "center",
+    marginRight: 5
+  },
+  line: {
+    flex: 1,
+    height: 2,
+    backgroundColor: Colors.white,
+  },
 });
 
 export default Title;

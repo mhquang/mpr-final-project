@@ -89,36 +89,36 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 40,
   },
   ageContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FFFFFF',
-    borderColor: '#D2FF1F',
-    width: 60, height: 60,
+    marginTop: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: Colors.white,
+    borderColor: Colors.lightGreen,
+    width: 60,
+    height: 60,
     borderRadius: 30,
-    borderWidth: 3,
-    marginHorizontal: 20,
+    borderWidth: 5,
+    marginHorizontal: 15,
+  },
+  age: {
+    color: Colors.black,
+    fontSize: 24,
+    fontFamily: "NTSomicBold",
   },
   infoContainer: {
-    flex: 2,
+    flex: 3,
   },
   indexContainer: {
-    flex: 3,
-    marginLeft: 20,
+    flex: 4,
+    marginLeft: 10,
   },
   iconButtonContainer: {
     paddingTop: 10,
     marginRight: 10,
-    justifyContent: 'space-between'
-  },
-  age: {
-    color: '#000000',
-    fontSize: 20,
-    fontFamily: 'NTSomicBold',
+    justifyContent: "space-between",
   },
   nameContainer: {
     flex: 1,
-    marginHorizontal: 10,
   },
   name: {
     fontFamily: "NTSomicBold",
@@ -128,7 +128,6 @@ const styles = StyleSheet.create({
   moneyContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal: 10,
     flex: 1,
   },
   money: {
