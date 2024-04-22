@@ -37,23 +37,24 @@ function Header() {
         </View>
         <View style={styles.moneyContainer}>
           <MaterialIcons name="savings" color={"pink"} size={24} />
-          <Text style={styles.money}>${authCtx.userData?.level}</Text>
+          <Text style={styles.money}>${authCtx.userData?.savings}</Text>
         </View>
       </View>
 
       <View style={styles.indexContainer}>
         <View style={styles.innerIndexContainer}>
           <Ionicons name="heart" color={Colors.redHealth} size={24} />
+          <Text style={styles.money}>{authCtx.userData?.health}</Text>
         </View>
 
         <View style={styles.innerIndexContainer}>
           <FontAwesome6 name="brain" color={Colors.blueIQ} size={24} />
-          <Text>{authCtx.userData?.iq}</Text>
+          <Text style={styles.money}>{authCtx.userData?.iq}</Text>
         </View>
 
         <View style={styles.innerIndexContainer}>
           <Ionicons name="happy" color={Colors.yellowHappiness} size={24} />
-          <Text>{authCtx.userData?.happiness}</Text>
+          <Text style={styles.money}>{authCtx.userData?.happiness}</Text>
         </View>
       </View>
 
@@ -88,13 +89,22 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 40,
   },
   ageContainer: {
-    flex: 1,
+    marginTop: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+    borderColor: '#D2FF1F',
+    width: 60, height: 60,
+    borderRadius: 30,
+    borderWidth: 3,
+    marginHorizontal: 20,
   },
   infoContainer: {
     flex: 2,
   },
   indexContainer: {
     flex: 3,
+    marginLeft: 20,
   },
   iconButtonContainer: {
     paddingTop: 10,
@@ -102,7 +112,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   age: {
-    color: Colors.white,
+    color: '#000000',
+    fontSize: 20,
+    fontFamily: 'NTSomicBold',
   },
   nameContainer: {
     flex: 1,

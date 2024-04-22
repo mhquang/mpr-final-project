@@ -34,9 +34,7 @@ function SetupPlayerScreen() {
   const email = authCtx.userData?.userId;
   const name = authCtx.userData?.name;
   const isName = !!name;
-  // function handleSetup(input) {
-  //     console.log(input.userName);
-  // }
+
   async function handleSetup({ userName, gender }) {
     setIsSettingup(true);
     try {
