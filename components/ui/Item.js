@@ -86,6 +86,8 @@ const styles = StyleSheet.create({
     height: 200,
     justifyContent: "space-between",
     maxHeight: 200,
+    marginTop: 10,
+    width: 380,
   },
 
   innerContainer: {

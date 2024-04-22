@@ -1,32 +1,26 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import Item from "../components/ui/Item";
+import { useContext } from "react";
+import { AuthContext } from "../store/auth-context";
+
 
 function HomeScreen() {
-  const test = {
-    name: "Bachelor of Information Systems and Technology",
-    requirements: [
-      "Bachelor's degree in Artificial Intelligence",
-      "At least 18 years old",
-    ],
-    time: "1 year",
-    health: { isIncrease: true, index: "1" },
-    iq: { isIncrease: false, index: "1" },
-    happiness: { isIncrease: false, index: "2" },
-    money: "$800 - $1000",
-  };
+  const authCtx = useContext(AuthContext);
+  const gender = authCtx.userData?.userGender;
+  console.log(gender);
 
   return (
     <View style={styles.rootContainer}>
-      <Text style={styles.title}>Welcome!</Text>
-      <Item
-        name={test.name}
-        requirements={test.requirements}
-        time={test.time}
-        health={test.health}
-        iq={test.iq}
-        happiness={test.happiness}
-        money={test.money}
-      />
+      <View style={styles.imageContainer}>
+        <Image
+          source={gender === 'Male' ? require("../assets/images/Male/01.png") : require("../assets/images/Female/01.png")}
+          style={[styles.image,
+          {
+            width: gender === 'Male' ? 200 : 320,
+            height: gender === 'Male' ? 360 : 350
+          }]}
+        />
+      </View>
     </View>
   );
 }
@@ -36,7 +30,6 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
   },
   title: {
@@ -45,4 +38,12 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     color: "white",
   },
+  image: {
+    maxWidth: "80%",
+    marginBottom: 30,
+  },
+  imageContainer: {
+    flex: 1,
+    marginTop: 30,
+  }
 });
