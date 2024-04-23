@@ -6,7 +6,7 @@ import Title from "../components/ui/Title";
 function SportsScreen() {
   return (
     <View style={styles.rootContainer}>
-      <Title children={"Sports"} />
+      <Title>Sports</Title>
       {sports.map((item, index) => {
         return (
           <Item

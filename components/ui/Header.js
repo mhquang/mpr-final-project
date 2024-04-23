@@ -9,10 +9,13 @@ import { useFonts } from "expo-font";
 import IconButton from "./IconButton";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import * as Progress from "react-native-progress";
 
 function Header() {
   const authCtx = useContext(AuthContext);
   const navigation = useNavigation();
+
+  const health = (authCtx.userData?.health) / 100
 
   const [fontsLoaded] = useFonts({
     NTSomicBold: require("../../assets/fonts/NTSomic-Bold.ttf"),
@@ -44,7 +47,8 @@ function Header() {
       <View style={styles.indexContainer}>
         <View style={styles.innerIndexContainer}>
           <Ionicons name="heart" color={Colors.redHealth} size={24} />
-          <Text style={styles.money}>{authCtx.userData?.health}</Text>
+          {/* <Text style={styles.money}>{authCtx.userData?.health}</Text> */}
+          <Progress.Bar progress={health} width={100} />
         </View>
 
         <View style={styles.innerIndexContainer}>
