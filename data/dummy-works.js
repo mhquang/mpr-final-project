@@ -141,7 +141,7 @@ export const main_job = [{
     name: "DevOps Engineer",
     requirements: [
         "Computer Science degree",
-        "Software Engineering degree at least 95 IQ",
+        "Software Engineering degree",
         "At least 95 IQ"
     ],
     time: "12 mins",

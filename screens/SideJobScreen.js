@@ -18,6 +18,7 @@ function SideJobScreen() {
                 iq={item.iq}
                 happiness={item.happiness}
                 money={item.money}
+                btn={"Apply"}
               />
             );
           })}
