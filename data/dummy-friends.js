@@ -4,8 +4,6 @@ export const friends = [
         age: 10,
         gender: 'Male',
         hobbies: ['football', 'basketball'],
-        health: { isIncrease: true, index: "1" },
-        iq: { isIncrease: true, index: "1" },
         happiness: { isIncrease: true, index: "1" },
     },
     {
@@ -13,8 +11,6 @@ export const friends = [
         age: 10,
         gender: 'Male',
         hobbies: ['football', 'basketball'],
-        health: { isIncrease: true, index: "1" },
-        iq: { isIncrease: true, index: "1" },
         happiness: { isIncrease: true, index: "1" },
     },
     {
@@ -22,8 +18,6 @@ export const friends = [
         age: 10,
         gender: 'Male',
         hobbies: ['football', 'basketball'],
-        health: { isIncrease: true, index: "1" },
-        iq: { isIncrease: true, index: "1" },
         happiness: { isIncrease: true, index: "1" },
     },
     {
@@ -31,8 +25,6 @@ export const friends = [
         age: 10,
         gender: 'Male',
         hobbies: ['football', 'basketball'],
-        health: { isIncrease: true, index: "1" },
-        iq: { isIncrease: true, index: "1" },
         happiness: { isIncrease: true, index: "1" },
     },
     {
@@ -40,17 +32,13 @@ export const friends = [
         age: 10,
         gender: 'Male',
         hobbies: ['football', 'basketball'],
-        health: { isIncrease: true, index: "1" },
-        iq: { isIncrease: true, index: "1" },
         happiness: { isIncrease: true, index: "1" },
     },
     {
         name: 'John',
         age: 10,
-        gender: 'male',
+        gender: 'Female',
         hobbies: ['football', 'basketball'],
-        health: { isIncrease: true, index: "1" },
-        iq: { isIncrease: true, index: "1" },
         happiness: { isIncrease: true, index: "1" },
     },
 ];

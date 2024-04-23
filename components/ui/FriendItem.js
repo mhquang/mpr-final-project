@@ -2,165 +2,138 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
-import IndexText from "./TextIndex";
+import IndexText from "./IndexText";
 
-function FriendItem({ name, age, hobbies, gender, happiness, health, iq }) {
-    const [fontsLoaded] = useFonts({
-        NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
-        UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
-        UnboundedMedium: require("../../assets/fonts/Unbounded-Medium.ttf"),
-    });
-    if (!fontsLoaded) {
-        return null;
-    }
+function FriendItem({ name, age, hobbies, gender, happiness }) {
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
+    UnboundedMedium: require("../../assets/fonts/Unbounded-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
-    return (
-        <View style={styles.itemContainer}>
-            <View style={styles.innerContainer}>
-                <View style={styles.nameContainer}>
-                <Text style={styles.titleText}>Name: </Text>
-                <Text style={styles.title}>{name}</Text>
-                </View>
-                <Pressable
-                    style={({ pressed }) => [
-                        styles.applyButton,
-                        pressed && styles.pressed,
-                    ]}
-                >
-                    <Text style={styles.apply}>Add Friend</Text>
-                </Pressable>
-            </View>
-            <View style={styles.innerContainer}>
-                <View style={styles.requireContainer}>
-                    <Text style={styles.titleText}>Hobbies:</Text>
-                    {hobbies.map((hobby, index) => (
-                        <Text key={index} style={styles.require}>
-                            - {hobby}
-                        </Text>
-                    ))}
-                </View>
+  return (
+    <View style={styles.itemContainer}>
+      <View style={styles.innerContainer}>
+        <Text style={styles.name}>Name: {name}</Text>
+        <Pressable
+          style={({ pressed }) => [
+            styles.addFriendButton,
+            pressed && styles.pressed,
+          ]}
+        >
+          <Text style={styles.btn}>Add Friend</Text>
+        </Pressable>
+      </View>
 
-                <View style={styles.timeContainer}>
-                    {/* <Ionicons name="time-outline" size={20} /> */}
-                    <Text style={styles.titleText}>Age:</Text>
-                    <Text style={styles.age}>{age}</Text>
-                </View>
-            </View>
-            <View style={styles.innerContainer}>
-                <View style={styles.indexContainer}>
-                    {health && (
-                        <>
-                            <IndexText isIncrease={health.isIncrease}>
-                                {health.index}
-                            </IndexText>
-                            <Ionicons name="heart" color={Colors.redHealth} size={20} />
-                        </>
-                    )}
-                    {iq && (
-                        <>
-                            <IndexText isIncrease={iq.isIncrease}>{iq.index}</IndexText>
-                            <FontAwesome6 name="brain" color={Colors.blueIQ} size={20} />
-                        </>
-                    )}
-                    {happiness && (
-                        <>
-                            <IndexText isIncrease={happiness.isIncrease}>
-                                {happiness.index}
-                            </IndexText>
-                            <Ionicons name="happy" color={Colors.yellowHappiness} size={20} />
-                        </>
-                    )}
-                </View>
+      <View style={styles.innerContainer2}>
+        <View style={styles.informationContainer}>
+          <View style={styles.ageAndGenderContainer}>
+            <Text style={styles.inforText}>Age: {age}</Text>
+            <Text style={styles.inforText}>{gender}</Text>
+          </View>
 
-                <Text style={styles.money}>{gender}</Text>
-            </View>
+          <Text style={styles.title}>Hobbies:</Text>
+          {hobbies.map((hobby, index) => (
+            <Text key={index} style={styles.hobby}>
+              - {hobby}
+            </Text>
+          ))}
         </View>
-    );
+        <View style={styles.indexContainer}>
+          <IndexText isIncrease={happiness.isIncrease}>
+            {happiness.index}
+          </IndexText>
+          <Ionicons name="happy" color={Colors.yellowHappiness} size={25} />
+        </View>
+      </View>
+    </View>
+  );
 }
 
 export default FriendItem;
 
 const styles = StyleSheet.create({
-    itemContainer: {
-        backgroundColor: Colors.item,
-        marginHorizontal: 10,
-        width: "90%",
-        padding: 20,
-        borderRadius: 20,
-        height: 200,
-        justifyContent: "space-between",
-        maxHeight: 200,
-        marginTop: 10,
-        width: 380,
-    },
+  itemContainer: {
+    backgroundColor: Colors.item,
+    marginHorizontal: 20,
+    width: "90%",
+    padding: 20,
+    borderRadius: 20,
+    maxHeight: 200,
+    marginTop: 10,
+  },
 
-    innerContainer: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
+  innerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
 
-    title: {
-        fontFamily: "UnboundedMedium",
-        fontSize: 16,
-        flex: 1,
-        color: Colors.black,
-    },
+  name: {
+    fontFamily: "UnboundedMedium",
+    color: Colors.black,
+    fontSize: 23,
+  },
 
-    applyButton: {
-        backgroundColor: Colors.blueIQ,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 20,
-    },
+  addFriendButton: {
+    backgroundColor: Colors.blueIQ,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+  },
 
-    apply: {
-        fontFamily: "NTSomicMedium",
-        fontSize: 16,
-        color: Colors.darkBlue,
-    },
+  btn: {
+    fontFamily: "NTSomicMedium",
+    fontSize: 16,
+    color: Colors.darkBlue,
+  },
 
-    requireContainer: {
-        flex: 1,
-    },
-    require: {
-        fontFamily: "NTSomicMedium",
-        fontSize: 13,
-    },
+  innerContainer2: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginTop: 5,
+  },
 
-    timeContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
+  informationContainer: {
+    flex: 1,
+    justifyContent: "space-between",
+    flexDirection: "column",
+  },
 
-    age: {
-        marginLeft: 5,
-        fontFamily: "UnboundedMedium",
-        fontSize: 16,
-    },
+  ageAndGenderContainer: {
+    flexDirection: "row",
+    marginBottom: 8
+  },
 
-    indexContainer: {
-        flexDirection: "row",
-        alignItems: "center",
-        width: 150,
-    },
+  inforText: {
+    fontFamily: "UnboundedMedium",
+    color: Colors.black,
+    fontSize: 18,
+    marginRight: 30
+  },
 
-    money: {
-        fontFamily: "UnboundedSemibold",
-        fontSize: 18,
-    },
-    pressed: {
-        opacity: 0.7,
-    },
-    titleText: {
-        fontFamily: "UnboundedMedium",
-        color: Colors.black,
-        fontSize: 16
-    },
-    nameContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-    }
+  title: {
+    fontFamily: "NTSomicMedium",
+    fontSize: 18,
+    color: Colors.black,
+  },
+
+  hobby: {
+    fontFamily: "NTSomicMedium",
+    fontSize: 16,
+  },
+
+  indexContainer: {
+    justifyContent: "flex-start",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  pressed: {
+    opacity: 0.7,
+  },
 });

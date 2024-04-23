@@ -3,7 +3,7 @@ import { useFonts } from "expo-font";
 import { Colors } from "../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
-import IndexText from "./TextIndex";
+import IndexText from "./IndexText";
 
 function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const [fontsLoaded] = useFonts({
@@ -83,10 +83,10 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 20,
     borderRadius: 20,
-    height: 200,
     justifyContent: "space-between",
     maxHeight: 200,
     marginTop: 10,
+    gap: 20
   },
 
   innerContainer: {
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   require: {
     fontFamily: "NTSomicMedium",
-    fontSize: 13,
+    fontSize: 15,
   },
 
   timeContainer: {
