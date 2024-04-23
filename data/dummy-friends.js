@@ -2,37 +2,55 @@ export const friends = [
     {
         name: 'John',
         age: 10,
-        gender: 'male',
-        hobbies: ['football', 'basketball']
+        gender: 'Male',
+        hobbies: ['football', 'basketball'],
+        health: { isIncrease: true, index: "1" },
+        iq: { isIncrease: true, index: "1" },
+        happiness: { isIncrease: true, index: "1" },
     },
     {
         name: 'Jack',
         age: 10,
-        gender: 'male',
-        hobbies: ['football', 'basketball']
+        gender: 'Male',
+        hobbies: ['football', 'basketball'],
+        health: { isIncrease: true, index: "1" },
+        iq: { isIncrease: true, index: "1" },
+        happiness: { isIncrease: true, index: "1" },
+    },
+    {
+        name: 'John',
+        age: 10,
+        gender: 'Male',
+        hobbies: ['football', 'basketball'],
+        health: { isIncrease: true, index: "1" },
+        iq: { isIncrease: true, index: "1" },
+        happiness: { isIncrease: true, index: "1" },
+    },
+    {
+        name: 'John',
+        age: 10,
+        gender: 'Male',
+        hobbies: ['football', 'basketball'],
+        health: { isIncrease: true, index: "1" },
+        iq: { isIncrease: true, index: "1" },
+        happiness: { isIncrease: true, index: "1" },
+    },
+    {
+        name: 'John',
+        age: 10,
+        gender: 'Male',
+        hobbies: ['football', 'basketball'],
+        health: { isIncrease: true, index: "1" },
+        iq: { isIncrease: true, index: "1" },
+        happiness: { isIncrease: true, index: "1" },
     },
     {
         name: 'John',
         age: 10,
         gender: 'male',
-        hobbies: ['football', 'basketball']
-    },
-    {
-        name: 'John',
-        age: 10,
-        gender: 'male',
-        hobbies: ['football', 'basketball']
-    },
-    {
-        name: 'John',
-        age: 10,
-        gender: 'male',
-        hobbies: ['football', 'basketball']
-    },
-    {
-        name: 'John',
-        age: 10,
-        gender: 'male',
-        hobbies: ['football', 'basketball']
+        hobbies: ['football', 'basketball'],
+        health: { isIncrease: true, index: "1" },
+        iq: { isIncrease: true, index: "1" },
+        happiness: { isIncrease: true, index: "1" },
     },
 ];

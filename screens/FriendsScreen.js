@@ -1,21 +1,25 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import FriendListScreen from './FriendListScreen';
 
 function FriendsScreen() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>
-                Friends Screen
-            </Text>
-        </View>
+        <ScrollView>
+            <View style={styles.container}>
+                <View style={styles.sportsScreenContainer}>
+                    <FriendListScreen />
+                </View>
+            </View>
+        </ScrollView>
     )
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    sportsScreenContainer: {
+        flex: 1,
     },
     text: {
         color: 'white',
