@@ -84,7 +84,7 @@ export default FriendItem;
 const styles = StyleSheet.create({
     itemContainer: {
         backgroundColor: Colors.item,
-        marginHorizontal: 10,
+        marginHorizontal: 20,
         width: "90%",
         padding: 20,
         borderRadius: 20,
@@ -92,9 +92,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         maxHeight: 200,
         marginTop: 10,
-        width: 380,
     },
-
     innerContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
