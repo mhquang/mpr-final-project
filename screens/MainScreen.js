@@ -7,7 +7,6 @@ import WorkScreen from "./WorkScreen";
 import FriendsScreen from "./FriendsScreen";
 import RelaxScreen from "./RelaxScreen";
 import InvestmentScreen from "./InvestmentScreen";
-import Header from "../components/ui/Header";
 import HomeScreen from "./HomeScreen";
 
 const BottomTab = createBottomTabNavigator();
@@ -21,9 +20,7 @@ export function MainScreen() {
         paddingBottom: 80,
       }}
       screenOptions={{
-        header: () => {
-          return <Header />;
-        },
+        headerShown: false,
         tabBarShowLabel: false,
         tabBarInactiveTintColor: Colors.lightGray,
         tabBarActiveTintColor: Colors.white,
