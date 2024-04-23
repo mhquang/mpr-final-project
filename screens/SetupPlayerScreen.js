@@ -38,13 +38,13 @@ function SetupPlayerScreen() {
     setIsSettingup(true);
     try {
       await updateUserData("userCharacteristics", email, {
-        savings: 0,
+        savings: 500,
         age: 0,
         userId: email,
         health: 50,
-        iq: 100,
+        iq: 60,
         money: 1000,
-        happiness: 100,
+        happiness: 40,
         name: userName,
         userGender: gender,
       });
