@@ -17,6 +17,7 @@ function SportsScreen() {
                     iq={item.iq}
                     happiness={item.happiness}
                     money={item.money}
+                    btn={'Play'}
                 />
             })}
         </View>

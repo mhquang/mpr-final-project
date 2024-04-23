@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "./TextIndex";
 
-function Item({ name, requirements, time, health, iq, happiness, money }) {
+function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -25,7 +25,7 @@ function Item({ name, requirements, time, health, iq, happiness, money }) {
             pressed && styles.pressed,
           ]}
         >
-          <Text style={styles.apply}>Apply</Text>
+          <Text style={styles.apply}>{btn}</Text>
         </Pressable>
       </View>
       <View style={styles.innerContainer}>
