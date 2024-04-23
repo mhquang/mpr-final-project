@@ -1,9 +1,9 @@
 import { View, StyleSheet } from "react-native";
-import Item from "../components/ui/Item";
 import { sports } from "../data/dummy-sports";
+
+import Item from "../components/ui/Item";
 import Title from "../components/ui/Title";
 function SportsScreen() {
-
     return (
         <View style={styles.rootContainer}>
             <Title children={'Sports'} />
@@ -24,15 +24,16 @@ function SportsScreen() {
     )
 }
 const styles = StyleSheet.create({
-    rootContainer: {
-        flex: 1,
-        marginTop: 10,
-    },
-    title: {
-        fontSize: 20,
-        color: "white",
-        fontWeight: "bold",
-        textAlign: "center",
-    }
+  rootContainer: {
+    flex: 1,
+    marginTop: 10,
+    width: "100%",
+  },
+  title: {
+    fontSize: 20,
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
 });
 export default SportsScreen;
