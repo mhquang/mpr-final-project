@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "./TextIndex";
 
-function FriendItem({ name, age, hobbies, gender }) {
+function FriendItem({ name, age, hobbies, gender, happiness, health, iq }) {
     const [fontsLoaded] = useFonts({
         NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
         UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -18,7 +18,10 @@ function FriendItem({ name, age, hobbies, gender }) {
     return (
         <View style={styles.itemContainer}>
             <View style={styles.innerContainer}>
+                <View style={styles.nameContainer}>
+                <Text style={styles.titleText}>Name: </Text>
                 <Text style={styles.title}>{name}</Text>
+                </View>
                 <Pressable
                     style={({ pressed }) => [
                         styles.applyButton,
@@ -30,7 +33,7 @@ function FriendItem({ name, age, hobbies, gender }) {
             </View>
             <View style={styles.innerContainer}>
                 <View style={styles.requireContainer}>
-                    <Text style={styles.hobbies}>Hobbies</Text>
+                    <Text style={styles.titleText}>Hobbies:</Text>
                     {hobbies.map((hobby, index) => (
                         <Text key={index} style={styles.require}>
                             - {hobby}
@@ -40,7 +43,8 @@ function FriendItem({ name, age, hobbies, gender }) {
 
                 <View style={styles.timeContainer}>
                     {/* <Ionicons name="time-outline" size={20} /> */}
-                    <Text style={styles.time}>{age}</Text>
+                    <Text style={styles.titleText}>Age:</Text>
+                    <Text style={styles.age}>{age}</Text>
                 </View>
             </View>
             <View style={styles.innerContainer}>
@@ -98,8 +102,8 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        fontFamily: "NTSomicMedium",
-        fontSize: 20,
+        fontFamily: "UnboundedMedium",
+        fontSize: 16,
         flex: 1,
         color: Colors.black,
     },
@@ -130,9 +134,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
 
-    time: {
+    age: {
         marginLeft: 5,
         fontFamily: "UnboundedMedium",
+        fontSize: 16,
     },
 
     indexContainer: {
@@ -148,9 +153,14 @@ const styles = StyleSheet.create({
     pressed: {
         opacity: 0.7,
     },
-    hobbies: {
+    titleText: {
         fontFamily: "UnboundedMedium",
-        fontSize: 13,
         color: Colors.black,
+        fontSize: 16
+    },
+    nameContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
     }
 });
