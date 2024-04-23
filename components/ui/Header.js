@@ -9,10 +9,15 @@ import { useFonts } from "expo-font";
 import IconButton from "./IconButton";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import * as Progress from "react-native-progress";
 
 function Header() {
   const authCtx = useContext(AuthContext);
   const navigation = useNavigation();
+
+  const health = (authCtx.userData?.health) / 100;
+  const iq = (authCtx.userData?.iq) / 100;
+  const happiness = (authCtx.userData?.happiness) / 100;
 
   const [fontsLoaded] = useFonts({
     NTSomicBold: require("../../assets/fonts/NTSomic-Bold.ttf"),
@@ -44,17 +49,17 @@ function Header() {
       <View style={styles.indexContainer}>
         <View style={styles.innerIndexContainer}>
           <Ionicons name="heart" color={Colors.redHealth} size={24} />
-          <Text style={styles.money}>{authCtx.userData?.health}</Text>
+          <Progress.Bar progress={health} width={100} />
         </View>
 
         <View style={styles.innerIndexContainer}>
           <FontAwesome6 name="brain" color={Colors.blueIQ} size={24} />
-          <Text style={styles.money}>{authCtx.userData?.iq}</Text>
+          <Progress.Bar progress={iq} width={100} />
         </View>
 
         <View style={styles.innerIndexContainer}>
           <Ionicons name="happy" color={Colors.yellowHappiness} size={24} />
-          <Text style={styles.money}>{authCtx.userData?.happiness}</Text>
+          <Progress.Bar progress={happiness} width={100} />
         </View>
       </View>
 
@@ -141,5 +146,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 10,
     marginVertical: 3,
+    gap: 10
   },
 });

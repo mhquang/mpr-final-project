@@ -4,24 +4,25 @@ import { sports } from "../data/dummy-sports";
 import Item from "../components/ui/Item";
 import Title from "../components/ui/Title";
 function SportsScreen() {
-    return (
-        <View style={styles.rootContainer}>
-            <Title children={'Sports'} />
-            {sports.map((sport, index) => {
-                return <Item
-                    key={index}
-                    name={sport.name}
-                    requirements={sport.requirements}
-                    time={sport.time}
-                    health={sport.health}
-                    iq={sport.iq}
-                    happiness={sport.happiness}
-                    money={sport.money}
-                    btn={'Play'}
-                />
-            })}
-        </View>
-    )
+  return (
+    <View style={styles.rootContainer}>
+      <Title>Sports</Title>
+      {sports.map((item, index) => {
+        return (
+          <Item
+            key={index}
+            name={item.name}
+            requirements={item.requirements}
+            time={item.time}
+            health={item.health}
+            iq={item.iq}
+            happiness={item.happiness}
+            money={item.money}
+          />
+        );
+      })}
+    </View>
+  );
 }
 const styles = StyleSheet.create({
   rootContainer: {

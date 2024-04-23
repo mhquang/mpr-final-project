@@ -6,7 +6,6 @@ import { getUserData, updateUserData } from "../util/firebase";
 
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import SetupContent from "../components/setup/SetupContent";
-import HomeScreen from "./HomeScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MainScreen from "./MainScreen";
 
@@ -42,7 +41,7 @@ function SetupPlayerScreen() {
         savings: 0,
         age: 0,
         userId: email,
-        health: 100,
+        health: 50,
         iq: 100,
         money: 1000,
         happiness: 100,
