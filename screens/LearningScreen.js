@@ -7,7 +7,6 @@ function LearningScreen() {
     <ScreenLayout>
       <View style={styles.container}>
         <Text style={styles.text}>Learning Screen</Text>
-        <Progress.Bar progress={0.3} width={200} />
       </View>
     </ScreenLayout>
   );
