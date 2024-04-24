@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet } from "react-native";
 import ScreenLayout from "./GeneralComs/ScreenLayout";
+import InvestmentItem from './../components/ui/InvestmentItem';
 function InvestmentScreen() {
   return (
     <ScreenLayout>
       <View style={styles.container}>
         <Text style={styles.text}>Investment Screen</Text>
-        <InvestmentScreen />
+        <InvestmentItem />
       </View>
     </ScreenLayout>
   );
