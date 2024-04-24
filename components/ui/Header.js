@@ -5,23 +5,42 @@ import { Colors } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
+import { IndexContext } from "../../store/IndexContext";
 
 import IconButton from "./IconButton";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import * as Progress from "react-native-progress";
-import { IndexContext } from "../../store/IndexContext";
 
 function Header() {
   const authCtx = useContext(AuthContext);
   const indexCtx = useContext(IndexContext);
-
-  const age = authCtx.userData?.age;
-  const health = indexCtx.health;
-  const iq = indexCtx.iq;
-  const happiness = indexCtx.happiness;
-
   const navigation = useNavigation();
+
+  const [age, setAge] = useState(authCtx.userData?.age);
+
+  const health = (authCtx.userData?.health + indexCtx.health) / 100;
+  const iq = (authCtx.userData?.iq + indexCtx.iq) / 100;
+  const happiness = (authCtx.userData?.happiness + indexCtx.happiness) / 100;
+
+  // if (health <= 0) {
+  //   console.log("died");
+  // }
+
+  useEffect(() => {
+    const updateAge = () => {
+      setAge((currentAge) => {
+        if (currentAge < 100) {
+          setTimeout(updateAge, 30000);
+        }
+
+        return currentAge < 100 ? currentAge + 1 : currentAge;
+      });
+    };
+
+    updateAge();
+  }, []);
+
   const [fontsLoaded] = useFonts({
     NTSomicBold: require("../../assets/fonts/NTSomic-Bold.ttf"),
     NTSomicSemibold: require("../../assets/fonts/NTSomic-Semibold.ttf"),
@@ -30,19 +49,6 @@ function Header() {
     return null;
   }
 
-  // useEffect(() => {
-  //   const updateAge = () => {
-  //     setAge((currentAge) => {
-  //       if (currentAge < 100) {
-  //         setTimeout(updateAge, 30000);
-  //       }
-
-  //       return currentAge < 100 ? currentAge + 1 : currentAge;
-  //     });
-  //   };
-
-  //   updateAge();
-  // }, []);
   return (
     <View style={styles.headerContainer}>
       <View style={styles.ageContainer}>
@@ -75,35 +81,17 @@ function Header() {
       <View style={styles.indexContainer}>
         <View style={styles.innerIndexContainer}>
           <Ionicons name="heart" color={Colors.redHealth} size={24} />
-          <Progress.Bar
-            progress={health}
-            width={100}
-            color={Colors.redHealth}
-            height={10}
-            borderRadius={5}
-          />
+          <Progress.Bar progress={health} width={100} />
         </View>
 
         <View style={styles.innerIndexContainer}>
           <FontAwesome6 name="brain" color={Colors.blueIQ} size={24} />
-          <Progress.Bar
-            progress={iq}
-            width={100}
-            color={Colors.blueIQ}
-            height={10}
-            borderRadius={5}
-          />
+          <Progress.Bar progress={iq} width={100} />
         </View>
 
         <View style={styles.innerIndexContainer}>
           <Ionicons name="happy" color={Colors.yellowHappiness} size={24} />
-          <Progress.Bar
-            progress={happiness}
-            width={100}
-            color={Colors.yellowHappiness}
-            height={10}
-            borderRadius={5}
-          />
+          <Progress.Bar progress={happiness} width={100} />
         </View>
       </View>
 

@@ -1,7 +1,4 @@
-import { createContext, useContext, useState } from "react";
-import { AuthContext } from "./auth-context";
-
-const authCtx = useContext(AuthContext);
+import { createContext, useState } from "react";
 
 export const IndexContext = createContext({
   health: 0,
@@ -12,31 +9,30 @@ export const IndexContext = createContext({
 
 const IndexContextProvider = ({ children }) => {
   const initialIndex = {
-    health: authCtx.userData?.health,
-    iq: authCtx.userData?.iq,
-    happiness: authCtx.userData?.happiness,
+    health: 0,
+    iq: 0,
+    happiness: 0,
   };
   const [index, setIndex] = useState(initialIndex);
 
-  const updateIndex = (index, value) => {
+  const updateIndex = (indexKey, value) => {
     setIndex((prevIndex) => ({
       ...prevIndex,
-      [index]: prevIndex[index] + value,
+      [indexKey]: (prevIndex[indexKey] || 0) + value,
     }));
   };
+  
 
   const value = {
     health: index.health,
     iq: index.iq,
     happiness: index.happiness,
     updateIndex,
-  }
+  };
 
   return (
-    <IndexContext.Provider value={value}>
-        {children}
-    </IndexContext.Provider>
-  )
+    <IndexContext.Provider value={value}>{children}</IndexContext.Provider>
+  );
 };
 
 export default IndexContextProvider;
