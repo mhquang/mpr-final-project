@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
   require: {
     fontFamily: "NTSomicMedium",
     fontSize: 15,
+    color: Colors.gray,
   },
 
   timeContainer: {

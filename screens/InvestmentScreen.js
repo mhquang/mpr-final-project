@@ -5,6 +5,7 @@ function InvestmentScreen() {
     <ScreenLayout>
       <View style={styles.container}>
         <Text style={styles.text}>Investment Screen</Text>
+        <InvestmentScreen />
       </View>
     </ScreenLayout>
   );
