@@ -17,30 +17,6 @@ function Header() {
   const indexCtx = useContext(IndexContext);
   const navigation = useNavigation();
 
-  const [age, setAge] = useState(authCtx.userData?.age);
-
-  const health = (authCtx.userData?.health + indexCtx.health) / 100;
-  const iq = (authCtx.userData?.iq + indexCtx.iq) / 100;
-  const happiness = (authCtx.userData?.happiness + indexCtx.happiness) / 100;
-
-  // if (health <= 0) {
-  //   console.log("died");
-  // }
-
-  useEffect(() => {
-    const updateAge = () => {
-      setAge((currentAge) => {
-        if (currentAge < 100) {
-          setTimeout(updateAge, 30000);
-        }
-
-        return currentAge < 100 ? currentAge + 1 : currentAge;
-      });
-    };
-
-    updateAge();
-  }, []);
-
   const [fontsLoaded] = useFonts({
     NTSomicBold: require("../../assets/fonts/NTSomic-Bold.ttf"),
     NTSomicSemibold: require("../../assets/fonts/NTSomic-Semibold.ttf"),
@@ -81,7 +57,7 @@ function Header() {
       <View style={styles.indexContainer}>
         <View style={styles.innerIndexContainer}>
           <Ionicons name="heart" color={Colors.redHealth} size={24} />
-          <Progress.Bar progress={health} width={100} />
+          <Text style={styles.money}>{authCtx.userData?.health}</Text>
         </View>
 
         <View style={styles.innerIndexContainer}>
