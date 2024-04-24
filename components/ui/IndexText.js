@@ -20,7 +20,7 @@ export default IndexText;
 const styles = StyleSheet.create({
   text: {
     fontFamily: "NTSomicMedium",
-    fontSize: 20,
+    fontSize: 18,
     marginHorizontal: 5
   },
   green: {
