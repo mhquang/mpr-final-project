@@ -6,13 +6,13 @@ import { useFonts } from "expo-font";
 
 
 function HomeScreen() {
+  const authCtx = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
     UnboundedSemibold: require("../assets/fonts/Unbounded-SemiBold.ttf"),
   });
   if (!fontsLoaded) {
     return null;
   }
-  const authCtx = useContext(AuthContext);
   const gender = authCtx.userData?.userGender;
 
   return (
