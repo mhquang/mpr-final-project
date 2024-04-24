@@ -1,13 +1,13 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "../constants/styles";
-import LearningScreen from "./LearningScreen";
-import HealthScreen from "./HealthScreen";
-import WorkScreen from "./WorkScreen";
-import FriendsScreen from "./FriendsScreen";
-import RelaxScreen from "./RelaxScreen";
-import InvestmentScreen from "./InvestmentScreen";
-import HomeScreen from "./HomeScreen";
+import { Colors } from "../../constants/styles";
+import LearningScreen from "../LearningScreen";
+import HealthScreen from "../HealthScreen";
+import WorkScreen from "../WorkScreen";
+import FriendsScreen from "../FriendsScreen";
+import RelaxScreen from "../RelaxScreen";
+import InvestmentScreen from "../InvestmentScreen";
+import HomeScreen from "../HomeScreen";
 
 const BottomTab = createBottomTabNavigator();
 

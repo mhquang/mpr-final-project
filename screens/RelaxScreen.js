@@ -1,7 +1,6 @@
 import { ScrollView } from "react-native";
-import SportsScreen from "./SportsScreen";
-
-import ScreenLayout from "./ScreenLayout";
+import SportsScreen from "./Relax/SportsScreen";
+import ScreenLayout from "./GeneralComs/ScreenLayout";
 function RelaxScreen() {
   return (
     <ScreenLayout>

@@ -3,17 +3,15 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { Colors } from "./constants/styles";
-import HowToPlayScreen from "./screens/HowToPlayScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import LoginScreen from "./screens/LoginScreen";
-import SignupScreen from "./screens/SignupScreen";
+import LoginScreen from "./screens/Auth/LoginScreen";
+import SignupScreen from "./screens/Auth/SignupScreen";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 import IconButton from "./components/ui/IconButton";
 import * as SplashScreen from "expo-splash-screen";
-import SetupPlayerScreen from "./screens/SetupPlayerScreen";
-import MainScreen from "./screens/MainScreen";
-import IndexContextProvider from "./store/IndexContext";
-
+import SetupPlayerScreen from "./screens/GeneralComs/SetupPlayerScreen";
+import MainScreen from "./screens/GeneralComs/MainScreen";
+import HowToPlayScreen from "./screens/Auth/HowToPlayScreen";
 const Stack = createNativeStackNavigator();
 function AuthStack() {
   const navigation = useNavigation();

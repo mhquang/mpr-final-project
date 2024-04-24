@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import ScreenLayout from "./ScreenLayout";
+import ScreenLayout from "./GeneralComs/ScreenLayout";
 
 function HealthScreen() {
   return (

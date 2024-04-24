@@ -1,11 +1,10 @@
 import { useContext, useState } from 'react';
 import { Alert, View, StyleSheet } from 'react-native';
-import AuthContent from '../components/Auth/AuthContent';
-import LoadingOverlay from '../components/ui/LoadingOverlay';
-import { AuthContext } from '../store/auth-context';
-import { login } from '../util/auth';
-import { writeDataToFirestore, checkIfDocExist, getUserData } from '../util/firebase';
-import MessageSuccess from '../components/ui/MessageSuccess';
+import AuthContent from '../../components/Auth/AuthContent';
+import LoadingOverlay from '../../components/ui/LoadingOverlay';
+import { AuthContext } from '../../store/auth-context';
+import { login } from '../../util/auth';
+import { writeDataToFirestore, checkIfDocExist, getUserData } from '../../util/firebase';
 
 function LoginScreen({ route }) {
 
