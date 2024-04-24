@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
   timeContainer: {
     flexDirection: "row",
     alignItems: "center",
+    maxWidth: 120
   },
 
   time: {

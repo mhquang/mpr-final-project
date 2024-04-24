@@ -12,6 +12,7 @@ import * as SplashScreen from "expo-splash-screen";
 import SetupPlayerScreen from "./screens/GeneralComs/SetupPlayerScreen";
 import MainScreen from "./screens/GeneralComs/MainScreen";
 import HowToPlayScreen from "./screens/Auth/HowToPlayScreen";
+import IndexContextProvider from "./store/IndexContext";
 const Stack = createNativeStackNavigator();
 function AuthStack() {
   const navigation = useNavigation();
