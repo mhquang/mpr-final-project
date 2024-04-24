@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../store/auth-context";
 import { Colors } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
@@ -10,15 +10,18 @@ import IconButton from "./IconButton";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import * as Progress from "react-native-progress";
+import { IndexContext } from "../../store/IndexContext";
 
 function Header() {
   const authCtx = useContext(AuthContext);
+  const indexCtx = useContext(IndexContext);
+
+  const age = authCtx.userData?.age;
+  const health = indexCtx.health;
+  const iq = indexCtx.iq;
+  const happiness = indexCtx.happiness;
+
   const navigation = useNavigation();
-
-  const health = (authCtx.userData?.health) / 100;
-  const iq = (authCtx.userData?.iq) / 100;
-  const happiness = (authCtx.userData?.happiness) / 100;
-
   const [fontsLoaded] = useFonts({
     NTSomicBold: require("../../assets/fonts/NTSomic-Bold.ttf"),
     NTSomicSemibold: require("../../assets/fonts/NTSomic-Semibold.ttf"),
@@ -27,10 +30,33 @@ function Header() {
     return null;
   }
 
+  // useEffect(() => {
+  //   const updateAge = () => {
+  //     setAge((currentAge) => {
+  //       if (currentAge < 100) {
+  //         setTimeout(updateAge, 30000);
+  //       }
+
+  //       return currentAge < 100 ? currentAge + 1 : currentAge;
+  //     });
+  //   };
+
+  //   updateAge();
+  // }, []);
   return (
     <View style={styles.headerContainer}>
       <View style={styles.ageContainer}>
-        <Text style={styles.age}>{authCtx.userData?.age}</Text>
+        <Progress.Circle
+          size={60}
+          progress={age / 100}
+          showsText={true}
+          borderWidth={0}
+          thickness={5}
+          textStyle={styles.age}
+          formatText={() => {
+            return `${age}`;
+          }}
+        />
       </View>
       <View style={styles.infoContainer}>
         <View style={styles.nameContainer}>
@@ -49,17 +75,35 @@ function Header() {
       <View style={styles.indexContainer}>
         <View style={styles.innerIndexContainer}>
           <Ionicons name="heart" color={Colors.redHealth} size={24} />
-          <Progress.Bar progress={health} width={100} />
+          <Progress.Bar
+            progress={health}
+            width={100}
+            color={Colors.redHealth}
+            height={10}
+            borderRadius={5}
+          />
         </View>
 
         <View style={styles.innerIndexContainer}>
           <FontAwesome6 name="brain" color={Colors.blueIQ} size={24} />
-          <Progress.Bar progress={iq} width={100} />
+          <Progress.Bar
+            progress={iq}
+            width={100}
+            color={Colors.blueIQ}
+            height={10}
+            borderRadius={5}
+          />
         </View>
 
         <View style={styles.innerIndexContainer}>
           <Ionicons name="happy" color={Colors.yellowHappiness} size={24} />
-          <Progress.Bar progress={happiness} width={100} />
+          <Progress.Bar
+            progress={happiness}
+            width={100}
+            color={Colors.yellowHappiness}
+            height={10}
+            borderRadius={5}
+          />
         </View>
       </View>
 
@@ -146,6 +190,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 10,
     marginVertical: 3,
-    gap: 10
+    gap: 10,
   },
 });

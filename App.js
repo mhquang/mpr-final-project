@@ -12,6 +12,7 @@ import IconButton from "./components/ui/IconButton";
 import * as SplashScreen from "expo-splash-screen";
 import SetupPlayerScreen from "./screens/SetupPlayerScreen";
 import MainScreen from "./screens/MainScreen";
+import IndexContextProvider from "./store/IndexContext";
 
 const Stack = createNativeStackNavigator();
 function AuthStack() {
@@ -159,7 +160,9 @@ export default function App() {
     <>
       <StatusBar style="light" />
       <AuthContextProvider>
-        <Root />
+        <IndexContextProvider>
+          <Root />
+        </IndexContextProvider>
       </AuthContextProvider>
     </>
   );

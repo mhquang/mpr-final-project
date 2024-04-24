@@ -4,8 +4,11 @@ import { Colors } from "../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "./IndexText";
+import { useContext } from "react";
+import { IndexContext } from "../../store/IndexContext";
 
 function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
+  const { updateIndex } = useContext(IndexContext);
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -14,6 +17,29 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   if (!fontsLoaded) {
     return null;
   }
+
+  const indexHandler = () => {
+    // Update health
+    if (health) {
+      const { isIncrease, index } = health;
+      const value = isIncrease ? parseInt(index) : -parseInt(index);
+      updateIndex('health', value);
+    }
+
+    // Update iq
+    if (iq) {
+      const { isIncrease, index } = iq;
+      const value = isIncrease ? parseInt(index) : -parseInt(index);
+      updateIndex('iq', value);
+    }
+
+    // Update happiness
+    if (happiness) {
+      const { isIncrease, index } = happiness;
+      const value = isIncrease ? parseInt(index) : -parseInt(index);
+      updateIndex('happiness', value);
+    }
+  };
 
   return (
     <View style={styles.itemContainer}>
@@ -24,6 +50,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
             styles.applyButton,
             pressed && styles.pressed,
           ]}
+          onPress={indexHandler}
         >
           <Text style={styles.apply}>{btn}</Text>
         </Pressable>
@@ -86,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     maxHeight: 200,
     marginTop: 10,
-    gap: 20
+    gap: 20,
   },
 
   innerContainer: {
