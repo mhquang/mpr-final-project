@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import Item from "../../components/ui/Item";
 import Title from "../../components/ui/Title";
-import { courses } from "../../data/learning.js/dummy-courses";
+import { courses } from "../../data/learning/dummy-courses";
 
 function LearningCoursesList() {
   return (

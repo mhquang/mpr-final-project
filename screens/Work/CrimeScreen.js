@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import { crime } from "../../data/work/dummy-works";
+import { crime } from "../../data/work/crime";
 
 import Item from "../../components/ui/Item";
 import Title from "../../components/ui/Title";

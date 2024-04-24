@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import Item from "../../components/ui/Item";
 import Title from "../../components/ui/Title";
-import { degrees } from "../../data/learning.js/dummy-degrees";
+import { degrees } from "../../data/learning/dummy-degrees";
 
 function LearingDegreesList() {
   return (

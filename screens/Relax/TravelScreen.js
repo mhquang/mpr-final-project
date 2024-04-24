@@ -1,22 +1,24 @@
 import { View, StyleSheet } from "react-native";
 import Item from "../../components/ui/Item";
 import Title from "../../components/ui/Title";
-import { leisure } from "../../data/relax/leisure";
-function LeisureScreen() {
+import { travel } from "../../data/relax/travel";
+
+function TravelScreen() {
   return (
     <View style={styles.rootContainer}>
-      <Title>Leisure</Title>
-      {leisure.map((item, index) => {
+      <Title>Travel</Title>
+      {travel.map((item, index) => {
         return (
           <Item
             key={index}
             name={item.name}
             requirements={item.requirements}
             time={item.time}
+            iq={item.iq}
             health={item.health}
             happiness={item.happiness}
             money={item.money}
-            btn={"Take part in"}
+            btn={"Visit"}
           />
         );
       })}
@@ -36,4 +38,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-export default LeisureScreen;
+export default TravelScreen;
