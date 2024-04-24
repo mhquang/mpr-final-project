@@ -1,13 +1,13 @@
 import { View, StyleSheet } from "react-native";
-import { crime } from "../data/dummy-works";
+import { side_job } from "../../data/dummy-works";
 
-import Item from "../components/ui/Item";
-import Title from "../components/ui/Title";
-function CrimeScreen() {
+import Item from "../../components/ui/Item";
+import Title from "../../components/ui/Title";
+function SideJobScreen() {
   return (
         <View style={styles.rootContainer}>
-          <Title>Crime</Title>
-          {crime.map((item, index) => {
+          <Title>Side Job</Title>
+          {side_job.map((item, index) => {
             return (
               <Item
                 key={index}
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-export default CrimeScreen;
+export default SideJobScreen;

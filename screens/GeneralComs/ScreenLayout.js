@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import Header from "../components/ui/Header";
+import Header from "../../components/ui/Header";
 
 function ScreenLayout({ children }) {
   return (

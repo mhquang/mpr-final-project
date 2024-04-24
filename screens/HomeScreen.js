@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import Item from "../components/ui/Item";
 import { useContext } from "react";
 import { AuthContext } from "../store/auth-context";
-import ScreenLayout from "./ScreenLayout";
+import ScreenLayout from "./GeneralComs/ScreenLayout";
 
 function HomeScreen() {
   const authCtx = useContext(AuthContext);
