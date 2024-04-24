@@ -1,17 +1,17 @@
-import { Text, View, StyleSheet } from "react-native";
-import * as Progress from "react-native-progress";
-import ScreenLayout from "./ScreenLayout";
+import { ScrollView, } from "react-native";
+import ScreenLayout from "./GeneralComs/ScreenLayout";
+import LearingDegreesList from "./Learning/LearingDegreesList";
+import LearningSkillsList from "./Learning/LearningSkillsList";
+import LearningCoursesList from "./Learning/LearningCoursesList";
 
 function LearningScreen() {
-  const authCtx = useContext(AuthContext);
-
-  const health = authCtx.userData?.health / 100;
   return (
     <ScreenLayout>
-      <View style={styles.container}>
-        <Text style={styles.text}>Learning Screen</Text>
-        <Progress.Bar progress={0.3} width={200} />
-      </View>
+      <ScrollView>
+        <LearingDegreesList />
+        <LearningSkillsList />
+        <LearningCoursesList />
+      </ScrollView>
     </ScreenLayout>
   );
 }

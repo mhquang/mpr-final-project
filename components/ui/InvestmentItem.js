@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 
   name: {
     fontFamily: "NTSomicMedium",
-    fontSize: 15,
+    fontSize: 13,
     color: Colors.gray,
   },
 

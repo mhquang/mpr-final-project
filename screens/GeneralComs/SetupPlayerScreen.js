@@ -1,12 +1,11 @@
 import { useContext, useLayoutEffect, useState } from "react";
 import { Alert } from "react-native";
-import { AuthContext } from "../store/auth-context";
+import { AuthContext } from "../../store/auth-context";
 import { useNavigation } from "@react-navigation/native";
-import { getUserData, updateUserData } from "../util/firebase";
+import { getUserData, updateUserData } from "../../util/firebase";
 
-import LoadingOverlay from "../components/ui/LoadingOverlay";
-import SetupContent from "../components/setup/SetupContent";
-import HomeScreen from "./HomeScreen";
+import LoadingOverlay from "../../components/ui/LoadingOverlay";
+import SetupContent from "../../components/setup/SetupContent";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MainScreen from "./MainScreen";
 
