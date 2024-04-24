@@ -1,9 +1,10 @@
-import { Text, View, StyleSheet } from "react-native";
+import { ScrollView, } from "react-native";
 import { useContext } from "react";
 import { AuthContext } from "../store/auth-context";
-
-import * as Progress from "react-native-progress";
-import ScreenLayout from "./ScreenLayout";
+import ScreenLayout from "./GeneralComs/ScreenLayout";
+import LearingDegreesList from "./Learning/LearingDegreesList";
+import LearningSkillsList from "./Learning/LearningSkillsList";
+import LearningCoursesList from "./Learning/LearningCoursesList";
 
 function LearningScreen() {
   const authCtx = useContext(AuthContext);
@@ -11,24 +12,13 @@ function LearningScreen() {
   const health = authCtx.userData?.health / 100;
   return (
     <ScreenLayout>
-      <View style={styles.container}>
-        <Text style={styles.text}>Learning Screen</Text>
-      </View>
+      <ScrollView>
+        <LearingDegreesList />
+        <LearningSkillsList />
+        <LearningCoursesList />
+      </ScrollView>
     </ScreenLayout>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});
 
 export default LearningScreen;

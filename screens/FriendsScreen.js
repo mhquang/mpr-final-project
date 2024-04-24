@@ -1,6 +1,6 @@
 import { View, StyleSheet, ScrollView } from "react-native";
-import FriendListScreen from "./FriendListScreen";
-import ScreenLayout from "./ScreenLayout";
+import ScreenLayout from "./GeneralComs/ScreenLayout";
+import FriendListScreen from "./Friends/FriendListScreen";
 
 function FriendsScreen() {
   return (

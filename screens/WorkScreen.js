@@ -1,9 +1,9 @@
 import { ScrollView } from "react-native";
-import SideJobScreen from "./SideJobScreen";
-import MainJobScreen from "./MainJobScreen";
-import CrimeScreen from "./CrimeScreen";
+import SideJobScreen from "./Work/SideJobScreen";
+import MainJobScreen from "./Work/MainJobScreen";
+import CrimeScreen from "./Work/CrimeScreen";
 
-import ScreenLayout from "./ScreenLayout";
+import ScreenLayout from "./GeneralComs/ScreenLayout";
 function WorkScreen() {
   return (
     <ScreenLayout>

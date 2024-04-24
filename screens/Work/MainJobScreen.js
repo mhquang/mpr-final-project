@@ -1,8 +1,8 @@
 import { View, StyleSheet } from "react-native";
-import { main_job } from "../data/dummy-works";
+import { main_job } from "../../data/dummy-works";
 
-import Item from "../components/ui/Item";
-import Title from "../components/ui/Title";
+import Item from "../../components/ui/Item";
+import Title from "../../components/ui/Title";
 function MainJobScreen() {
   return (
         <View style={styles.rootContainer}>
