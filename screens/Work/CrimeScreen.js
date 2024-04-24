@@ -5,24 +5,24 @@ import Item from "../../components/ui/Item";
 import Title from "../../components/ui/Title";
 function CrimeScreen() {
   return (
-        <View style={styles.rootContainer}>
-          <Title>Crime</Title>
-          {crime.map((item, index) => {
-            return (
-              <Item
-                key={index}
-                name={item.name}
-                requirements={item.requirements}
-                time={item.time}
-                health={item.health}
-                iq={item.iq}
-                happiness={item.happiness}
-                money={item.money}
-                btn={"Apply"}
-              />
-            );
-          })}
-        </View>
+    <View style={styles.rootContainer}>
+      <Title>Crime</Title>
+      {crime.map((item, index) => {
+        return (
+          <Item
+            key={index}
+            name={item.name}
+            requirements={item.requirements}
+            time={item.time}
+            health={item.health}
+            iq={item.iq}
+            happiness={item.happiness}
+            money={item.money}
+            btn={"Apply"}
+          />
+        );
+      })}
+    </View>
   );
 }
 const styles = StyleSheet.create({
