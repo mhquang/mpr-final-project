@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import { main_job } from "../../data/work/dummy-works";
+import { main_job } from "../../data/work/main-jobs";
 
 import Item from "../../components/ui/Item";
 import Title from "../../components/ui/Title";

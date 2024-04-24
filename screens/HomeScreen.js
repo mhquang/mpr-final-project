@@ -4,16 +4,16 @@ import { AuthContext } from "../store/auth-context";
 import ScreenLayout from "./GeneralComs/ScreenLayout";
 import { useFonts } from "expo-font";
 
-
 function HomeScreen() {
+  const authCtx = useContext(AuthContext);
+  const gender = authCtx.userData?.userGender;
+
   const [fontsLoaded] = useFonts({
     UnboundedSemibold: require("../assets/fonts/Unbounded-SemiBold.ttf"),
   });
   if (!fontsLoaded) {
     return null;
   }
-  const authCtx = useContext(AuthContext);
-  const gender = authCtx.userData?.userGender;
 
   return (
     <ScreenLayout>
@@ -34,9 +34,7 @@ function HomeScreen() {
             ]}
           />
         </View>
-        <View>
-          
-        </View>
+        <View></View>
       </View>
     </ScreenLayout>
   );

@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import { sports } from "../../data/relax/sports/dummy-sports";
+import { sports } from "../../data/relax/dummy-sports";
 import Item from "../../components/ui/Item";
 import Title from "../../components/ui/Title";
 function SportsScreen() {
