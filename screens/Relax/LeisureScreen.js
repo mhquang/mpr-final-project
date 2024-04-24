@@ -1,12 +1,12 @@
 import { View, StyleSheet } from "react-native";
-import { sports } from "../../data/relax/sports/dummy-sports";
 import Item from "../../components/ui/Item";
 import Title from "../../components/ui/Title";
-function SportsScreen() {
+import { leisure } from "../../data/relax/leisure/leisure";
+function LeisureScreen() {
   return (
     <View style={styles.rootContainer}>
-      <Title>Sports</Title>
-      {sports.map((item, index) => {
+      <Title>Leisure</Title>
+      {leisure.map((item, index) => {
         return (
           <Item
             key={index}
@@ -14,10 +14,9 @@ function SportsScreen() {
             requirements={item.requirements}
             time={item.time}
             health={item.health}
-            iq={item.iq}
             happiness={item.happiness}
             money={item.money}
-            btn={"Play"}
+            btn={"Take part in"}
           />
         );
       })}
@@ -37,4 +36,4 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-export default SportsScreen;
+export default LeisureScreen;
