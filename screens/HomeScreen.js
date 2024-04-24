@@ -2,8 +2,16 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { useContext } from "react";
 import { AuthContext } from "../store/auth-context";
 import ScreenLayout from "./GeneralComs/ScreenLayout";
+import { useFonts } from "expo-font";
+
 
 function HomeScreen() {
+  const [fontsLoaded] = useFonts({
+    UnboundedSemibold: require("../assets/fonts/Unbounded-SemiBold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
   const authCtx = useContext(AuthContext);
   const gender = authCtx.userData?.userGender;
 
@@ -25,6 +33,9 @@ function HomeScreen() {
               },
             ]}
           />
+        </View>
+        <View>
+          
         </View>
       </View>
     </ScreenLayout>

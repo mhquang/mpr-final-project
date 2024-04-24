@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import Title from "../../components/ui/Title";
-import { friends } from "../../data/dummy-friends";
+import { friends } from "../../data/friends/dummy-friends";
 import FriendItem from "../../components/ui/FriendItem";
 
 function FriendListScreen() {
