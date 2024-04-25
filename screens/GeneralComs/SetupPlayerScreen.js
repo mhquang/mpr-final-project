@@ -47,6 +47,7 @@ function SetupPlayerScreen() {
         happiness: 100,
         name: userName,
         userGender: gender,
+        isSingle: true
       });
       const userData = await getUserData("userCharacteristics", email);
       authCtx.getUserData(userData);

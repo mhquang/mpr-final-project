@@ -1,31 +1,40 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-
 import Button from "../ui/Button";
 import Input from "../Auth/Input";
-
+import { Dropdown } from 'react-native-element-dropdown';
+import { useFonts } from "expo-font";
+import { Colors } from "../../constants/styles";
 function SetupUser({ onSubmit, credentialsInvalid }) {
   const [enteredUserName, setEnteredUserName] = useState("");
-  const [enteredGender, setEnteredGender] = useState("");
+  const [value, setValue] = useState("Male");
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
-  const { userName: userNameIsValid, gender: genderIsValid } =
-    credentialsInvalid;
-
+  const { userName: userNameIsValid } =
+  credentialsInvalid;
+  
+  const data = [
+    { label: 'Male', value: 'Male' },
+    { label: 'Female', value: 'Female' },
+  ];
   function updateInputValueHandler(inputType, enteredValue) {
     switch (inputType) {
       case "userName":
         setEnteredUserName(enteredValue);
         break;
-      case "gender":
-        setEnteredGender(enteredValue);
-        break;
+      }
     }
-  }
-
+    
   function submitHandler() {
     onSubmit({
       userName: enteredUserName,
-      gender: enteredGender,
+      gender: value,
     });
   }
 
@@ -40,13 +49,21 @@ function SetupUser({ onSubmit, credentialsInvalid }) {
           keyboardType="default"
           placeholder={"name"}
         />
-        <Input
-          label="Gender"
-          onUpdateValue={updateInputValueHandler.bind(this, "gender")}
-          value={enteredGender}
-          isInvalid={genderIsValid}
-          keyboardType="default"
-          placeholder={"Male or Female"}
+        <Dropdown
+        style={styles.dropdown}
+        itemTextStyle={styles.itemTextStyle}
+        itemContainerStyle={styles.itemContainerStyle}
+        containerStyle={styles.containerStyle}
+        selectedTextStyle={styles.selectedTextStyle}
+        iconStyle={styles.iconStyle}
+        data={data}
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        value={value}
+        onChange={item => {
+          setValue(item.value);
+        }}
         />
         <View style={styles.buttons}>
           <Button onPress={submitHandler}>Start now</Button>
@@ -55,11 +72,35 @@ function SetupUser({ onSubmit, credentialsInvalid }) {
     </View>
   );
 }
-
-export default SetupUser;
-
 const styles = StyleSheet.create({
   buttons: {
     marginTop: 15,
   },
+  dropdown: {
+    height: 55,
+    marginTop: 15,
+    backgroundColor: Colors.white,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 30,
+  },
+  placeholderStyle: {
+    fontSize: 20,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+    color: Colors.black,
+    fontFamily: 'UnboundedSemibold'
+  },
+  containerStyle: {
+    borderRadius: 30,
+    
+  },
+  itemContainerStyle: {
+    borderRadius: 30,
+  },
+  itemTextStyle: {
+    fontFamily: 'NTSomicMedium',
+  },
 });
+export default SetupUser;
