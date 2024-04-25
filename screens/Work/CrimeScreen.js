@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { crime } from "../../data/work/crime";
 
-import Item from "../../components/ui/Item";
+import Item from "../../components/ui/items/Item";
 import Title from "../../components/ui/Title";
 function CrimeScreen() {
   return (

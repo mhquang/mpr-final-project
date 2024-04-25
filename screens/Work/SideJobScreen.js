@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import { side_job } from "../../data/work/side-jobs";
 
-import Item from "../../components/ui/Item";
+import Item from "../../components/ui/items/Item";
 import Title from "../../components/ui/Title";
 function SideJobScreen() {
   return (
