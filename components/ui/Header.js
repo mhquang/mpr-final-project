@@ -6,7 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 import { IndexContext } from "../../store/IndexContext";
-
 import IconButton from "./IconButton";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -53,6 +52,7 @@ function Header() {
     <View style={styles.headerContainer}>
       <View style={styles.ageContainer}>
         <Progress.Circle
+          color={Colors.lightGray}
           size={60}
           progress={age / 100}
           showsText={true}
@@ -81,17 +81,17 @@ function Header() {
       <View style={styles.indexContainer}>
         <View style={styles.innerIndexContainer}>
           <Ionicons name="heart" color={Colors.redHealth} size={24} />
-          <Progress.Bar progress={health} width={100} />
+          <Progress.Bar color={Colors.lightGreen} progress={health} width={100} />
         </View>
 
         <View style={styles.innerIndexContainer}>
           <FontAwesome6 name="brain" color={Colors.blueIQ} size={24} />
-          <Progress.Bar progress={iq} width={100} />
+          <Progress.Bar color={Colors.lightGreen} progress={iq} width={100} />
         </View>
 
         <View style={styles.innerIndexContainer}>
           <Ionicons name="happy" color={Colors.yellowHappiness} size={24} />
-          <Progress.Bar progress={happiness} width={100} />
+          <Progress.Bar color={Colors.lightGreen} progress={happiness} width={100} />
         </View>
       </View>
 
