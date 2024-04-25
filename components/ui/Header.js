@@ -21,7 +21,9 @@ function Header() {
   const health = (authCtx.userData?.health + indexCtx.health) / 100;
   const iq = (authCtx.userData?.iq + indexCtx.iq) / 100;
   const happiness = (authCtx.userData?.happiness + indexCtx.happiness) / 100;
-
+  const healthColorRep = indexCtx.health;
+  const iqColorRep = indexCtx.iq;
+  const happinessColorRep = indexCtx.happiness;
   // if (health <= 0) {
   //   console.log("died");
   // }
@@ -82,17 +84,25 @@ function Header() {
       <View style={styles.indexContainer}>
         <View style={styles.innerIndexContainer}>
           <Ionicons name="heart" color={Colors.redHealth} size={24} />
-          <Progress.Bar color={Colors.lightGreen} progress={health} width={100} />
+          <Progress.Bar color={
+            healthColorRep > -50 ? Colors.lightGreen : 
+            healthColorRep <= -50 && healthColorRep > -80 ? '#e6b400' : Colors.redHealth
+          } progress={health} width={100} />
         </View>
 
         <View style={styles.innerIndexContainer}>
           <FontAwesome6 name="brain" color={Colors.blueIQ} size={24} />
-          <Progress.Bar color={Colors.lightGreen} progress={iq} width={100} />
+          <Progress.Bar color={
+            iqColorRep > -50 ? Colors.lightGreen : 
+            iqColorRep <= -50 && iqColorRep > -80 ? '#e6b400' : Colors.redHealth
+          } progress={iq} width={100} />
         </View>
-
         <View style={styles.innerIndexContainer}>
           <Ionicons name="happy" color={Colors.yellowHappiness} size={24} />
-          <Progress.Bar color={Colors.lightGreen} progress={happiness} width={100} />
+          <Progress.Bar color={
+            happinessColorRep > -50 ? Colors.lightGreen : 
+            happinessColorRep <= -50 && happinessColorRep > -80 ? '#e6b400' : Colors.redHealth
+          } progress={happiness} width={100} />
         </View>
       </View>
 

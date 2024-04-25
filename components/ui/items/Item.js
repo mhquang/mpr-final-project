@@ -83,7 +83,6 @@ function Item({
               </Text>
             ))}
         </View>
-
         <View style={styles.timeContainer}>
           <Ionicons name="time-outline" size={20} />
           <Text style={styles.time}>{time}</Text>
@@ -189,6 +188,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     flex: 1,
+    justifyContent: "flex-end",
   },
 
   time: {
