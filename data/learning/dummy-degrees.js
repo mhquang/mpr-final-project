@@ -70,7 +70,7 @@ export const degrees = [
         times: 4
     },
     {
-        name: 'Bachelor ',
+        name: 'Bachelor of Software Engineering',
         money: '$500/year',
         time: '9 months',
         requirements: ['Complete High school'],
@@ -97,16 +97,6 @@ export const degrees = [
         health: {isIncrease: false, index: "3"},    
         happiness: { isIncrease: false, index: "3" },
         iq: { isIncrease: true, index: "7" },
-        times: 4
-    },
-    {
-        name: 'Bachelor of Game Development',
-        money: '$500/year',
-        time: '9 months',
-        requirements: ['Complete High school'],
-        health: {isIncrease: false, index: "5"},    
-        happiness: { isIncrease: false, index: "5" },
-        iq: { isIncrease: true, index: "10" },
         times: 4
     },
     {

@@ -18,7 +18,7 @@ function LeisureScreen() {
             iq={item.iq}
             happiness={item.happiness}
             money={item.money}
-            btn={"Take part in"}
+            btn={"Join in"}
           />
         );
       })}

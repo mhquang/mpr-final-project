@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IndexContext } from "../../../store/IndexContext";
 
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
@@ -22,7 +22,10 @@ function Item({
 }) {
   const [progress, setProgress] = useState(0);
   const [year, setYear] = useState(0);
+  const [showProgress, setShowProgress] = useState(false);
+
   const { updateIndex } = useContext(IndexContext);
+
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -31,6 +34,16 @@ function Item({
   if (!fontsLoaded) {
     return null;
   }
+
+  useEffect(() => {
+    let timer;
+    if (showProgress) {
+      timer = setTimeout(() => {
+        setShowProgress(false);
+      }, 200);
+    }
+    return () => clearTimeout(timer);
+  }, [showProgress]);
 
   const indexHandler = () => {
     // Update health
@@ -57,6 +70,7 @@ function Item({
     if (progress < 1 && year < times) {
       setProgress(progress + 1 / times);
       setYear(year + 1);
+      setShowProgress(true);
     }
   };
 
@@ -71,7 +85,13 @@ function Item({
           ]}
           onPress={indexHandler}
         >
-          <Text style={styles.apply}>{btn}</Text>
+          {showProgress ? (
+            <Text style={styles.apply}>
+              {year}/{times}
+            </Text>
+          ) : (
+            <Text style={styles.apply}>{btn}</Text>
+          )}
         </Pressable>
       </View>
       <View style={styles.innerContainer}>
@@ -166,8 +186,10 @@ const styles = StyleSheet.create({
   applyButton: {
     backgroundColor: Colors.blueIQ,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    width: 90,
     borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
   apply: {
@@ -177,7 +199,7 @@ const styles = StyleSheet.create({
   },
 
   requireContainer: {
-    flex: 2,
+    flex: 1,
   },
   require: {
     fontFamily: "NTSomicMedium",
@@ -188,7 +210,6 @@ const styles = StyleSheet.create({
   timeContainer: {
     flexDirection: "row",
     alignItems: "center",
-    flex: 1,
   },
 
   time: {
