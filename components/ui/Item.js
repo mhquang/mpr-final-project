@@ -23,21 +23,21 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
     if (health) {
       const { isIncrease, index } = health;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updateIndex('health', value);
+      updateIndex("health", value);
     }
 
     // Update iq
     if (iq) {
       const { isIncrease, index } = iq;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updateIndex('iq', value);
+      updateIndex("iq", value);
     }
 
     // Update happiness
     if (happiness) {
       const { isIncrease, index } = happiness;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updateIndex('happiness', value);
+      updateIndex("happiness", value);
     }
   };
 
@@ -57,11 +57,12 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.requireContainer}>
-          {requirements.map((requirement, index) => (
-            <Text key={index} style={styles.require}>
-              - {requirement}
-            </Text>
-          ))}
+          {requirements &&
+            requirements.map((requirement, index) => (
+              <Text key={index} style={styles.require}>
+                - {requirement}
+              </Text>
+            ))}
         </View>
 
         <View style={styles.timeContainer}>
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   timeContainer: {
     flexDirection: "row",
     alignItems: "center",
-    maxWidth: 120
+    maxWidth: 120,
   },
 
   time: {
