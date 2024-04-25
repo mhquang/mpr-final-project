@@ -19,30 +19,14 @@ function PersonalInfo() {
     const relationshipStatus = isSingle ? "Single" : "In relationship";
     return (
         <View style={styles.rootContainer}>
-            <View style={styles.innerContainer}>
-            <Text style={styles.title}>Life Scenario: </Text>
-            <Text style={styles.text}>Becoming a Pro Programmer</Text>
-            </View>
-            <View style={styles.innerContainer}>
-            <Text style={styles.title}>Age: </Text>
-            <Text style={styles.text}>{userData?.age}</Text>
-            </View>
-            <View style={styles.innerContainer}>
-            <Text style={styles.title}>Name: </Text>
-            <Text style={styles.text}>{userData?.name}</Text>
-            </View>
-            <View style={styles.innerContainer}>
-            <Text style={styles.title}>Gender: </Text>
-            <Text style={styles.text}>{userData?.userGender}</Text>
-            </View>
-            <View style={styles.innerContainer}>
-            <Text style={styles.title}>Relationship Status: </Text>
-            <Text style={styles.text}>{relationshipStatus}</Text>
-            </View>
-            <View style={styles.innerContainer}>
-            <Text style={styles.title}>Net Worth: </Text>
-            <Text style={styles.text}>${netWorth}</Text>
-            </View>
+          <View style={styles.personalInfoContainer}>
+            <Text style={styles.title}>Life Scenario: <Text style={styles.text}>Becoming a Pro Programmer</Text></Text>
+            <Text style={styles.title}>Name: <Text style={styles.text}>{userData?.name}</Text></Text>
+            <Text style={styles.title}>Age: <Text style={styles.text}>{userData?.age}</Text></Text>
+            <Text style={styles.title}>Gender: <Text style={styles.text}>{userData?.userGender}</Text></Text>
+            <Text style={styles.title}>Relationship Status: <Text style={styles.text}>{relationshipStatus}</Text></Text>
+            <Text style={styles.title}>Net Worth: <Text style={styles.text}>${netWorth}</Text></Text>
+          </View>
         </View>
     )
 }
@@ -51,6 +35,11 @@ const styles = StyleSheet.create({
       flex: 1,
       width: "100%",
     },
+    personalInfoContainer: {
+      flex: 1,
+      marginLeft: 20,
+    },
+    
     innerContainer: {
       justifyContent: "center",
       padding: 10,
