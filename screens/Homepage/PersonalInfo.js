@@ -7,7 +7,7 @@ function PersonalInfo() {
   const authCtx = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
-    NTSomicSemiBold: require("../../assets/fonts/NTSomic-Semibold.ttf"),
+    UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
   });
   if (!fontsLoaded) {
     return null;
@@ -60,14 +60,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   title: {
-    fontSize: 13,
+    fontSize: 16,
     color: "white",
-    fontFamily: "NTSomicMedium",
+    fontFamily: "UnboundedSemibold",
   },
   text: {
-    fontSize: 18,
+    fontSize: 16,
     color: "white",
-    fontFamily: "NTSomicSemiBold",
+    fontFamily: "NTSomicMedium",
   },
 });
 
