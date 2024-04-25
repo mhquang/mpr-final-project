@@ -1,26 +1,15 @@
-import { View, Text, StyleSheet } from "react-native";
+import { ScrollView } from "react-native";
 import ScreenLayout from "./GeneralComs/ScreenLayout";
+import HealthListScreen from "./Health/HealthListScreen";
 
 function HealthScreen() {
   return (
     <ScreenLayout>
-      <View style={styles.container}>
-        <Text style={styles.text}>Health Screen</Text>
-      </View>
+      <ScrollView>
+        <HealthListScreen />
+      </ScrollView>
     </ScreenLayout>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});
 
 export default HealthScreen;
