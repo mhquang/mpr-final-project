@@ -2,12 +2,13 @@ import { View, StyleSheet, Text } from "react-native";
 import { useContext } from "react";
 import { useFonts } from "expo-font";
 import { AuthContext } from "../../store/auth-context";
+import { Colors } from "../../constants/styles";
 
 function PersonalInfo() {
   const authCtx = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
-    UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
+    NTSomicSemibold: require("../../assets/fonts/NTSomic-Semibold.ttf"),
   });
   if (!fontsLoaded) {
     return null;
@@ -60,14 +61,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   title: {
-    fontSize: 16,
-    color: "white",
-    fontFamily: "UnboundedSemibold",
+    fontSize: 15,
+    color: Colors.lightGray,
+    fontFamily: "NTSomicMedium",
   },
   text: {
-    fontSize: 16,
+    fontSize: 18,
     color: "white",
-    fontFamily: "NTSomicMedium",
+    fontFamily: "NTSomicSemibold",
   },
 });
 

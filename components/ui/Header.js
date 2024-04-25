@@ -52,8 +52,9 @@ function Header() {
     <View style={styles.headerContainer}>
       <View style={styles.ageContainer}>
         <Progress.Circle
-          color={Colors.lightGray}
-          size={60}
+          color={Colors.lightGreen}
+          unfilledColor={Colors.lightGray}
+          size={70}
           progress={age / 100}
           showsText={true}
           borderWidth={0}
@@ -130,11 +131,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.white,
-    borderColor: Colors.lightGreen,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    borderWidth: 5,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     marginHorizontal: 15,
   },
   age: {

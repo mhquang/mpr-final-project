@@ -19,6 +19,7 @@ function LearingDegreesList() {
             happiness={degree.happiness}
             money={degree.money}
             btn={"Apply"}
+            times={degree.times}
           />
         );
       })}
