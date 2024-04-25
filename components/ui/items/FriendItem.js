@@ -1,14 +1,14 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useFonts } from "expo-font";
-import { Colors } from "../../constants/styles";
+import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import IndexText from "./IndexText";
+import IndexText from "../IndexText";
 
 function FriendItem({ name, age, hobbies, gender, happiness }) {
   const [fontsLoaded] = useFonts({
-    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
-    UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
-    UnboundedMedium: require("../../assets/fonts/Unbounded-Medium.ttf"),
+    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
+    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
   });
   if (!fontsLoaded) {
     return null;

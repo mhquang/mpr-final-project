@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { sports } from "../../data/relax/dummy-sports";
-import Item from "../../components/ui/Item";
+import Item from "../../components/ui/items/Item";
 import Title from "../../components/ui/Title";
 function SportsScreen() {
   return (

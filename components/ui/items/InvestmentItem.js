@@ -1,13 +1,19 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
-import { Colors } from "../../constants/styles";
+import { Colors } from "../../../constants/styles";
 import { useFonts } from "expo-font";
-import IndexText from "./IndexText";
 
-function InvestmentItem({name, code, money, interest, isIncrease}) {
+function InvestmentItem({
+  name,
+  code,
+  money,
+  interest,
+  isIncrease,
+  buttonText,
+}) {
   const [fontsLoaded] = useFonts({
-    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
-    UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
-    UnboundedMedium: require("../../assets/fonts/Unbounded-Medium.ttf"),
+    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
+    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
   });
   if (!fontsLoaded) {
     return null;
@@ -20,12 +26,14 @@ function InvestmentItem({name, code, money, interest, isIncrease}) {
       </View>
       <View style={styles.moneyContainer}>
         <Text style={styles.money}>${money}</Text>
-        <IndexText isIncrease={false}>{interest}%</IndexText>
+        <Text style={[styles.interest, isIncrease ? styles.green : styles.red]}>
+          {isIncrease ? `+${interest}%` : `-${interest}%`}
+        </Text>
       </View>
       <Pressable
         style={({ pressed }) => [styles.button, pressed && styles.pressed]}
       >
-        <Text style={styles.buttonText}>Buy</Text>
+        <Text style={styles.buttonText}>{buttonText}</Text>
       </Pressable>
     </View>
   );
@@ -43,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 10,
     flexDirection: "row",
-    gap: 10
+    gap: 10,
   },
 
   inforContainer: {
@@ -70,6 +78,18 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontFamily: "UnboundedSemibold",
     fontSize: 18,
+  },
+
+  interest: {
+    fontFamily: "NTSomicMedium",
+    fontSize: 15,
+    marginHorizontal: 5,
+  },
+  green: {
+    color: "green",
+  },
+  red: {
+    color: "red",
   },
 
   button: {

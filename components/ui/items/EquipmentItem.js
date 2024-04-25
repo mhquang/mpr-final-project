@@ -1,18 +1,18 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useFonts } from "expo-font";
-import { Colors } from "../../constants/styles";
+import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
-import IndexText from "./IndexText";
+import IndexText from "../IndexText";
 import { useContext } from "react";
-import { IndexContext } from "../../store/IndexContext";
+import { IndexContext } from "../../../store/IndexContext";
 
 function EquipmentItem({ name, money, btn }) {
   const { updateIndex } = useContext(IndexContext);
   const [fontsLoaded] = useFonts({
-    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
-    UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
-    UnboundedMedium: require("../../assets/fonts/Unbounded-Medium.ttf"),
+    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
+    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
   });
   if (!fontsLoaded) {
     return null;

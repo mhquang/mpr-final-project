@@ -1,7 +1,8 @@
 import { View, StyleSheet } from "react-native";
-import Item from "../../components/ui/Item";
-import Title from "../../components/ui/Title";
 import { leisure } from "../../data/relax/leisure";
+import Item from "../../components/ui/items/Item";
+import Title from "../../components/ui/Title";
+
 function LeisureScreen() {
   return (
     <View style={styles.rootContainer}>

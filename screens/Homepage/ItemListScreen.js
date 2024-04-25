@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import { items } from "../../data/items/items";
-import EquipmentItem from "../../components/ui/EquipmentItem";
+import EquipmentItem from "../../components/ui/items/EquipmentItem";
 import Title from "../../components/ui/Title";
 function ItemListScreen() {
   return (

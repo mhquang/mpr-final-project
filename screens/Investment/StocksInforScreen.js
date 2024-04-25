@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { stocks } from "./../../data/investment/stocks";
-import InvestmentItem from "./../../components/ui/InvestmentItem";
+import InvestmentItem from "../../components/ui/items/InvestmentItem";
 import Title from "../../components/ui/Title";
 
 function StocksInforScreen() {
@@ -15,6 +15,7 @@ function StocksInforScreen() {
             code={item.code}
             money={item.money}
             interest={item.interest}
+            buttonText={"Buy"}
           />
         );
       })}
