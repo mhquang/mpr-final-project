@@ -2,13 +2,26 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IndexContext } from "../../../store/IndexContext";
 
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
+import * as Progress from "react-native-progress";
 
-function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
+function Item({
+  name,
+  requirements,
+  time,
+  health,
+  iq,
+  happiness,
+  money,
+  btn,
+  times,
+}) {
+  const [progress, setProgress] = useState(0);
+  const [year, setYear] = useState(0);
   const { updateIndex } = useContext(IndexContext);
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -40,6 +53,11 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
       const value = isIncrease ? parseInt(index) : -parseInt(index);
       updateIndex("happiness", value);
     }
+
+    if (progress < 1 && year < times) {
+      setProgress(progress + 1 / times);
+      setYear(year + 1);
+    }
   };
 
   return (
@@ -61,7 +79,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
           {requirements &&
             requirements.map((requirement, index) => (
               <Text key={index} style={styles.require}>
-                - {requirement}
+                {requirement}
               </Text>
             ))}
         </View>
@@ -99,6 +117,20 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
 
         <Text style={styles.money}>{money}</Text>
       </View>
+      {times && (
+        <View>
+          <Text style={styles.progress}>
+            {year}/{times}
+          </Text>
+          <Progress.Bar
+            color={Colors.blueIQ}
+            progress={progress}
+            width={null}
+            height={10}
+            borderRadius={6}
+          />
+        </View>
+      )}
     </View>
   );
 }
@@ -113,9 +145,9 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 20,
     justifyContent: "space-between",
-    maxHeight: 200,
+    maxHeight: 250,
     marginTop: 10,
-    gap: 20,
+    gap: 10,
   },
 
   innerContainer: {
@@ -145,7 +177,7 @@ const styles = StyleSheet.create({
   },
 
   requireContainer: {
-    flex: 1,
+    flex: 2,
   },
   require: {
     fontFamily: "NTSomicMedium",
@@ -156,7 +188,7 @@ const styles = StyleSheet.create({
   timeContainer: {
     flexDirection: "row",
     alignItems: "center",
-    maxWidth: 120,
+    flex: 1,
   },
 
   time: {
@@ -174,6 +206,13 @@ const styles = StyleSheet.create({
     fontFamily: "UnboundedSemibold",
     fontSize: 18,
   },
+
+  progress: {
+    fontFamily: "NTSomicMedium",
+    fontSize: 13,
+    marginBottom: 3,
+  },
+
   pressed: {
     opacity: 0.7,
   },

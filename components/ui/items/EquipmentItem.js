@@ -22,18 +22,18 @@ function EquipmentItem({ name, money, btn }) {
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
+        <Text style={styles.money}>{money}</Text>
+      </View>
+      <View style={styles.innerContainer}>
         <Pressable
           style={({ pressed }) => [
             styles.applyButton,
             pressed && styles.pressed,
           ]}
-        //   onPress={indexHandler}
+          //   onPress={indexHandler}
         >
           <Text style={styles.apply}>{btn}</Text>
         </Pressable>
-      </View>
-      <View style={styles.innerContainer}>
-        <Text style={styles.money}>{money}</Text>
       </View>
     </View>
   );
@@ -79,14 +79,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: Colors.darkBlue,
   },
-
-
-
-
-
-
-
-
 
   money: {
     fontFamily: "UnboundedSemibold",

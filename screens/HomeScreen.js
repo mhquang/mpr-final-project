@@ -19,30 +19,30 @@ function HomeScreen() {
   return (
     <ScreenLayout>
       <ScrollView>
-      <View style={styles.rootContainer}>
-        <View style={styles.imageContainer}>
-          <Image
-            source={
-              gender === "Male"
-                ? require("../assets/images/Male/01.png")
-                : require("../assets/images/Female/01.png")
-            }
-            style={[
-              styles.image,
-              {
-                width: gender === "Male" ? 200 : 320,
-                height: gender === "Male" ? 360 : 350,
-              },
-            ]}
-          />
+        <View style={styles.rootContainer}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={
+                gender === "Male"
+                  ? require("../assets/images/Male/01.png")
+                  : require("../assets/images/Female/01.png")
+              }
+              style={[
+                styles.image,
+                {
+                  width: gender === "Male" ? 200 : 320,
+                  height: gender === "Male" ? 360 : 350,
+                },
+              ]}
+            />
+          </View>
+          <View>
+            <PersonalInfo />
+          </View>
+          <View style={styles.itemContainer}>
+            <ItemListScreen />
+          </View>
         </View>
-        <View>
-          <PersonalInfo />
-        </View>
-        <View style={styles.itemContainer}>
-          <ItemListScreen />
-        </View>
-      </View>
       </ScrollView>
     </ScreenLayout>
   );
