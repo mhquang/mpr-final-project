@@ -3,7 +3,7 @@ import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext, useState } from "react";
-import { IndexContext } from "../../../store/IndexContext";
+import { AuthContext } from "../../../store/auth-context";
 
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
@@ -22,7 +22,7 @@ function Item({
 }) {
   const [progress, setProgress] = useState(0);
   const [year, setYear] = useState(0);
-  const { updateIndex } = useContext(IndexContext);
+  const { updateIndex } = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -33,26 +33,30 @@ function Item({
   }
 
   const indexHandler = () => {
+    const updates = {};
+
     // Update health
     if (health) {
       const { isIncrease, index } = health;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updateIndex("health", value);
+      updates.health = value
     }
 
     // Update iq
     if (iq) {
       const { isIncrease, index } = iq;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updateIndex("iq", value);
+      updates.iq = value
     }
 
     // Update happiness
     if (happiness) {
       const { isIncrease, index } = happiness;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updateIndex("happiness", value);
+      updates.happiness = value
     }
+
+    updateIndex(updates)
 
     if (progress < 1 && year < times) {
       setProgress(progress + 1 / times);
