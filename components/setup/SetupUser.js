@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../ui/Button";
 import Input from "../Auth/Input";
 import { Dropdown } from 'react-native-element-dropdown';
 import { useFonts } from "expo-font";
 import { Colors } from "../../constants/styles";
+import IconButton from "../ui/IconButton";
+import { AuthContext } from "../../store/auth-context";
 function SetupUser({ onSubmit, credentialsInvalid }) {
   const [enteredUserName, setEnteredUserName] = useState("");
   const [value, setValue] = useState("Male");
+  const authCtx = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -41,6 +44,12 @@ function SetupUser({ onSubmit, credentialsInvalid }) {
   return (
     <View style={styles.form}>
       <View>
+        <IconButton 
+          icon={"logout"}
+          onPress={authCtx.logout}
+          size={24}
+          color={Colors.white}
+        />
         <Input
           label="Player's Name"
           onUpdateValue={updateInputValueHandler.bind(this, "userName")}

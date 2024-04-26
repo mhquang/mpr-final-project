@@ -1,10 +1,9 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, Alert } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
-
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import * as Progress from "react-native-progress";
@@ -23,6 +22,7 @@ function Item({
   const [progress, setProgress] = useState(0);
   const [year, setYear] = useState(0);
   const { updateIndex } = useContext(AuthContext);
+  const userHealth = useContext(AuthContext).userData.health;
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -39,7 +39,12 @@ function Item({
     if (health) {
       const { isIncrease, index } = health;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updates.health = value
+      if(isIncrease || userHealth > 20) {
+        updates.health = value;
+      } else {        
+        Alert.alert("Warning", "Your health is low, you need to get treatments!")
+        return;
+      }
     }
 
     // Update iq
@@ -180,7 +185,7 @@ const styles = StyleSheet.create({
   },
 
   requireContainer: {
-    flex: 2,
+    flex: 1,
   },
   require: {
     fontFamily: "NTSomicMedium",
@@ -191,7 +196,6 @@ const styles = StyleSheet.create({
   timeContainer: {
     flexDirection: "row",
     alignItems: "center",
-    flex: 1,
     justifyContent: "flex-end",
   },
 
