@@ -19,7 +19,6 @@ function SetupPlayerScreen() {
       try {
         const value = await AsyncStorage.getItem("userData");
         if (value !== null) {
-          // We have data!!
           console.log(value);
           authCtx.getUserData(JSON.parse(value));
         }

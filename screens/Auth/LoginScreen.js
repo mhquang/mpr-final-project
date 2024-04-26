@@ -11,9 +11,6 @@ function LoginScreen({ route }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const authCtx = useContext(AuthContext);
 
-
-  const isCreated = route.params?.isCreated;
-
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
@@ -49,16 +46,7 @@ function LoginScreen({ route }) {
 
   return (
     <AuthContent isLogin onAuthenticate={loginHandler} />
-    // <View style={styles.container}>
-    //   {/* {isCreated && <MessageSuccess message="Account created successfully!" />} */}
-    // </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-});
 
 export default LoginScreen;

@@ -1,6 +1,14 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { Colors } from '../../constants/styles';
+import { useFonts } from "expo-font";
 
 function LoadingOverlay({ message }) {
+  const [fontsLoaded] = useFonts({
+    UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <View style={styles.rootContainer}>
       <Text style={styles.message}>{message}</Text>
@@ -17,10 +25,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 32,
+    backgroundColor: Colors.background
   },
   message: {
     fontSize: 16,
     marginBottom: 12,
-    color: 'white'
+    color: Colors.white,
+    fontFamily: "UnboundedSemibold"
   },
 });
