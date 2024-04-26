@@ -1,10 +1,9 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, Alert } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext, useState } from "react";
 import { IndexContext } from "../../../store/IndexContext";
-
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import * as Progress from "react-native-progress";
@@ -23,6 +22,10 @@ function Item({
   const [progress, setProgress] = useState(0);
   const [year, setYear] = useState(0);
   const { updateIndex } = useContext(IndexContext);
+  const { setIq } = useContext(IndexContext);
+  const userHealth = useContext(IndexContext).health;
+  const userIq = useContext(IndexContext).iq;
+  const userHappiness = useContext(IndexContext).happiness;
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -33,25 +36,35 @@ function Item({
   }
 
   const indexHandler = () => {
+    console.log(userHealth, userIq, userHappiness);
     // Update health
     if (health) {
       const { isIncrease, index } = health;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updateIndex("health", value);
+      if (isIncrease || (userHealth > -90 && userHealth <= 0)) {
+        updateIndex("health", value);
+      } else {
+        Alert.alert("Warning", "You will die in 5 days without treatments");
+        return;
+      }
     }
 
     // Update iq
     if (iq) {
       const { isIncrease, index } = iq;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updateIndex("iq", value);
+      if(userIq > -100 && userIq <= 0) {
+        updateIndex("iq", value);
+      }
     }
-
+    // Fix lỗi có thể cộng quá 100
     // Update happiness
     if (happiness) {
       const { isIncrease, index } = happiness;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updateIndex("happiness", value);
+      if(userHappiness > -100 && userHappiness <= 0) {
+        updateIndex("happiness", value);
+      }
     }
 
     if (progress < 1 && year < times) {

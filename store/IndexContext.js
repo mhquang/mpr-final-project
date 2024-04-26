@@ -22,7 +22,7 @@ const IndexContextProvider = ({ children }) => {
     }));
   };
   
-
+  
   const value = {
     health: index.health,
     iq: index.iq,
