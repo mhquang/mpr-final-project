@@ -18,7 +18,7 @@ export function MainScreen() {
   const authCtx = useContext(AuthContext);
   const age = authCtx.userData?.age;
   useEffect(() => {
-    const randomNum = getRandomAccidents(1, 30);
+    const randomNum = getRandomAccidents(1, 50);
     accidents.forEach((accident) => {
       if (accident.id === randomNum) {
         if (accident.title && accident.description) {
