@@ -1,12 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext({
   userData: undefined,
   token: "",
   isAuthenticated: false,
   getUserData: (userData) => {},
+  updateIndex: (indexUpdates) => {},
   authenticate: (token) => {},
   logout: () => {},
 });
@@ -14,6 +15,20 @@ export const AuthContext = createContext({
 function AuthContextProvider({ children }) {
   const [authToken, setAuthToken] = useState();
   const [userData, setUserData] = useState();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (userData) {
+        setUserData((prevUserData) => ({
+          ...prevUserData,
+          age: prevUserData.age + 1,
+        }));
+        AsyncStorage.setItem("userData", JSON.stringify(userData));
+      }
+    }, 30000); // 1 minute
+
+    return () => clearInterval(timer);
+  }, [userData]);
 
   function authenticate(token) {
     setAuthToken(token);
@@ -24,6 +39,20 @@ function AuthContextProvider({ children }) {
     setUserData(userData);
     AsyncStorage.setItem("userData", JSON.stringify(userData));
   }
+
+  const updateIndex = (indexUpdates) => {
+    if (userData) {
+      const updatedUserData = { ...userData };
+      for (const indexName in indexUpdates) {
+        if (indexUpdates.hasOwnProperty(indexName)) {
+          updatedUserData[indexName] += indexUpdates[indexName];
+        }
+      }
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+  
 
   function logout() {
     setAuthToken(null);
@@ -38,6 +67,7 @@ function AuthContextProvider({ children }) {
     isAuthenticated: !!authToken,
     authenticate: authenticate,
     getUserData: getUserData,
+    updateIndex: updateIndex,
     logout: logout,
   };
 
