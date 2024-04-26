@@ -8,10 +8,34 @@ import FriendsScreen from "../FriendsScreen";
 import RelaxScreen from "../RelaxScreen";
 import InvestmentScreen from "../InvestmentScreen";
 import HomeScreen from "../HomeScreen";
-
+import { getRandomAccidents } from "../../util/getRandomAccidents";
+import { AuthContext } from "../../store/auth-context";
+import { useEffect, useContext } from "react";
+import { Alert } from "react-native";
+import { accidents } from "../../data/accidents/dummy-accidents";
 const BottomTab = createBottomTabNavigator();
-
 export function MainScreen() {
+  const authCtx = useContext(AuthContext);
+  const age = authCtx.userData?.age;
+  useEffect(() => {
+    const randomNum = getRandomAccidents(1, 30);
+    accidents.forEach((accident) => {
+      if (accident.id === randomNum) {
+        if (accident.title && accident.description) {
+          Alert.alert(accident.title, accident.description);
+        }
+        if (accident.happiness || accident.health || accident.iq) {
+          authCtx.updateIndex({
+            happiness: accident.happiness || 0,
+            health: accident.health || 0,
+            iq: accident.iq || 0,
+          });
+        } else {
+          console.error("Happiness, health, or IQ data is missing in accident:", accident);
+        }
+      }
+    });
+  }, [age]);
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
