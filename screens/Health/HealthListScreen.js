@@ -1,38 +1,37 @@
 import { StyleSheet, View, Text } from "react-native";
 import { treatment } from "../../data/health/treatment";
 import { useContext } from "react";
-import { IndexContext } from "../../store/IndexContext";
 import { AuthContext } from "../../store/auth-context";
 import { useFonts } from "expo-font";
 
 import Item from "../../components/ui/items/Item";
 import Title from "../../components/ui/Title";
+import { Colors } from "../../constants/styles";
 
 function HealthListScreen() {
-  const indexCtx = useContext(IndexContext);
   const authCtx = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
-    UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),
+    NTSomicSemibold: require("../../assets/fonts/NTSomic-Semibold.ttf"),
   });
   if (!fontsLoaded) {
     return null;
   }
   const age = authCtx.userData?.age;
-  const health = indexCtx.health;
+  const health = authCtx.userData?.health;
   return (
     <View style={styles.rootContainer}>
       <Title>Health</Title>
       <View style={styles.healthInfoContainer}>
-        <Text style={styles.titleInfo}>
+        <Text style={styles.title}>
           Age: <Text style={styles.text}>{age}</Text>
         </Text>
-        <Text style={styles.titleInfo}>
+        <Text style={styles.title}>
           Health:{" "}
           <Text
-            style={[styles.text, { color: health <= -50 ? "red" : "green" }]}
+            style={[styles.text, { color: health <= 50 ? "red" : "green" }]}
           >
-            {health <= -50 ? "Bad" : "Good"}
+            {health <= 50 ? "Bad" : "Good"}
           </Text>
         </Text>
       </View>
@@ -63,21 +62,14 @@ const styles = StyleSheet.create({
   healthInfoContainer: {
     flex: 1,
     marginLeft: 20,
-    marginVertical: 15,
-  },
-  titleInfo: {
-    fontSize: 20,
-    color: "white",
-    fontFamily: "UnboundedSemibold",
   },
   title: {
-    fontSize: 20,
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
+    fontSize: 16,
+    color: Colors.lightGray,
+    fontFamily: "NTSomicMedium",
   },
   text: {
-    fontSize: 18,
+    fontSize: 22,
     color: "white",
     fontFamily: "NTSomicMedium",
   },

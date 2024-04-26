@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../store/auth-context";
 import { Colors } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
-import { IndexContext } from "../../store/IndexContext";
 import IconButton from "./IconButton";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -13,31 +12,13 @@ import * as Progress from "react-native-progress";
 
 function Header() {
   const authCtx = useContext(AuthContext);
-  const indexCtx = useContext(IndexContext);
   const navigation = useNavigation();
 
-  const [age, setAge] = useState(authCtx.userData?.age);
+  const health = authCtx.userData?.health / 100;
+  const iq = authCtx.userData?.iq / 100;
+  const happiness = authCtx.userData?.happiness / 100;
 
-  const health = (authCtx.userData?.health + indexCtx.health) / 100;
-  const iq = (authCtx.userData?.iq + indexCtx.iq) / 100;
-  const happiness = (authCtx.userData?.happiness + indexCtx.happiness) / 100;
-  // if (health <= 0) {
-  //   console.log("died");
-  // }
-
-  useEffect(() => {
-    const updateAge = () => {
-      setAge((currentAge) => {
-        if (currentAge < 100) {
-          setTimeout(updateAge, 30000);
-        }
-
-        return currentAge < 100 ? currentAge + 1 : currentAge;
-      });
-    };
-
-    updateAge();
-  }, []);
+  const age = authCtx.userData?.age;
 
   const [fontsLoaded] = useFonts({
     NTSomicBold: require("../../assets/fonts/NTSomic-Bold.ttf"),
