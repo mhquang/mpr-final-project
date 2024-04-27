@@ -47,7 +47,8 @@ function SetupPlayerScreen() {
         money: 1000,
         savings: 500,
         isSingle: true,
-        friends: []
+        friends: [],
+        lover: [],
       });
       const userData = await getUserData("userCharacteristics", email);
       authCtx.getUserData(userData);
