@@ -5,6 +5,7 @@ import ScreenLayout from "./GeneralComs/ScreenLayout";
 import { useFonts } from "expo-font";
 import ItemListScreen from "./Homepage/ItemListScreen";
 import PersonalInfo from "./Homepage/PersonalInfo";
+import StorageScreen from "./Homepage/StorageScreen";
 
 function HomeScreen() {
   const authCtx = useContext(AuthContext);
@@ -56,12 +57,9 @@ function HomeScreen() {
               style={[styles.image, getImageDimensions(gender)]}
             />
           </View>
-          <View>
-            <PersonalInfo />
-          </View>
-          <View style={styles.itemContainer}>
-            <ItemListScreen />
-          </View>
+          <PersonalInfo />
+          <StorageScreen />
+          <ItemListScreen />
         </View>
       </ScrollView>
     </ScreenLayout>
@@ -74,7 +72,6 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
   },
-
   image: {
     maxWidth: "80%",
     marginBottom: 30,
@@ -83,9 +80,5 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 30,
     alignItems: "center",
-  },
-  itemContainer: {
-    flex: 1,
-    marginTop: 20,
   },
 });

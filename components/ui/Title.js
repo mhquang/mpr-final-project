@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    marginTop: 10
   },
   title: {
     fontSize: 25,
