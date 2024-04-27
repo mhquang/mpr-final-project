@@ -65,7 +65,7 @@ function BankItem({ name, isDeposit, interest, isLoan, isLoanRepayment }) {
           <Text style={styles.money}>${loanMoney}</Text>
         ) : (
           <Text style={styles.money}>
-            {isDeposit ? `$${money}` : `$${savings}`}
+            {isDeposit ? `$${formatNumber(money)}` : `$${formatNumber(savings)}`}
           </Text>
         )}
       </View>
