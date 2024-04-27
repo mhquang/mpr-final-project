@@ -2,12 +2,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
 import { updateUserData } from "../util/firebase";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
+import { Alert } from "react-native";
 export const AuthContext = createContext({
   userData: undefined,
   token: "",
   isAuthenticated: false,
   getUserData: (userData) => {},
   updateIndex: (indexUpdates) => {},
+  updateMoney: (value) => {},
+  updateItems: (item) => {},
   updateFriends: (friend) => {},
   removeFriends: (friend) => {},
   dateFriends: (friend) => {},
@@ -26,6 +29,7 @@ function AuthContextProvider({ children }) {
         setUserData((prevUserData) => ({
           ...prevUserData,
           age: prevUserData.age + 1,
+          money: prevUserData.money + 100,
         }));
         AsyncStorage.setItem("userData", JSON.stringify(userData));
       }
@@ -60,8 +64,27 @@ function AuthContextProvider({ children }) {
             updatedUserData[indexName] = 100;
           } 
         }
-      }
-      
+      } 
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+
+  const updateMoney = (value, item) => {
+    console.log(userData.money);
+    if (userData) {
+      const updatedUserData = { ...userData };
+      updatedUserData['money'] += value;
+      updatedUserData?.items.push(item);
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+  const updateItems = (item) => {
+    console.log(userData.money);
+    if (userData) {
+      const updatedUserData = { ...userData };
+      updatedUserData?.items.push(item);
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
@@ -134,6 +157,8 @@ function AuthContextProvider({ children }) {
     authenticate: authenticate,
     getUserData: getUserData,
     updateIndex: updateIndex,
+    updateMoney: updateMoney,
+    updateItems: updateItems,
     updateFriends: updateFriends,
     removeFriends: removeFriends,
     dateFriends: dateFriends,

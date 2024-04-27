@@ -1,8 +1,13 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
-
+import { AuthContext } from "../../../store/auth-context";
+import { useContext } from "react";
+import Button from "../Button";
 function EquipmentItem({ name, money, btn }) {
+  const authCtx = useContext(AuthContext);
+  const isSufficient = authCtx.userData?.money >= parseInt(money);
+  const isBought = authCtx.userData?.items.includes(name);
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -12,6 +17,10 @@ function EquipmentItem({ name, money, btn }) {
     return null;
   }
 
+  const buyHandler = () => {
+      const value = -parseInt(money)
+      authCtx.updateMoney(value, name);
+  };
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
@@ -19,16 +28,9 @@ function EquipmentItem({ name, money, btn }) {
         <Text style={styles.money}>{money}</Text>
       </View>
       <View style={styles.innerContainer}>
-        <Pressable
-          style={({ pressed }) => [
-            styles.applyButton,
-            pressed && styles.pressed,
-          ]}
-          //   onPress={indexHandler}
-        >
-          <Text style={styles.apply}>{btn}</Text>
-        </Pressable>
+        {!isBought && isSufficient && <Button children={btn} onPress={buyHandler} />}
       </View>
+        {isBought && <Text style={styles.apply}>Bought</Text>}
     </View>
   );
 }

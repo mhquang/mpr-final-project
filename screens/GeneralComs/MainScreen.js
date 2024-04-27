@@ -18,6 +18,9 @@ export function MainScreen() {
   const authCtx = useContext(AuthContext);
   const age = authCtx.userData?.age;
   useEffect(() => {
+    if(age === 18) {
+      authCtx.updateMoney(10000);
+    }
     const randomNum = getRandomAccidents(1, 70);
     accidents.forEach((accident) => {
       if (accident.id === randomNum) {

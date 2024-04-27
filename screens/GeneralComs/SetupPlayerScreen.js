@@ -8,6 +8,7 @@ import LoadingOverlay from "../../components/ui/LoadingOverlay";
 import SetupContent from "../../components/setup/SetupContent";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MainScreen from "./MainScreen";
+import { items } from "../../data/items/items";
 
 function SetupPlayerScreen() {
   const [isSettingup, setIsSettingup] = useState(false);
@@ -42,13 +43,13 @@ function SetupPlayerScreen() {
         age: 0,
         userGender: gender,
         health: 20,
-        iq: 20,
-        happiness: 20,
-        money: 1000,
-        savings: 500,
-        isSingle: true,
+        iq: 10,
+        happiness: 15,
+        money: 0,
+        savings: 0,
         friends: [],
         lover: [],
+        items: [],
       });
       const userData = await getUserData("userCharacteristics", email);
       authCtx.getUserData(userData);
