@@ -8,7 +8,6 @@ import ButtonItem from "../buttons/ButtonItem";
 function EquipmentItem({ name, money, btn }) {
   const authCtx = useContext(AuthContext);
   const isSufficient = authCtx.userData?.money >= parseInt(money);
-  
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -21,7 +20,7 @@ function EquipmentItem({ name, money, btn }) {
 
   const buyHandler = () => {
     const value = -parseInt(money);
-    authCtx.updateMoney(value, name, 'buy');
+    authCtx.updateMoney({ value: value, item: name, action: "buy" });
   };
   return (
     <View style={styles.itemContainer}>

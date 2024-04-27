@@ -94,7 +94,7 @@ function Authenticated() {
         component={SetupPlayerScreen}
         options={{
           title: "",
-          headerShown: true,
+          // headerShown: true,
           headerStyle: { backgroundColor: Colors.background },
           headerShadowVisible: false,
           headerTintColor: Colors.white,

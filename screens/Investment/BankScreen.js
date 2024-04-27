@@ -1,9 +1,10 @@
 import { StyleSheet, View } from "react-native";
-import Title from "../../components/ui/Title";
-import BankItem from "../../components/ui/items/BankItem";
 import { bank } from "./../../data/investment/bank";
 import { useContext } from "react";
 import { AuthContext } from "../../store/auth-context";
+
+import Title from "../../components/ui/Title";
+import BankItem from "../../components/ui/items/BankItem";
 
 function BankScreen() {
   const authCtx = useContext(AuthContext);
