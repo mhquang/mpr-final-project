@@ -1,13 +1,14 @@
-import { StyleSheet, View, Text, Pressable, Alert } from "react-native";
+import { StyleSheet, View, Text, Alert } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
+
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import * as Progress from "react-native-progress";
-import Button from "../Button";
+import ButtonItem from "../buttons/ButtonItem";
 function Item({
   name,
   requirements,
@@ -21,9 +22,11 @@ function Item({
 }) {
   const [progress, setProgress] = useState(0);
   const [year, setYear] = useState(0);
-  const { updateIndex } = useContext(AuthContext);
   const userHealth = useContext(AuthContext).userData?.health;
   const isSufficient = useContext(AuthContext).userData?.money >= money;
+
+  const { updateIndex } = useContext(AuthContext);
+
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -34,37 +37,39 @@ function Item({
   }
   const indexHandler = () => {
     const updates = {};
+
     if (money) {
-      const value = money === 'Free' ? 0 : -parseInt(money);
+      const value = money === "Free" ? 0 : -parseInt(money);
       updates.money = value;
     }
-    // Update health
+
     if (health) {
       const { isIncrease, index } = health;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      if(isIncrease || userHealth > 20) {
+      if (isIncrease || userHealth > 20) {
         updates.health = value;
-      } else {        
-        Alert.alert("Warning", "Your health is low, you need to get treatments!")
+      } else {
+        Alert.alert(
+          "Warning",
+          "Your health is low, you need to get treatments!"
+        );
         return;
       }
     }
 
-    // Update iq
     if (iq) {
       const { isIncrease, index } = iq;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updates.iq = value
+      updates.iq = value;
     }
 
-    // Update happiness
     if (happiness) {
       const { isIncrease, index } = happiness;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updates.happiness = value
+      updates.happiness = value;
     }
 
-    updateIndex(updates)
+    updateIndex(updates);
 
     if (progress < 1 && year < times) {
       setProgress(progress + 1 / times);
@@ -76,7 +81,9 @@ function Item({
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {(money === 'Free' || isSufficient) && <Button children={btn} onPress={indexHandler}/>}
+        {(money === "Free" || isSufficient) && (
+          <ButtonItem children={btn} onPress={indexHandler} />
+        )}
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.requireContainer}>
@@ -118,7 +125,9 @@ function Item({
           )}
         </View>
 
-        <Text style={styles.money}>{money === 'Free' ? 'Free' : `$${money}`}</Text>
+        <Text style={styles.money}>
+          {money === "Free" ? "Free" : `$${money}`}
+        </Text>
       </View>
       {times && (
         <View>

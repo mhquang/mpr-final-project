@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../constants/styles";
 
-import FlatButton from "../ui/FlatButton";
+import FlatButton from "../ui/buttons/FlatButton";
 import AuthForm from "./AuthForm";
 
 

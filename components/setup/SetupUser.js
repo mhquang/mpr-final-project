@@ -1,12 +1,14 @@
 import { useState, useContext } from "react";
 import { StyleSheet, View } from "react-native";
-import Button from "../ui/Button";
-import Input from "../Auth/Input";
 import { Dropdown } from 'react-native-element-dropdown';
 import { useFonts } from "expo-font";
 import { Colors } from "../../constants/styles";
-import IconButton from "../ui/IconButton";
 import { AuthContext } from "../../store/auth-context";
+
+import Button from "../ui/buttons/Button";
+import Input from "../Auth/Input";
+import IconButton from "../ui/buttons/IconButton";
+
 function SetupUser({ onSubmit, credentialsInvalid }) {
   const [enteredUserName, setEnteredUserName] = useState("");
   const [value, setValue] = useState("Male");

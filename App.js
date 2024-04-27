@@ -3,11 +3,12 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { Colors } from "./constants/styles";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoginScreen from "./screens/Auth/LoginScreen";
 import SignupScreen from "./screens/Auth/SignupScreen";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import IconButton from "./components/ui/IconButton";
+import IconButton from "./components/ui/buttons/IconButton";
 import * as SplashScreen from "expo-splash-screen";
 import SetupPlayerScreen from "./screens/GeneralComs/SetupPlayerScreen";
 import MainScreen from "./screens/GeneralComs/MainScreen";

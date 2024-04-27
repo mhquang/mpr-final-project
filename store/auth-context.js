@@ -53,20 +53,29 @@ function AuthContextProvider({ children }) {
       const updatedUserData = { ...userData };
       for (const indexName in indexUpdates) {
         if (indexUpdates.hasOwnProperty(indexName)) {
-          if(updatedUserData[indexName] >= 0 && updatedUserData[indexName] <= 100 && indexName !== 'money') {
+          if (
+            updatedUserData[indexName] >= 0 &&
+            updatedUserData[indexName] <= 100 &&
+            indexName !== "money"
+          ) {
             updatedUserData[indexName] += indexUpdates[indexName];
           }
-          if(updatedUserData[indexName] >= 0 && indexName === 'money') {
+          if (updatedUserData[indexName] >= 0 && indexName === "money") {
             updatedUserData[indexName] += indexUpdates[indexName];
           }
           if (updatedUserData[indexName] < 0) {
             updatedUserData[indexName] = 0;
           }
-          if (updatedUserData[indexName] > 100 && (indexName === 'health' || indexName === 'iq' || indexName === 'happiness')) {
+          if (
+            updatedUserData[indexName] > 100 &&
+            (indexName === "health" ||
+              indexName === "iq" ||
+              indexName === "happiness")
+          ) {
             updatedUserData[indexName] = 100;
-          } 
+          }
         }
-      } 
+      }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
@@ -76,10 +85,10 @@ function AuthContextProvider({ children }) {
     console.log(userData.money);
     if (userData) {
       const updatedUserData = { ...userData };
-      if(value) {
-        updatedUserData['money'] += value;
+      if (value) {
+        updatedUserData["money"] += value;
       }
-      if(item) {
+      if (item) {
         updatedUserData?.items.push(item);
       }
       setUserData(updatedUserData);

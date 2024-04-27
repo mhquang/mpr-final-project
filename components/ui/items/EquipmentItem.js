@@ -3,7 +3,7 @@ import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { AuthContext } from "../../../store/auth-context";
 import { useContext } from "react";
-import Button from "../Button";
+import ButtonItem from "../buttons/ButtonItem";
 function EquipmentItem({ name, money, btn }) {
   const authCtx = useContext(AuthContext);
   const isSufficient = authCtx.userData?.money >= parseInt(money);
@@ -28,7 +28,7 @@ function EquipmentItem({ name, money, btn }) {
         <Text style={styles.money}>${money}</Text>
       </View>
       <View style={styles.innerContainer}>
-        {!isBought && isSufficient && <Button children={btn} onPress={buyHandler} />}
+        {!isBought && isSufficient && <ButtonItem children={btn} onPress={buyHandler} />}
       </View>
         {isBought && <Text style={styles.apply}>Bought</Text>}
     </View>

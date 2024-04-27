@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useFonts } from "expo-font";
-import { Colors } from "../../constants/styles";
+import { Colors } from "../../../constants/styles";
 
 function Button({ children, onPress }) {
   const [fontsLoaded] = useFonts({
-    Oddval: require("../../assets/fonts/oddval.semibold.ttf"),
+    Oddval: require("../../../assets/fonts/oddval.semibold.ttf"),
   });
   if (!fontsLoaded) {
     return null;

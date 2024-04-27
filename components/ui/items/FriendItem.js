@@ -2,19 +2,23 @@ import { StyleSheet, View, Text } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import IndexText from "../IndexText";
 import { AuthContext } from "../../../store/auth-context";
 import { useContext } from "react";
-import Button from "../Button";
+
+import IndexText from "../IndexText";
+import ButtonItem from "../buttons/ButtonItem";
+import IconButton from "../buttons/IconButton";
+
 function FriendItem({ name, age, hobbies, gender, happiness }) {
   const authCtx = useContext(AuthContext);
   const isFriend = authCtx.userData?.friends.includes(name);
   const isDifferentGender = authCtx.userData?.userGender !== gender;
   const isInRelationship = authCtx.userData?.lover.length === 1;
   const isLover = authCtx.userData?.lover.includes(name);
+
   const friendHandler = () => {
-    console.log(isInRelationship)
-    if(name) {
+    console.log(isInRelationship);
+    if (name) {
       authCtx.updateFriends(name);
       authCtx.updateIndex({
         happiness: 1,
@@ -22,7 +26,7 @@ function FriendItem({ name, age, hobbies, gender, happiness }) {
     }
   };
   const unFriendHandler = () => {
-    if(name) {
+    if (name) {
       authCtx.removeFriends(name);
       authCtx.updateIndex({
         happiness: -2,
@@ -30,7 +34,7 @@ function FriendItem({ name, age, hobbies, gender, happiness }) {
     }
   };
   const dateFriendHandler = () => {
-    if(name) {
+    if (name) {
       authCtx.dateFriends(name);
       authCtx.updateIndex({
         happiness: 5,
@@ -38,7 +42,7 @@ function FriendItem({ name, age, hobbies, gender, happiness }) {
     }
   };
   const breakUpHandler = () => {
-    if(name) {
+    if (name) {
       authCtx.breakUpFriends(name);
       authCtx.updateIndex({
         happiness: -5,
@@ -57,38 +61,47 @@ function FriendItem({ name, age, hobbies, gender, happiness }) {
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
-        <Text style={styles.name}>Name: {name}</Text>
-        {!isFriend && <Button 
-          children={'Add friend'}
-          onPress={friendHandler}
-        />}
-        { !isLover && isFriend && <Button 
-          children={'Unfriend'}
-          onPress={unFriendHandler}
-        />}
-        {!isInRelationship && isDifferentGender && isFriend && <Button 
-          children={'Date'}
-          onPress={dateFriendHandler}
-        />}
-        { isLover && isDifferentGender && isFriend && <Button 
-          children={'Break up'}
-          onPress={breakUpHandler}
-        />}
+        <Text style={styles.name}>{name}</Text>
+        {!isFriend && (
+          <ButtonItem children={"Add friend"} onPress={friendHandler} />
+        )}
+        {!isInRelationship && isDifferentGender && isFriend && (
+          <ButtonItem children={"Date"} onPress={dateFriendHandler} />
+        )}
+        {!isLover && isFriend && (
+          <IconButton
+            icon={"deleteuser"}
+            size={24}
+            color={Colors.darkBlue}
+            onPress={unFriendHandler}
+          />
+        )}
+        {isLover && isDifferentGender && isFriend && (
+          <ButtonItem children={"Break up"} onPress={breakUpHandler} />
+        )}
       </View>
 
       <View style={styles.innerContainer2}>
         <View style={styles.informationContainer}>
-          <View style={styles.ageAndGenderContainer}>
-            <Text style={styles.inforText}>Age: {age}</Text>
+          <View style={styles.innerInforContainer}>
+            <Text style={styles.title}>Age:</Text>
+            <Text style={styles.inforText}>{age}</Text>
+          </View>
+          <View style={styles.innerInforContainer}>
+            <Text style={styles.title}>Gender:</Text>
             <Text style={styles.inforText}>{gender}</Text>
           </View>
 
-          <Text style={styles.title}>Hobbies:</Text>
-          {hobbies.map((hobby, index) => (
-            <Text key={index} style={styles.hobby}>
-              - {hobby}
-            </Text>
-          ))}
+          <View style={styles.innerInforContainer}>
+            <Text style={styles.title}>Hobbies: </Text>
+            <View>
+              {hobbies.map((hobby, index) => (
+                <Text key={index} style={styles.inforText}>
+                  - {hobby}
+                </Text>
+              ))}
+            </View>
+          </View>
         </View>
         <View style={styles.indexContainer}>
           <IndexText isIncrease={happiness.isIncrease}>
@@ -121,22 +134,10 @@ const styles = StyleSheet.create({
   },
 
   name: {
-    fontFamily: "UnboundedMedium",
-    color: Colors.black,
-    fontSize: 23,
-  },
-
-  addFriendButton: {
-    backgroundColor: Colors.blueIQ,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-  },
-
-  btn: {
     fontFamily: "NTSomicMedium",
-    fontSize: 16,
-    color: Colors.darkBlue,
+    fontSize: 20,
+    flex: 1,
+    color: Colors.black,
   },
 
   innerContainer2: {
@@ -148,31 +149,24 @@ const styles = StyleSheet.create({
 
   informationContainer: {
     flex: 1,
-    justifyContent: "space-between",
-    flexDirection: "column",
   },
 
-  ageAndGenderContainer: {
+  innerInforContainer: {
     flexDirection: "row",
-    marginBottom: 8
-  },
-
-  inforText: {
-    fontFamily: "UnboundedMedium",
-    color: Colors.black,
-    fontSize: 18,
-    marginRight: 30
   },
 
   title: {
     fontFamily: "NTSomicMedium",
-    fontSize: 18,
-    color: Colors.black,
+    fontSize: 15,
+    color: Colors.gray,
+    width: 70,
   },
 
-  hobby: {
+  inforText: {
     fontFamily: "NTSomicMedium",
-    fontSize: 16,
+    fontSize: 15,
+    color: Colors.black,
+    marginLeft: 10,
   },
 
   indexContainer: {

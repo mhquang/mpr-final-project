@@ -1,10 +1,10 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useFonts } from "expo-font";
-import { Colors } from '../../constants/styles';
+import { Colors } from '../../../constants/styles';
 
 function FlatButton({ children, onPress }) {
   const [fontsLoaded] = useFonts({
-    NTSomicSemibold: require("../../assets/fonts/NTSomic-Semibold.ttf"),
+    NTSomicSemibold: require("../../../assets/fonts/NTSomic-Semibold.ttf"),
   });
   if (!fontsLoaded) {
     return null;
