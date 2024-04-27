@@ -11,6 +11,7 @@ export const AuthContext = createContext({
   updateFriends: (friend) => {},
   removeFriends: (friend) => {},
   dateFriends: (friend) => {},
+  breakUpFriends: (friend) => {},
   authenticate: (token) => {},
   logout: () => {},
 });
@@ -68,10 +69,10 @@ function AuthContextProvider({ children }) {
   const updateFriends = (friend) => {
     if (userData) {
       const updatedUserData = { ...userData };
-      if (!updatedUserData.friends) {
-        updatedUserData.friends = [];
-      }
-      updatedUserData.friends.push(friend);
+      // if (!updatedUserData.friends) {
+      //   updatedUserData.friends = [];
+      // }
+      updatedUserData?.friends.push(friend);
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
@@ -92,9 +93,20 @@ function AuthContextProvider({ children }) {
     console.log(userData);
     if (userData) {
       const updatedUserData = { ...userData };
-      if (!updatedUserData.lover) {
-        updatedUserData.lover = friend;
-        updatedUserData.isSingle = false;
+      if (updatedUserData.lover.length === 0) {
+        updatedUserData?.lover.push(friend);
+      }
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+  const breakUpFriends = (friend) => {
+    console.log(friend);
+    console.log(userData.lover);
+    if (userData) {
+      const updatedUserData = { ...userData };
+      if (updatedUserData.lover.length === 1) {
+        updatedUserData.lover.splice(0, 1);
       }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
@@ -125,6 +137,7 @@ function AuthContextProvider({ children }) {
     updateFriends: updateFriends,
     removeFriends: removeFriends,
     dateFriends: dateFriends,
+    breakUpFriends: breakUpFriends,
     logout: logout,
   };
   if (isSaving) {

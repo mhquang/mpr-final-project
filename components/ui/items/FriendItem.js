@@ -10,7 +10,10 @@ function FriendItem({ name, age, hobbies, gender, happiness }) {
   const authCtx = useContext(AuthContext);
   const isFriend = authCtx.userData?.friends.includes(name);
   const isDifferentGender = authCtx.userData?.userGender !== gender;
+  const isInRelationship = authCtx.userData?.lover.length === 1;
+  const isLover = authCtx.userData?.lover.includes(name);
   const friendHandler = () => {
+    console.log(isInRelationship)
     if(name) {
       authCtx.updateFriends(name);
       authCtx.updateIndex({
@@ -34,6 +37,14 @@ function FriendItem({ name, age, hobbies, gender, happiness }) {
       });
     }
   };
+  const breakUpHandler = () => {
+    if(name) {
+      authCtx.breakUpFriends(name);
+      authCtx.updateIndex({
+        happiness: -5,
+      });
+    }
+  };
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -47,13 +58,21 @@ function FriendItem({ name, age, hobbies, gender, happiness }) {
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.name}>Name: {name}</Text>
-        <Button 
-          children={isFriend ? "Unfriend" : "Add Friend"}
-          onPress={isFriend ? unFriendHandler : friendHandler}
-        />
-        {isDifferentGender && isFriend && <Button 
+        {!isFriend && <Button 
+          children={'Add friend'}
+          onPress={friendHandler}
+        />}
+        { !isLover && isFriend && <Button 
+          children={'Unfriend'}
+          onPress={unFriendHandler}
+        />}
+        {!isInRelationship && isDifferentGender && isFriend && <Button 
           children={'Date'}
           onPress={dateFriendHandler}
+        />}
+        { isLover && isDifferentGender && isFriend && <Button 
+          children={'Break up'}
+          onPress={breakUpHandler}
         />}
       </View>
 
