@@ -17,7 +17,7 @@ export const accidents = [
         title: "Opps",
         description: "Get captured by the police",
         happiness: -6,
-        // money: -1000
+        money: -1000
     },
     {
         id: 4,
@@ -53,14 +53,6 @@ export const accidents = [
         title: "Today is a bad day",
         description: "You get robbed, dont worry too much!",
         happiness: -3,
-        // money: -1000
+        money: -1000
     },
-    {
-        id: 9,
-        title: "Today is a bad day",
-        description: "You get robbed, dont worry too much!",
-        happiness: -3,
-        // money: -1000
-    },
-    
 ]

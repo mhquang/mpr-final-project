@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
 import { updateUserData } from "../util/firebase";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
-import { Alert } from "react-native";
 export const AuthContext = createContext({
   userData: undefined,
   token: "",
@@ -14,7 +13,8 @@ export const AuthContext = createContext({
   updateFriends: (friend) => {},
   removeFriends: (friend) => {},
   dateFriends: (friend) => {},
-  breakUpFriends: (friend) => {},
+  breakUpFriends: () => {},
+  resetLife: () => {},
   authenticate: (token) => {},
   logout: () => {},
 });
@@ -154,7 +154,7 @@ function AuthContextProvider({ children }) {
     }
   };
 
-  const breakUpFriends = (friend) => {
+  const breakUpFriends = () => {
     if (userData) {
       const updatedUserData = { ...userData };
       if (updatedUserData.lover.length === 1) {
@@ -164,6 +164,12 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
+  function resetLife() {
+    setAuthToken(null);
+    setUserData(null);
+    AsyncStorage.removeItem("token");
+    AsyncStorage.removeItem("userData");
+  }
 
   async function logout() {
     setIsSaving(true);
@@ -193,6 +199,7 @@ function AuthContextProvider({ children }) {
     removeFriends: removeFriends,
     dateFriends: dateFriends,
     breakUpFriends: breakUpFriends,
+    resetLife: resetLife,
     logout: logout,
   };
   if (isSaving) {
