@@ -17,7 +17,7 @@ export const items = [
     },
     {
         name: 'Passport',
-        money: "10000"
+        money: "7700"
     },
     {
         name: 'Laptop',

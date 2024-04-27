@@ -1,36 +1,25 @@
 import { StyleSheet, View, Text } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
-import ButtonItem from "../buttons/ButtonItem";
-import { useContext } from "react";
-import { AuthContext } from "../../../store/auth-context";
-import { items } from "../../../data/items/items";
-function StorageItem({ name }) {
-  const { updateMoney } = useContext(AuthContext);
+
+function FriendListItem({ name }) {
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
   });
   if (!fontsLoaded) {
     return null;
   }
-  const selectedItem = items.find((item) => item.name === name);
-  const sellItemHandler = () => {
-    updateMoney(parseInt(selectedItem.money) / 2, name, 'sell');
-  };
 
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
       </View>
-      <View>
-      <ButtonItem children={'Sell'} onPress={sellItemHandler}/>
-      </View>
     </View>
   );
 }
 
-export default StorageItem;
+export default FriendListItem;
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -43,7 +32,6 @@ const styles = StyleSheet.create({
     maxHeight: 200,
     marginTop: 10,
     gap: 20,
-    flexDirection: "row",
   },
 
   innerContainer: {
@@ -55,6 +43,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "NTSomicMedium",
     fontSize: 15,
+    flex: 1,
     color: Colors.black,
   },
 });

@@ -6,7 +6,7 @@ import { useFonts } from "expo-font";
 import ItemListScreen from "./Homepage/ItemListScreen";
 import PersonalInfo from "./Homepage/PersonalInfo";
 import StorageScreen from "./Homepage/StorageScreen";
-
+import FriendListScreen from "./Homepage/FriendListScreen";
 function HomeScreen() {
   const authCtx = useContext(AuthContext);
   const age = authCtx.userData?.age;
@@ -59,6 +59,7 @@ function HomeScreen() {
           </View>
           <PersonalInfo />
           <StorageScreen />
+          <FriendListScreen />
           <ItemListScreen />
         </View>
       </ScrollView>
