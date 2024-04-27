@@ -25,7 +25,7 @@ function EquipmentItem({ name, money, btn }) {
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        <Text style={styles.money}>{money}</Text>
+        <Text style={styles.money}>${money}</Text>
       </View>
       <View style={styles.innerContainer}>
         {!isBought && isSufficient && <Button children={btn} onPress={buyHandler} />}

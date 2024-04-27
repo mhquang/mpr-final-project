@@ -1,7 +1,7 @@
 export const languages = [
     {
         name: 'English',
-        money: '$1000',
+        money: '1000',
         time: '9 months',
         requirements: ['At least 10 years old',],
         health: {isIncrease: false, index: "2"},
@@ -11,7 +11,7 @@ export const languages = [
     },
     {
         name: 'Korean',
-        money: '$1100',
+        money: '1100',
         time: '9 months',
         requirements: ['At least 10 years old'],
         health: {isIncrease: false, index: "2"},
@@ -21,7 +21,7 @@ export const languages = [
     },
     {
         name: 'Chinese',
-        money: '$1100',
+        money: '1100',
         time: '6 months',
         requirements: ['At least 10 years old'],
         health: {isIncrease: false, index: "2"},    
@@ -31,7 +31,7 @@ export const languages = [
     },
     {
         name: 'Japanese',
-        money: '$1100',
+        money: '1100',
         time: '9 months',
         requirements: ['At least 10 years old'],
         health: {isIncrease: false, index: "3"},    
@@ -41,7 +41,7 @@ export const languages = [
     },
     {
         name: 'Russian',
-        money: '$1200',
+        money: '1200',
         time: '9 months',
         requirements: ['At least 10 years old'],
         health: {isIncrease: false, index: "3"},    

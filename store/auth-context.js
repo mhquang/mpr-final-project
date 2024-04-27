@@ -10,7 +10,6 @@ export const AuthContext = createContext({
   getUserData: (userData) => {},
   updateIndex: (indexUpdates) => {},
   updateMoney: (value) => {},
-  updateItems: (item) => {},
   updateFriends: (friend) => {},
   removeFriends: (friend) => {},
   dateFriends: (friend) => {},
@@ -54,13 +53,16 @@ function AuthContextProvider({ children }) {
       const updatedUserData = { ...userData };
       for (const indexName in indexUpdates) {
         if (indexUpdates.hasOwnProperty(indexName)) {
-          if(updatedUserData[indexName] >= 0 && updatedUserData[indexName] <= 100) {
+          if(updatedUserData[indexName] >= 0 && updatedUserData[indexName] <= 100 && indexName !== 'money') {
+            updatedUserData[indexName] += indexUpdates[indexName];
+          }
+          if(updatedUserData[indexName] >= 0 && indexName === 'money') {
             updatedUserData[indexName] += indexUpdates[indexName];
           }
           if (updatedUserData[indexName] < 0) {
             updatedUserData[indexName] = 0;
           }
-          if (updatedUserData[indexName] > 100) {
+          if (updatedUserData[indexName] > 100 && (indexName === 'health' || indexName === 'iq' || indexName === 'happiness')) {
             updatedUserData[indexName] = 100;
           } 
         }
@@ -74,17 +76,12 @@ function AuthContextProvider({ children }) {
     console.log(userData.money);
     if (userData) {
       const updatedUserData = { ...userData };
-      updatedUserData['money'] += value;
-      updatedUserData?.items.push(item);
-      setUserData(updatedUserData);
-      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
-    }
-  };
-  const updateItems = (item) => {
-    console.log(userData.money);
-    if (userData) {
-      const updatedUserData = { ...userData };
-      updatedUserData?.items.push(item);
+      if(value) {
+        updatedUserData['money'] += value;
+      }
+      if(item) {
+        updatedUserData?.items.push(item);
+      }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
@@ -158,7 +155,6 @@ function AuthContextProvider({ children }) {
     getUserData: getUserData,
     updateIndex: updateIndex,
     updateMoney: updateMoney,
-    updateItems: updateItems,
     updateFriends: updateFriends,
     removeFriends: removeFriends,
     dateFriends: dateFriends,

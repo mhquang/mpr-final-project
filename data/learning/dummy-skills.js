@@ -1,7 +1,7 @@
 export const skills = [
     {
         name: 'Time management',
-        money: '$200',
+        money: '200',
         time: '1 month',
         requirements: ['At least 15 years old',],
         health: {isIncrease: false, index: "1"},
@@ -10,7 +10,7 @@ export const skills = [
     },
     {
         name: 'Soft skills',
-        money: '$200',
+        money: '200',
         time: '2 months',
         requirements: ['At least 18 years old',],
         health: {isIncrease: false, index: "1"},
@@ -19,7 +19,7 @@ export const skills = [
     },
     {
         name: 'Meditation',
-        money: '$200',
+        money: '200',
         time: '2 months',
         requirements: ['At least 16 years old',],
         health: {isIncrease: true, index: "1"},
@@ -28,7 +28,7 @@ export const skills = [
     },
     {
         name: 'Self Help',
-        money: '$200',
+        money: '200',
         time: '2 months',
         requirements: ['At least 18 years old',],
         health: {isIncrease: true, index: "1"},
@@ -37,7 +37,7 @@ export const skills = [
     },
     {
         name: 'Self improvement',
-        money: '$200',
+        money: '200',
         time: '2 months',
         requirements: ['At least 16 years old',],
         health: {isIncrease: true, index: "1"},
@@ -46,7 +46,7 @@ export const skills = [
     },
     {
         name: 'Home medic',
-        money: '$200',
+        money: '200',
         time: '2 months',
         requirements: ['At least 16 years old',],
         health: {isIncrease: true, index: "3"},

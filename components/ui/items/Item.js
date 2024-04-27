@@ -7,7 +7,7 @@ import { AuthContext } from "../../../store/auth-context";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import * as Progress from "react-native-progress";
-
+import Button from "../Button";
 function Item({
   name,
   requirements,
@@ -22,7 +22,8 @@ function Item({
   const [progress, setProgress] = useState(0);
   const [year, setYear] = useState(0);
   const { updateIndex } = useContext(AuthContext);
-  const userHealth = useContext(AuthContext).userData.health;
+  const userHealth = useContext(AuthContext).userData?.health;
+  const isSufficient = useContext(AuthContext).userData?.money >= money;
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -31,10 +32,12 @@ function Item({
   if (!fontsLoaded) {
     return null;
   }
-
   const indexHandler = () => {
     const updates = {};
-
+    if (money) {
+      const value = money === 'Free' ? 0 : -parseInt(money);
+      updates.money = value;
+    }
     // Update health
     if (health) {
       const { isIncrease, index } = health;
@@ -73,15 +76,7 @@ function Item({
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        <Pressable
-          style={({ pressed }) => [
-            styles.applyButton,
-            pressed && styles.pressed,
-          ]}
-          onPress={indexHandler}
-        >
-          <Text style={styles.apply}>{btn}</Text>
-        </Pressable>
+        {(money === 'Free' || isSufficient) && <Button children={btn} onPress={indexHandler}/>}
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.requireContainer}>
@@ -123,7 +118,7 @@ function Item({
           )}
         </View>
 
-        <Text style={styles.money}>{money}</Text>
+        <Text style={styles.money}>{money === 'Free' ? 'Free' : `$${money}`}</Text>
       </View>
       {times && (
         <View>

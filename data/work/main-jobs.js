@@ -7,7 +7,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$60000/year",
+    salary: "60000",
+    money: "Free"
 },
 {
     name: "Web Developer",
@@ -18,7 +19,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$50000/year",
+    salary: "50000",
+    money: "Free"
 },
 {
     name: "Mobile Developer",
@@ -29,7 +31,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$60000/year",
+    salary: "60000",
+    money: "Free"
 },
 {
     name: "Security Engineer",
@@ -39,7 +42,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$75000/year",
+    salary: "75000",
+    money: "Free"
 },
 {
     name: "Information Security Analyst",
@@ -49,7 +53,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$70000/year",
+    money: "70000",
+    money: "Free"
 },
 {
     name: "Business Analyst",
@@ -59,7 +64,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$65000/year",
+    salary: "65000",
+    money: "Free"
 },
 {
     name: "Database Administrator",
@@ -69,7 +75,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$65000/year",
+    salary: "65000",
+    money: "Free"
 },
 {
     name: "Quality Assurance Engineer",
@@ -80,7 +87,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$60000/year",
+    salary: "60000",
+    money: "Free"
 },
 {
     name: "DevOps Engineer",
@@ -92,7 +100,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$150000/year",
+    salary: "150000",
+    money: "Free"
 },
 {
     name: "Frontend Developer",
@@ -103,7 +112,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$65000/year",
+    salary: "65000",
+    money: "Free"
 },
 {
     name: "Backend Developer",
@@ -114,7 +124,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$70000/year",
+    salary: "70000",
+    money: "Free"
 },
 {
     name: "Full-stack Developer",
@@ -125,7 +136,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$70000/year",
+    salary: "70000",
+    money: "Free"
 },
 {
     name: "Data Analyst",
@@ -135,7 +147,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$55000/year",
+    salary: "55000",
+    money: "Free"
 },
 {
     name: "Data Scientist",
@@ -145,7 +158,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$80000/year",
+    salary: "80000",
+    money: "Free"
 },
 {
     name: "Data Engineer",
@@ -155,7 +169,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$80000/year",
+    salary: "80000",
+    money: "Free"
 },
 {
     name: "Game Developer",
@@ -165,7 +180,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$60000/year",
+    salary: "60000",
+    money: "Free"
 },
 {
     name: "Game Designer",
@@ -175,7 +191,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$55000/year",
+    salary: "55000",
+    money: "Free"
 },
 {
     name: "Game Tester",
@@ -185,7 +202,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$45000/year",
+    salary: "45000",
+    money: "Free"
 },
 {
     name: "AI Engineer",
@@ -195,7 +213,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$80000/year",
+    salary: "80000",
+    money: "Free"
 },
 {
     name: "Machine Learning Engineer",
@@ -205,7 +224,8 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$90000/year",
+    salary: "90000",
+    money: "Free"
 },
 {
     name: "AI Research Scientist",
@@ -215,6 +235,7 @@ export const main_job = [{
     time: "12 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$90000/year",
+    salary: "90000",
+    money: "Free"
 },
 ]
