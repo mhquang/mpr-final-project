@@ -1,10 +1,39 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import IndexText from "../IndexText";
-
+import { AuthContext } from "../../../store/auth-context";
+import { useContext } from "react";
+import Button from "../Button";
 function FriendItem({ name, age, hobbies, gender, happiness }) {
+  const authCtx = useContext(AuthContext);
+  const isFriend = authCtx.userData?.friends.includes(name);
+  const isDifferentGender = authCtx.userData?.userGender !== gender;
+  const friendHandler = () => {
+    if(name) {
+      authCtx.updateFriends(name);
+      authCtx.updateIndex({
+        happiness: 1,
+      });
+    }
+  };
+  const unFriendHandler = () => {
+    if(name) {
+      authCtx.removeFriends(name);
+      authCtx.updateIndex({
+        happiness: -2,
+      });
+    }
+  };
+  const dateFriendHandler = () => {
+    if(name) {
+      authCtx.dateFriends(name);
+      authCtx.updateIndex({
+        happiness: 5,
+      });
+    }
+  };
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -18,14 +47,14 @@ function FriendItem({ name, age, hobbies, gender, happiness }) {
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.name}>Name: {name}</Text>
-        <Pressable
-          style={({ pressed }) => [
-            styles.addFriendButton,
-            pressed && styles.pressed,
-          ]}
-        >
-          <Text style={styles.btn}>Add Friend</Text>
-        </Pressable>
+        <Button 
+          children={isFriend ? "Unfriend" : "Add Friend"}
+          onPress={isFriend ? unFriendHandler : friendHandler}
+        />
+        {isDifferentGender && isFriend && <Button 
+          children={'Date'}
+          onPress={dateFriendHandler}
+        />}
       </View>
 
       <View style={styles.innerContainer2}>

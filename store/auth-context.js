@@ -8,6 +8,9 @@ export const AuthContext = createContext({
   isAuthenticated: false,
   getUserData: (userData) => {},
   updateIndex: (indexUpdates) => {},
+  updateFriends: (friend) => {},
+  removeFriends: (friend) => {},
+  dateFriends: (friend) => {},
   authenticate: (token) => {},
   logout: () => {},
 });
@@ -62,7 +65,41 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
-  
+  const updateFriends = (friend) => {
+    if (userData) {
+      const updatedUserData = { ...userData };
+      if (!updatedUserData.friends) {
+        updatedUserData.friends = [];
+      }
+      updatedUserData.friends.push(friend);
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+  const removeFriends = (friend) => {
+    if (userData) {
+      const updatedUserData = { ...userData };
+      const friendIndex = updatedUserData.friends.indexOf(friend);
+      if (friendIndex !== -1) {
+        updatedUserData.friends.splice(friendIndex, 1);
+      }
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+  const dateFriends = (friend) => {
+    console.log(friend);
+    console.log(userData);
+    if (userData) {
+      const updatedUserData = { ...userData };
+      if (!updatedUserData.lover) {
+        updatedUserData.lover = friend;
+        updatedUserData.isSingle = false;
+      }
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
 
   async function logout() {
     setIsSaving(true);
@@ -85,6 +122,9 @@ function AuthContextProvider({ children }) {
     authenticate: authenticate,
     getUserData: getUserData,
     updateIndex: updateIndex,
+    updateFriends: updateFriends,
+    removeFriends: removeFriends,
+    dateFriends: dateFriends,
     logout: logout,
   };
   if (isSaving) {
