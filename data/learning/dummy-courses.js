@@ -1,7 +1,7 @@
 export const courses = [
     {
         name: 'Finance Management',
-        money: '$300',
+        money: '300',
         time: '6 months',
         requirements: ['At least 18 years old',],
         health: {isIncrease: false, index: "2"},
@@ -10,7 +10,7 @@ export const courses = [
     },
     {
         name: 'Business Management',
-        money: '$300',
+        money: '300',
         time: '6 months',
         requirements: ['At least 18 years old',],
         health: {isIncrease: false, index: "2"},
@@ -19,7 +19,7 @@ export const courses = [
     },
     {
         name: 'Real Estate Management',
-        money: '$300',
+        money: '300',
         time: '6 months',
         requirements: ['At least 18 years old',],
         health: {isIncrease: false, index: "2"},

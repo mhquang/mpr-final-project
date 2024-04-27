@@ -6,7 +6,7 @@ export const crime = [{
     time: "1 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$2000 - $10000",
+    money: "5000",
 },
 {
     name: "Hacking",
@@ -16,7 +16,7 @@ export const crime = [{
     time: "2 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$1000",
+    money: "1000",
 },
 {
     name: "Robbery",
@@ -26,7 +26,7 @@ export const crime = [{
     time: "1 mins",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: false, index: "3" },
-    money: "$10 - $1000",
+    money: "600",
 },
 
 ]
