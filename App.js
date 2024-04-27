@@ -80,6 +80,8 @@ function AuthStack() {
 }
 
 function Authenticated() {
+  const authCtx = useContext(AuthContext);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -87,7 +89,24 @@ function Authenticated() {
         contentStyle: { backgroundColor: Colors.background },
       }}
     >
-      <Stack.Screen name="Setup" component={SetupPlayerScreen} />
+      <Stack.Screen
+        name="Setup"
+        component={SetupPlayerScreen}
+        options={{
+          headerShown: true,
+          headerStyle: { backgroundColor: Colors.background },
+          headerShadowVisible: false,
+          headerTintColor: Colors.white,
+          headerRight: () => (
+            <IconButton
+              icon={"logout"}
+              onPress={authCtx.logout}
+              size={24}
+              color={Colors.white}
+            />
+          ),
+        }}
+      />
       <Stack.Screen
         name="MainScreen"
         component={MainScreen}
@@ -160,7 +179,7 @@ export default function App() {
     <>
       <StatusBar style="light" />
       <AuthContextProvider>
-        <Root/>
+        <Root />
       </AuthContextProvider>
     </>
   );

@@ -46,12 +46,6 @@ function SetupUser({ onSubmit, credentialsInvalid }) {
   return (
     <View style={styles.form}>
       <View>
-        <IconButton 
-          icon={"logout"}
-          onPress={authCtx.logout}
-          size={24}
-          color={Colors.white}
-        />
         <Input
           label="Player's Name"
           onUpdateValue={updateInputValueHandler.bind(this, "userName")}
@@ -101,7 +95,8 @@ const styles = StyleSheet.create({
   selectedTextStyle: {
     fontSize: 16,
     color: Colors.black,
-    fontFamily: 'UnboundedSemibold'
+    fontFamily: 'UnboundedSemibold',
+    borderRadius: 30,
   },
   containerStyle: {
     borderRadius: 30,
