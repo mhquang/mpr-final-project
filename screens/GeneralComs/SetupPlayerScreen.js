@@ -37,16 +37,17 @@ function SetupPlayerScreen() {
     setIsSettingup(true);
     try {
       await updateUserData("userCharacteristics", email, {
-        savings: 0,
-        age: 0,
         userId: email,
-        health: 100,
-        iq: 100,
-        money: 1000,
-        happiness: 100,
         name: userName,
+        age: 0,
         userGender: gender,
-        isSingle: true
+        health: 20,
+        iq: 20,
+        happiness: 20,
+        money: 1000,
+        savings: 500,
+        isSingle: true,
+        friends: []
       });
       const userData = await getUserData("userCharacteristics", email);
       authCtx.getUserData(userData);
