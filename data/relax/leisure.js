@@ -61,13 +61,11 @@ export const leisure = [
     health: { isIncrease: false, index: "3" },
   },
   {
-    name: "Get lotery tickets",
+    name: "Buy lotery tickets",
     money: "25",
     time: "1 hour",
     requirements: ["At least 16 years old"],
-    happiness: { isIncrease: true, index: "35" },
-    iq: { isIncrease: true, index: "5" },
-    health: { isIncrease: false, index: "3" },
+    happiness: { isIncrease: true, index: "35"},
   },
   {
     name: "Take a Coffee",

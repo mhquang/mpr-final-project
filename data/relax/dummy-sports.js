@@ -46,7 +46,7 @@ export const sports = [
   },
   {
     name: "Running",
-    requirements: ["No age restriction"],
+    requirements: [],
     time: "30 mins",
     health: { isIncrease: true, index: "2" },
     iq: { isIncrease: false, index: "0" },
@@ -55,7 +55,7 @@ export const sports = [
   },
   {
     name: "Cycling",
-    requirements: ["No age restriction"],
+    requirements: [],
     time: "60 mins",
     health: { isIncrease: true, index: "2" },
     iq: { isIncrease: true, index: "1" },
@@ -64,7 +64,7 @@ export const sports = [
   },
   {
     name: "Golf",
-    requirements: ["No age restriction"],
+    requirements: [],
     time: "120 mins",
     health: { isIncrease: true, index: "2" },
     iq: { isIncrease: false, index: "0" },
