@@ -16,7 +16,7 @@ function PersonalInfo() {
   const userData = authCtx.userData;
   const netWorth = userData?.money + userData?.savings;
   const lover = userData?.lover[0];
-  const relationshipStatus = !lover ? "Single" : `In a relationship with ${lover}` ;
+  const relationshipStatus = !lover ? "Single" : `In a relationship with ${lover}`;
   return (
     <View style={styles.rootContainer}>
       <View style={styles.personalInfoContainer}>

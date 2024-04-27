@@ -1,30 +1,30 @@
 export const items = [
     {
         name: 'Game Console',
-        money: "$500"
+        money: "500"
     },
     {
         name: 'TV',
-        money: "$2000"
+        money: "2000"
     },
     {
         name: 'Camping Equipment',
-        money: "$2100"
+        money: "2100"
     },
     {
         name: 'Gun',
-        money: "$4000"
+        money: "4000"
     },
     {
         name: 'Passport',
-        money: "$10000"
+        money: "10000"
     },
     {
         name: 'Laptop',
-        money: "$5000"
+        money: "5000"
     },
     {
         name: 'Car',
-        money: "$10000"
+        money: "10000"
     }
 ];
