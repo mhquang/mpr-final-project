@@ -8,8 +8,6 @@ import BankItem from "../../components/ui/items/BankItem";
 
 function BankScreen() {
   const authCtx = useContext(AuthContext);
-  const savings = authCtx.userData?.savings;
-  const money = authCtx.userData?.money;
   return (
     <View style={styles.rootContainer}>
       <Title>Bank</Title>
@@ -20,9 +18,8 @@ function BankScreen() {
             name={item.name}
             isDeposit={item.isDeposit}
             interest={item.interest}
-            money={money}
-            savings={savings}
             isLoan={item.isLoan}
+            isLoanRepayment={item.isLoanRepayment}
           />
         );
       })}

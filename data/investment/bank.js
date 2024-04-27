@@ -13,4 +13,8 @@ export const bank = [
     interest: 9.9,
     isLoan: true,
   },
+  {
+    name: "Loan Repayment",
+    isLoanRepayment: true,
+  },
 ];

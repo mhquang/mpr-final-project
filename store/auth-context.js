@@ -102,6 +102,12 @@ function AuthContextProvider({ children }) {
       if (action === "withdrawal") {
         updatedUserData["savings"] -= value;
       }
+      if (action === 'loan') {
+        updatedUserData["loan"] += value;
+      }
+      if (action === 'loanRepayment') {
+        updatedUserData["loan"] += value
+      }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
