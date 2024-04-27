@@ -97,6 +97,8 @@ function Authenticated() {
           headerStyle: { backgroundColor: Colors.background },
           headerShadowVisible: false,
           headerTintColor: Colors.white,
+          headerBackVisible: false,
+          gestureEnabled: false,
           headerRight: () => (
             <IconButton
               icon={"logout"}
