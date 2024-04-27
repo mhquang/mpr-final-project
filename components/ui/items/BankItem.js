@@ -1,13 +1,15 @@
 import { StyleSheet, View, Text } from "react-native";
 import { Colors } from "../../../constants/styles";
 import { useFonts } from "expo-font";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import ButtonItem from "../buttons/ButtonItem";
 import { AuthContext } from "../../../store/auth-context";
 
-function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
-  const [loanMoney, setLoanMoney] = useState(0);
+function BankItem({ name, isDeposit, interest, isLoan, isLoanRepayment }) {
   const authCtx = useContext(AuthContext);
+  const money = authCtx.userData?.money;
+  const savings = authCtx.userData?.savings;
+  const loanMoney = authCtx.userData?.loan;
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -18,6 +20,10 @@ function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
     return null;
   }
 
+  const depositAndWithdrawalHandler = (percentage) => {
+    isDeposit ? depositHandler(percentage) : withdrawalHandler(percentage);
+  };
+
   const withdrawalHandler = (percentage) => {
     const withdrawalAmount = savings * percentage;
     authCtx.updateMoney({ value: withdrawalAmount, action: "withdrawal" });
@@ -26,6 +32,15 @@ function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
   const depositHandler = (percentage) => {
     const depositAmount = -(money * percentage);
     authCtx.updateMoney({ value: depositAmount, action: "deposit" });
+  };
+
+  const loanHandler = (amount) => {
+    authCtx.updateMoney({ value: amount, action: "loan" });
+  };
+
+  const loanRepaymentHandler = (percentage) => {
+    const loanRepaymentAmount = -(loanMoney * percentage);
+    authCtx.updateMoney({value: loanRepaymentAmount, action: 'loanRepayment'})
   };
 
   return (
@@ -46,6 +61,8 @@ function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
         </View>
         {isLoan ? (
           <Text style={styles.money}>${loanMoney}</Text>
+        ) : isLoanRepayment ? (
+          <Text style={styles.money}>${loanMoney}</Text>
         ) : (
           <Text style={styles.money}>
             {isDeposit ? `$${money}` : `$${savings}`}
@@ -54,31 +71,25 @@ function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
       </View>
       {isLoan ? (
         <View style={styles.buttonContainer}>
-          <ButtonItem>$100</ButtonItem>
-          <ButtonItem>$1000</ButtonItem>
-          <ButtonItem>$100K</ButtonItem>
+          <ButtonItem onPress={() => loanHandler(100)}>$100</ButtonItem>
+          <ButtonItem onPress={() => loanHandler(1000)}>$1000</ButtonItem>
+          <ButtonItem onPress={() => loanHandler(100000)}>$100K</ButtonItem>
+        </View>
+      ) : isLoanRepayment ? (
+        <View style={styles.buttonContainer}>
+          <ButtonItem onPress={() => loanRepaymentHandler(0.1)}>10%</ButtonItem>
+          <ButtonItem onPress={() => loanRepaymentHandler(0.5)}>50%</ButtonItem>
+          <ButtonItem onPress={() => loanRepaymentHandler(1)}>100%</ButtonItem>
         </View>
       ) : (
         <View style={styles.buttonContainer}>
-          <ButtonItem
-            onPress={() =>
-              isDeposit ? depositHandler(0.1) : withdrawalHandler(0.1)
-            }
-          >
+          <ButtonItem onPress={() => depositAndWithdrawalHandler(0.1)}>
             10%
           </ButtonItem>
-          <ButtonItem
-            onPress={() =>
-              isDeposit ? depositHandler(0.5) : withdrawalHandler(0.5)
-            }
-          >
+          <ButtonItem onPress={() => depositAndWithdrawalHandler(0.5)}>
             50%
           </ButtonItem>
-          <ButtonItem
-            onPress={() =>
-              isDeposit ? depositHandler(1) : withdrawalHandler(1)
-            }
-          >
+          <ButtonItem onPress={() => depositAndWithdrawalHandler(1)}>
             100%
           </ButtonItem>
         </View>
