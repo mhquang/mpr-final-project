@@ -3,9 +3,9 @@ export const side_job = [{
     requirements: [
         "At least 16 years old",
     ],
-    time: "1 mins",
-    health: { isIncrease: false, index: 3 },
-    iq: { isIncrease: false, index: 3 },
+    time: "1 month",
+    health: { isIncrease: false, index: 2 },
+    iq: { isIncrease: true, index: 1 },
     happiness: { isIncrease: false, index: 3 },
     salary: 200
 },
@@ -14,10 +14,10 @@ export const side_job = [{
     requirements: [
         "At least 18 years old",
     ],
-    time: "2-3 mins",
+    time: "3 months",
     health: { isIncrease: false, index: 3 },
-    iq: { isIncrease: false, index: 3 },
-    happiness: { isIncrease: false, index: 3 },
+    iq: { isIncrease: true, index: 1 },
+    happiness: { isIncrease: false, index: 2 },
     salary: 500
 },
 {
@@ -27,9 +27,9 @@ export const side_job = [{
     ],
     time: "2 mins",
     health: { isIncrease: false, index: 3 },
-    iq: { isIncrease: false, index: 3 },
+    iq: { isIncrease: true, index: 3 },
     happiness: { isIncrease: false, index: 3 },
-    salary: 500
+    salary: 800,
 },
 {
     name: "Make Money Online",
@@ -37,18 +37,18 @@ export const side_job = [{
         "At least 18 years old",
     ],
     time: "2-3 mins",
-    health: { isIncrease: false, index: 3 },
-    iq: { isIncrease: false, index: 3 },
-    happiness: { isIncrease: false, index: 3 },
-    salary: 750
+    health: { isIncrease: false, index: 4 },
+    iq: { isIncrease: true, index: 2 },
+    happiness: { isIncrease: false, index: 1 },
+    salary: 980
 },
 {
     name: "Pan Handler",
     requirements: [
         "At least 16 years old",
     ],
-    time: "1 mins",
+    time: "1 month",
     health: { isIncrease: false, index: 3 },
-    iq: { isIncrease: false, index: 3 },
-    salary: 80
+    iq: { isIncrease: true, index: 3 },
+    salary: 690
 }]

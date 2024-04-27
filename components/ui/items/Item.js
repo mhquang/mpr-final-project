@@ -4,7 +4,7 @@ import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
-
+import { getRandomAccidents } from "../../../util/getRandomAccidents";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import * as Progress from "react-native-progress";
@@ -26,7 +26,7 @@ function Item({
   const userHealth = useContext(AuthContext).userData?.health;
   const isSufficient = useContext(AuthContext).userData?.money >= money;
 
-  const { updateIndex } = useContext(AuthContext);
+  const { updateIndex, updateMoney } = useContext(AuthContext);
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -37,49 +37,62 @@ function Item({
     return null;
   }
   const indexHandler = () => {
-    const updates = {};
-
-    if (money) {
-      const value = money === "Free" ? 0 : -parseInt(money);
-      updates.money = value;
-    }
-
-    if (salary) {
-      const value = +salary;
-      updates.money = value;
-    }
-
-    if (health) {
-      const { isIncrease, index } = health;
-      const value = isIncrease ? parseInt(index) : -parseInt(index);
-      if (isIncrease || userHealth > 20) {
-        updates.health = value;
-      } else {
+    if(name === 'Buy lotery tickets') {
+      updateMoney(-25);
+      if(getRandomAccidents(1, 500) === 1) {
         Alert.alert(
-          "Warning",
-          "Your health is low, you need to get treatments!"
+          "Congratulation!",
+          "You won a lotery"
         );
-        return;
+        updateIndex({
+          money: 30000,
+          happiness: 35,
+        });
       }
-    }
-
-    if (iq) {
-      const { isIncrease, index } = iq;
-      const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updates.iq = value;
-    }
-
-    if (happiness) {
-      const { isIncrease, index } = happiness;
-      const value = isIncrease ? parseInt(index) : -parseInt(index);
-      updates.happiness = value;
-    }
-
-    updateIndex(updates);
-
-    if (progress < 1 && year < times) {
-      setProgress(progress + 1 / times);
-      setYear(year + 1);
+    } else {
+      const updates = {};
+      if (money) {
+        const value = money === "Free" ? 0 : -parseInt(money);
+        updates.money = value;
+      }
+  
+      if (salary) {
+        const value = +salary;
+        updates.money = value;
+      }
+  
+      if (health) {
+        const { isIncrease, index } = health;
+        const value = isIncrease ? parseInt(index) : -parseInt(index);
+        if (isIncrease || userHealth > 20) {
+          updates.health = value;
+        } else {
+          Alert.alert(
+            "Warning",
+            "Your health is low, you need to get treatments!"
+          );
+          return;
+        }
+      }
+  
+      if (iq) {
+        const { isIncrease, index } = iq;
+        const value = isIncrease ? parseInt(index) : -parseInt(index);
+        updates.iq = value;
+      }
+  
+      if (happiness) {
+        const { isIncrease, index } = happiness;
+        const value = isIncrease ? parseInt(index) : -parseInt(index);
+        updates.happiness = value;
+      }
+  
+      updateIndex(updates);
+  
+      if (progress < 1 && year < times) {
+        setProgress(progress + 1 / times);
+        setYear(year + 1);
+      }
     }
   };
 
@@ -102,7 +115,7 @@ function Item({
             ))}
         </View>
         <View style={styles.timeContainer}>
-          <Ionicons name="time-outline" size={20} />
+          {time && <Ionicons name="time-outline" size={20} />}
           <Text style={styles.time}>{time}</Text>
         </View>
       </View>
