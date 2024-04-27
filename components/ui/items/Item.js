@@ -37,13 +37,10 @@ function Item({
     return null;
   }
   const indexHandler = () => {
-    if(name === 'Buy lotery tickets') {
-      updateMoney(-25);
-      if(getRandomAccidents(1, 500) === 1) {
-        Alert.alert(
-          "Congratulation!",
-          "You won a lotery"
-        );
+    if (name === "Buy lotery tickets") {
+      updateMoney({ value: -25 });
+      if (getRandomAccidents(1, 500) === 1) {
+        Alert.alert("Congratulation!", "You won a lotery");
         updateIndex({
           money: 30000,
           happiness: 35,
@@ -55,12 +52,12 @@ function Item({
         const value = money === "Free" ? 0 : -parseInt(money);
         updates.money = value;
       }
-  
+
       if (salary) {
         const value = +salary;
         updates.money = value;
       }
-  
+
       if (health) {
         const { isIncrease, index } = health;
         const value = isIncrease ? parseInt(index) : -parseInt(index);
@@ -74,21 +71,21 @@ function Item({
           return;
         }
       }
-  
+
       if (iq) {
         const { isIncrease, index } = iq;
         const value = isIncrease ? parseInt(index) : -parseInt(index);
         updates.iq = value;
       }
-  
+
       if (happiness) {
         const { isIncrease, index } = happiness;
         const value = isIncrease ? parseInt(index) : -parseInt(index);
         updates.happiness = value;
       }
-  
+
       updateIndex(updates);
-  
+
       if (progress < 1 && year < times) {
         setProgress(progress + 1 / times);
         setYear(year + 1);
