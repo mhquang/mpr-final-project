@@ -17,6 +17,7 @@ function Item({
   iq,
   happiness,
   money,
+  salary,
   btn,
   times,
 }) {
@@ -40,6 +41,11 @@ function Item({
 
     if (money) {
       const value = money === "Free" ? 0 : -parseInt(money);
+      updates.money = value;
+    }
+
+    if (salary) {
+      const value = +salary;
       updates.money = value;
     }
 
@@ -84,6 +90,7 @@ function Item({
         {(money === "Free" || isSufficient) && (
           <ButtonItem children={btn} onPress={indexHandler} />
         )}
+        {salary && <ButtonItem children={btn} onPress={indexHandler} />}
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.requireContainer}>
@@ -125,9 +132,16 @@ function Item({
           )}
         </View>
 
-        <Text style={styles.money}>
-          {money === "Free" ? "Free" : `$${money}`}
-        </Text>
+        <View style={styles.salaryContainer}>
+          {salary ? (
+            <Text style={styles.moneyTitle}>Salary: </Text>
+          ) : (
+            <Text style={styles.moneyTitle}>Cost: </Text>
+          )}
+          <Text style={styles.money}>
+            {salary ? `$${salary}` : money === "Free" ? "Free" : `$${money}`}
+          </Text>
+        </View>
       </View>
       {times && (
         <View>
@@ -212,6 +226,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: 150,
+    flex: 4,
+  },
+
+  salaryContainer: {
+    flex: 3,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  moneyTitle: {
+    fontFamily: "NTSomicMedium",
+    fontSize: 15,
+    color: Colors.gray,
   },
 
   money: {

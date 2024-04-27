@@ -48,7 +48,6 @@ function AuthContextProvider({ children }) {
   }
 
   const updateIndex = (indexUpdates) => {
-    console.log(userData.health, userData.iq, userData.happiness);
     if (userData) {
       const updatedUserData = { ...userData };
       for (const indexName in indexUpdates) {
@@ -82,7 +81,6 @@ function AuthContextProvider({ children }) {
   };
 
   const updateMoney = (value, item) => {
-    console.log(userData.money);
     if (userData) {
       const updatedUserData = { ...userData };
       if (value) {
@@ -118,8 +116,6 @@ function AuthContextProvider({ children }) {
     }
   };
   const dateFriends = (friend) => {
-    console.log(friend);
-    console.log(userData);
     if (userData) {
       const updatedUserData = { ...userData };
       if (updatedUserData.lover.length === 0) {
@@ -130,8 +126,6 @@ function AuthContextProvider({ children }) {
     }
   };
   const breakUpFriends = (friend) => {
-    console.log(friend);
-    console.log(userData.lover);
     if (userData) {
       const updatedUserData = { ...userData };
       if (updatedUserData.lover.length === 1) {

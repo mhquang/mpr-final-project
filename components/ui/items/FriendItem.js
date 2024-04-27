@@ -17,7 +17,6 @@ function FriendItem({ name, age, hobbies, gender, happiness }) {
   const isLover = authCtx.userData?.lover.includes(name);
 
   const friendHandler = () => {
-    console.log(isInRelationship);
     if (name) {
       authCtx.updateFriends(name);
       authCtx.updateIndex({

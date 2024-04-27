@@ -15,12 +15,14 @@ export const treatment = [
     },
     {
         name: 'See a doctor',
+        time: "1 mins",
         money: '1000',
         health: { isIncrease: true, index: "5" },
     },
     {
         name: 'Meditate',
         money: 'Free',
+        time: "1 mins",
         iq: { isIncrease: true, index: "2" },
         health: { isIncrease: true, index: "3" },
     },

@@ -5,10 +5,9 @@ export const main_job = [{
         "Software Engineering degree",
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "60000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 60000,
 },
 {
     name: "Web Developer",
@@ -17,10 +16,9 @@ export const main_job = [{
         "Software Engineering degree",
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "50000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 50000,
 },
 {
     name: "Mobile Developer",
@@ -29,10 +27,9 @@ export const main_job = [{
         "Software Engineering degree",
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "60000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 60000,
 },
 {
     name: "Security Engineer",
@@ -40,10 +37,9 @@ export const main_job = [{
         "Cybersecurity degree",
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "75000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 75000,
 },
 {
     name: "Information Security Analyst",
@@ -51,10 +47,9 @@ export const main_job = [{
         "Cybersecurity degree",
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    money: "70000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 70000,
 },
 {
     name: "Business Analyst",
@@ -62,10 +57,9 @@ export const main_job = [{
         "Information Systems and Technology degree",
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "65000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 65000,
 },
 {
     name: "Database Administrator",
@@ -73,10 +67,9 @@ export const main_job = [{
         "Information Systems and Technology degree",
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "65000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 65000,
 },
 {
     name: "Quality Assurance Engineer",
@@ -85,10 +78,9 @@ export const main_job = [{
         "Software Engineering degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "60000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 60000,
 },
 {
     name: "DevOps Engineer",
@@ -98,10 +90,9 @@ export const main_job = [{
         "At least 95 IQ"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "150000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 150000,
 },
 {
     name: "Frontend Developer",
@@ -110,10 +101,9 @@ export const main_job = [{
         "Software Engineering degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "65000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 65000,
 },
 {
     name: "Backend Developer",
@@ -122,10 +112,9 @@ export const main_job = [{
         "Software Engineering degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "70000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 70000,
 },
 {
     name: "Full-stack Developer",
@@ -134,10 +123,9 @@ export const main_job = [{
         "Software Engineering degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "70000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 70000,
 },
 {
     name: "Data Analyst",
@@ -145,10 +133,9 @@ export const main_job = [{
         "Data Science degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "55000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 55000,
 },
 {
     name: "Data Scientist",
@@ -156,10 +143,9 @@ export const main_job = [{
         "Data Science degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "80000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 80000,
 },
 {
     name: "Data Engineer",
@@ -167,10 +153,9 @@ export const main_job = [{
         "Data Science degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "80000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 80000,
 },
 {
     name: "Game Developer",
@@ -178,10 +163,9 @@ export const main_job = [{
         "Game Development degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "60000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 60000,
 },
 {
     name: "Game Designer",
@@ -189,10 +173,9 @@ export const main_job = [{
         "Game Development degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "55000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 55000,
 },
 {
     name: "Game Tester",
@@ -200,10 +183,9 @@ export const main_job = [{
         "Game Development degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "45000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 45000,
 },
 {
     name: "AI Engineer",
@@ -211,10 +193,9 @@ export const main_job = [{
         "Artificial Intelligence degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "80000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 80000,
 },
 {
     name: "Machine Learning Engineer",
@@ -222,10 +203,9 @@ export const main_job = [{
         "Artificial Intelligence degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "90000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 90000,
 },
 {
     name: "AI Research Scientist",
@@ -233,9 +213,8 @@ export const main_job = [{
         "Artificial Intelligence degree"
     ],
     time: "12 mins",
-    health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: false, index: "3" },
-    salary: "90000",
-    money: "Free"
+    health: { isIncrease: false, index: 3 },
+    iq: { isIncrease: false, index: 3 },
+    salary: 90000,
 },
 ]

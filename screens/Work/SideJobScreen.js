@@ -17,7 +17,7 @@ function SideJobScreen() {
                 health={item.health}
                 iq={item.iq}
                 happiness={item.happiness}
-                money={item.money}
+                salary={item.salary}
                 btn={"Apply"}
               />
             );

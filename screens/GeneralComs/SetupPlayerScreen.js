@@ -20,7 +20,6 @@ function SetupPlayerScreen() {
       try {
         const value = await AsyncStorage.getItem("userData");
         if (value !== null) {
-          console.log(value);
           authCtx.getUserData(JSON.parse(value));
         }
       } catch (error) {
@@ -53,7 +52,6 @@ function SetupPlayerScreen() {
       });
       const userData = await getUserData("userCharacteristics", email);
       authCtx.getUserData(userData);
-      console.log(userData);
       navigation.navigate("MainScreen");
     } catch (error) {
       Alert.alert(
