@@ -42,7 +42,7 @@ function Item({
       if (getRandomAccidents(1, 500) === 1) {
         Alert.alert("Congratulation!", "You won a lotery");
         updateIndex({
-          money: 30000,
+          money: 50000,
           happiness: 35,
         });
       }

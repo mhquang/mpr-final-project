@@ -5,7 +5,7 @@ import { Colors } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
-
+import { formatNumber } from "../../util/formatNumber";
 import IconButton from "./buttons/IconButton";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -52,11 +52,11 @@ function Header() {
         </View>
         <View style={styles.moneyContainer}>
           <Ionicons name="cash" color={Colors.lightGreen} size={24} />
-          <Text style={styles.money}>${authCtx.userData?.money}</Text>
+          <Text style={styles.money}>${formatNumber(authCtx.userData?.money)}</Text>
         </View>
         <View style={styles.moneyContainer}>
           <MaterialIcons name="savings" color={"pink"} size={24} />
-          <Text style={styles.money}>${authCtx.userData?.savings}</Text>
+          <Text style={styles.money}>${formatNumber(authCtx.userData?.savings)}</Text>
         </View>
       </View>
 
