@@ -21,7 +21,7 @@ function EquipmentItem({ name, money, btn }) {
 
   const buyHandler = () => {
     const value = -parseInt(money);
-    authCtx.updateMoney(value, name);
+    authCtx.updateMoney(value, name, 'buy');
   };
   return (
     <View style={styles.itemContainer}>

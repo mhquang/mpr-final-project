@@ -10,6 +10,7 @@ export const AuthContext = createContext({
   getUserData: (userData) => {},
   updateIndex: (indexUpdates) => {},
   updateMoney: (value) => {},
+  sellItem: (item) => {},
   updateFriends: (friend) => {},
   removeFriends: (friend) => {},
   dateFriends: (friend) => {},
@@ -80,14 +81,31 @@ function AuthContextProvider({ children }) {
     }
   };
 
-  const updateMoney = (value, item) => {
+  const updateMoney = (value, item, action) => {
     if (userData) {
       const updatedUserData = { ...userData };
       if (value) {
         updatedUserData["money"] += value;
       }
-      if (item) {
+      if (item && action === 'buy') {
         updatedUserData?.items.push(item);
+      }
+      if (item && action === 'sell') {
+        const itemIndex = updatedUserData.items.indexOf(item);
+        if (itemIndex !== -1) {
+          updatedUserData.items.splice(itemIndex, 1);
+        }
+      }
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+  const sellItem = (item) => {
+    if (userData) {
+      const updatedUserData = { ...userData };
+      const itemIndex = updatedUserData.items.indexOf(item);
+      if (itemIndex !== -1) {
+        updatedUserData.items.splice(itemIndex, 1);
       }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
@@ -158,6 +176,7 @@ function AuthContextProvider({ children }) {
     getUserData: getUserData,
     updateIndex: updateIndex,
     updateMoney: updateMoney,
+    sellItem: sellItem,
     updateFriends: updateFriends,
     removeFriends: removeFriends,
     dateFriends: dateFriends,
