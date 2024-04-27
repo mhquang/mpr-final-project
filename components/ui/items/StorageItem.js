@@ -15,7 +15,12 @@ function StorageItem({ name }) {
   }
   const selectedItem = items.find((item) => item.name === name);
   const sellItemHandler = () => {
-    updateMoney(parseInt(selectedItem.money) / 2, name, 'sell');
+    // updateMoney(parseInt(selectedItem.money) / 2, name, "sell");
+    updateMoney({
+      value: parseInt(selectedItem.money) / 2,
+      item: name,
+      action: "sell",
+    });
   };
 
   return (
@@ -24,7 +29,7 @@ function StorageItem({ name }) {
         <Text style={styles.title}>{name}</Text>
       </View>
       <View>
-      <ButtonItem children={'Sell'} onPress={sellItemHandler}/>
+        <ButtonItem children={"Sell"} onPress={sellItemHandler} />
       </View>
     </View>
   );

@@ -81,25 +81,32 @@ function AuthContextProvider({ children }) {
     }
   };
 
-  const updateMoney = (value, item, action) => {
+  const updateMoney = ({ value, item, action }) => {
     if (userData) {
       const updatedUserData = { ...userData };
       if (value) {
         updatedUserData["money"] += value;
       }
-      if (item && action === 'buy') {
+      if (item && action === "buy") {
         updatedUserData?.items.push(item);
       }
-      if (item && action === 'sell') {
+      if (item && action === "sell") {
         const itemIndex = updatedUserData.items.indexOf(item);
         if (itemIndex !== -1) {
           updatedUserData.items.splice(itemIndex, 1);
         }
       }
+      if (action === "deposit") {
+        updatedUserData["savings"] -= value;
+      }
+      if (action === "withdrawal") {
+        updatedUserData["savings"] -= value;
+      }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
+
   const sellItem = (item) => {
     if (userData) {
       const updatedUserData = { ...userData };
@@ -111,6 +118,7 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
+
   const updateFriends = (friend) => {
     if (userData) {
       const updatedUserData = { ...userData };
@@ -122,6 +130,7 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
+
   const removeFriends = (friend) => {
     if (userData) {
       const updatedUserData = { ...userData };
@@ -133,6 +142,7 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
+
   const dateFriends = (friend) => {
     if (userData) {
       const updatedUserData = { ...userData };
@@ -143,6 +153,7 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
+
   const breakUpFriends = (friend) => {
     if (userData) {
       const updatedUserData = { ...userData };
@@ -168,6 +179,7 @@ function AuthContextProvider({ children }) {
     AsyncStorage.removeItem("userData");
     setIsSaving(false);
   }
+
   const value = {
     userData: userData,
     token: authToken,

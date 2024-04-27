@@ -14,9 +14,7 @@ function ButtonItem({ children, onPress }) {
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
       onPress={onPress}
     >
-      <View>
         <Text style={styles.buttonText}>{children}</Text>
-      </View>
     </Pressable>
   );
 }
@@ -27,7 +25,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: Colors.blueIQ,
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",

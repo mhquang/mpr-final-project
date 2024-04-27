@@ -1,10 +1,13 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Colors } from "../../../constants/styles";
 import { useFonts } from "expo-font";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import ButtonItem from "../buttons/ButtonItem";
+import { AuthContext } from "../../../store/auth-context";
 
 function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
   const [loanMoney, setLoanMoney] = useState(0);
+  const authCtx = useContext(AuthContext);
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -14,6 +17,17 @@ function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
   if (!fontsLoaded) {
     return null;
   }
+
+  const withdrawalHandler = (percentage) => {
+    const withdrawalAmount = savings * percentage;
+    authCtx.updateMoney({ value: withdrawalAmount, action: "withdrawal" });
+  };
+
+  const depositHandler = (percentage) => {
+    const depositAmount = -(money * percentage);
+    authCtx.updateMoney({ value: depositAmount, action: "deposit" });
+  };
+
   return (
     <View style={styles.itemContainer}>
       <View style={styles.inforContainer}>
@@ -40,39 +54,33 @@ function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
       </View>
       {isLoan ? (
         <View style={styles.buttonContainer}>
-          <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-          >
-            <Text style={styles.buttonText}>$100</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-          >
-            <Text style={styles.buttonText}>$1000</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-          >
-            <Text style={styles.buttonText}>$100K</Text>
-          </Pressable>
+          <ButtonItem>$100</ButtonItem>
+          <ButtonItem>$1000</ButtonItem>
+          <ButtonItem>$100K</ButtonItem>
         </View>
       ) : (
         <View style={styles.buttonContainer}>
-          <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+          <ButtonItem
+            onPress={() =>
+              isDeposit ? depositHandler(0.1) : withdrawalHandler(0.1)
+            }
           >
-            <Text style={styles.buttonText}>10%</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+            10%
+          </ButtonItem>
+          <ButtonItem
+            onPress={() =>
+              isDeposit ? depositHandler(0.5) : withdrawalHandler(0.5)
+            }
           >
-            <Text style={styles.buttonText}>25%</Text>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+            50%
+          </ButtonItem>
+          <ButtonItem
+            onPress={() =>
+              isDeposit ? depositHandler(1) : withdrawalHandler(1)
+            }
           >
-            <Text style={styles.buttonText}>50%</Text>
-          </Pressable>
+            100%
+          </ButtonItem>
         </View>
       )}
     </View>
