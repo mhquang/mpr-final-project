@@ -2,8 +2,10 @@ import { StyleSheet, View, Text } from "react-native";
 import { Colors } from "../../../constants/styles";
 import { useFonts } from "expo-font";
 import { useContext } from "react";
-import ButtonItem from "../buttons/ButtonItem";
 import { AuthContext } from "../../../store/auth-context";
+import { formatNumber } from "../../../util/formatNumber";
+
+import ButtonItem from "../buttons/ButtonItem";
 
 function BankItem({ name, isDeposit, interest, isLoan, isLoanRepayment }) {
   const authCtx = useContext(AuthContext);
@@ -60,9 +62,9 @@ function BankItem({ name, isDeposit, interest, isLoan, isLoanRepayment }) {
           )}
         </View>
         {isLoan ? (
-          <Text style={styles.money}>${loanMoney}</Text>
+          <Text style={styles.money}>${formatNumber(loanMoney)}</Text>
         ) : isLoanRepayment ? (
-          <Text style={styles.money}>${loanMoney}</Text>
+          <Text style={styles.money}>${formatNumber(loanMoney)}</Text>
         ) : (
           <Text style={styles.money}>
             {isDeposit ? `$${formatNumber(money)}` : `$${formatNumber(savings)}`}
