@@ -4,7 +4,7 @@ import { useFonts } from "expo-font";
 import { useContext, useState } from "react";
 import ButtonItem from "../buttons/ButtonItem";
 import { AuthContext } from "../../../store/auth-context";
-
+import { formatNumber } from "../../../util/formatNumber";
 function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
   const [loanMoney, setLoanMoney] = useState(0);
   const authCtx = useContext(AuthContext);
@@ -48,7 +48,7 @@ function BankItem({ name, isDeposit, interest, money, savings, isLoan }) {
           <Text style={styles.money}>${loanMoney}</Text>
         ) : (
           <Text style={styles.money}>
-            {isDeposit ? `$${money}` : `$${savings}`}
+            {isDeposit ? `$${formatNumber(money)}` : `$${formatNumber(savings)}`}
           </Text>
         )}
       </View>
