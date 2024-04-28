@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Colors } from "../../../constants/styles";
 import { useFonts } from "expo-font";
+import { formatNumber } from './../../../util/formatNumber';
 
 function InvestmentItem({
   name,
@@ -25,7 +26,7 @@ function InvestmentItem({
         <Text style={styles.name}>{name}</Text>
       </View>
       <View style={styles.moneyContainer}>
-        <Text style={styles.money}>${money}</Text>
+        <Text style={styles.money}>${formatNumber(money)}</Text>
         <Text style={[styles.interest, isIncrease ? styles.green : styles.red]}>
           {isIncrease ? `+${interest}%` : `-${interest}%`}
         </Text>
@@ -55,29 +56,29 @@ const styles = StyleSheet.create({
   },
 
   inforContainer: {
-    flex: 3,
+    flex: 4,
   },
 
   moneyContainer: {
-    flex: 2,
+    flex: 3,
   },
 
   code: {
     fontFamily: "NTSomicMedium",
-    fontSize: 25,
+    fontSize: 20,
     color: Colors.black,
   },
 
   name: {
     fontFamily: "NTSomicMedium",
-    fontSize: 13,
+    fontSize: 12,
     color: Colors.gray,
   },
 
   money: {
     marginTop: 5,
     fontFamily: "UnboundedSemibold",
-    fontSize: 18,
+    fontSize: 15,
   },
 
   interest: {

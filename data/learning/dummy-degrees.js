@@ -31,7 +31,7 @@ export const degrees = [
     },
     {
         name: 'Bachelor of Artificial Intelligence',
-        money: '500',
+        money: 500,
         time: '9 months',
         requirements: ['Complete High school'],
         health: {isIncrease: false, index: "3"},    
@@ -41,7 +41,7 @@ export const degrees = [
     },
     {
         name: 'Bachelor of Computer Science',
-        money: '500',
+        money: 500,
         time: '9 months',
         requirements: ['Complete High school'],
         health: {isIncrease: false, index: "3"},    
@@ -51,7 +51,7 @@ export const degrees = [
     },
     {
         name: 'Bachelor of Cybersercurity',
-        money: '500',
+        money: 500,
         time: '9 months',
         requirements: ['Complete High school'],
         health: {isIncrease: false, index: "3"},    
@@ -61,7 +61,7 @@ export const degrees = [
     },
     {
         name: 'Bachelor of Information Systems and Technology',
-        money: '500',
+        money: 500,
         time: '9 months',
         requirements: ['Complete High school'],
         health: {isIncrease: false, index: "3"},    
@@ -71,7 +71,7 @@ export const degrees = [
     },
     {
         name: 'Bachelor of Data Science',
-        money: '500',
+        money: 500,
         time: '9 months',
         requirements: ['Complete High school'],
         health: {isIncrease: false, index: "3"},    
@@ -81,7 +81,7 @@ export const degrees = [
     },
     {
         name: 'Bachelor of Game Development',
-        money: '500',
+        money: 500,
         time: '9 months',
         requirements: ['Complete High school'],
         health: {isIncrease: false, index: "3"},    
@@ -91,7 +91,7 @@ export const degrees = [
     },
     {
         name: 'Masters',
-        money: '800',
+        money: 800,
         time: '6 months',
         requirements: ['Complete Bachelor Degree'],
         health: {isIncrease: false, index: "5"},    

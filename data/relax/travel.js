@@ -1,7 +1,7 @@
 export const travel = [
     {
         name: 'Korea',
-        money: '1500',
+        money: 1500,
         time: '3 days',
         requirements: ['Have learned Korean'],
         happiness: { isIncrease: true, index: "5" },
@@ -10,7 +10,7 @@ export const travel = [
     },
     {
         name: 'China',
-        money: '1500',
+        money: 1500,
         time: '3 days',
         requirements: ['Have learned Chinese'],
         happiness: { isIncrease: true, index: "5" },
@@ -19,7 +19,7 @@ export const travel = [
     },
     {
         name: 'Russia',
-        money: '1800',
+        money: 1500,
         time: '3 days',
         requirements: ["Have learned Russian"],
         happiness: { isIncrease: true, index: "6" },
@@ -28,7 +28,7 @@ export const travel = [
     },
     {
         name: 'Japan',
-        money: '1500',
+        money: 1500,
         time: '3 days',
         requirements: ['Have learned Japanese'],
         happiness: { isIncrease: true, index: "5" },
@@ -37,7 +37,7 @@ export const travel = [
     },
     {
         name: 'England',
-        money: '3000',
+        money: 3000,
         time: '3 days',
         requirements: ['Have learned English'],
         happiness: { isIncrease: true, index: "7" },

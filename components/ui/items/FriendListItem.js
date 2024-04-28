@@ -1,8 +1,14 @@
 import { StyleSheet, View, Text } from "react-native";
 import { useFonts } from "expo-font";
+import { useContext } from "react";
+import { AuthContext } from "../../../store/auth-context";
+
 import { Colors } from "../../../constants/styles";
+import IconButton from "../buttons/IconButton";
 
 function FriendListItem({ name }) {
+  const authCtx = useContext(AuthContext);
+
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
   });
@@ -10,10 +16,25 @@ function FriendListItem({ name }) {
     return null;
   }
 
+  const unFriendHandler = () => {
+    if (name) {
+      authCtx.removeFriends(name);
+      authCtx.updateIndex({
+        happiness: -2,
+      });
+    }
+  };
+
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
+        <IconButton
+            icon={"deleteuser"}
+            size={24}
+            color={Colors.darkBlue}
+            onPress={unFriendHandler}
+          />
       </View>
     </View>
   );
@@ -26,12 +47,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.item,
     marginHorizontal: 20,
     width: "90%",
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderRadius: 20,
     justifyContent: "space-between",
     maxHeight: 200,
     marginTop: 10,
-    gap: 20,
   },
 
   innerContainer: {
@@ -42,7 +63,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontFamily: "NTSomicMedium",
-    fontSize: 15,
+    fontSize: 20,
     flex: 1,
     color: Colors.black,
   },

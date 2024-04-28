@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text } from "react-native";
 import { Colors } from "../../../constants/styles";
 import { useFonts } from "expo-font";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { formatNumber } from "../../../util/formatNumber";
 
@@ -9,8 +9,8 @@ import ButtonItem from "../buttons/ButtonItem";
 
 function BankItem({ name, isDeposit, interest, isLoan, isLoanRepayment }) {
   const authCtx = useContext(AuthContext);
-  const money = authCtx.userData?.money;
   const savings = authCtx.userData?.savings;
+  const money = authCtx.userData?.money;
   const loanMoney = authCtx.userData?.loan;
 
   const [fontsLoaded] = useFonts({
@@ -32,8 +32,9 @@ function BankItem({ name, isDeposit, interest, isLoan, isLoanRepayment }) {
   };
 
   const depositHandler = (percentage) => {
-    const depositAmount = -(money * percentage);
-    authCtx.updateMoney({ value: depositAmount, action: "deposit" });
+    const depositAmount = money * percentage;
+    authCtx.updateMoney({ value: -depositAmount, action: "deposit" });
+    console.log(depositAmount);
   };
 
   const loanHandler = (amount) => {
@@ -42,7 +43,10 @@ function BankItem({ name, isDeposit, interest, isLoan, isLoanRepayment }) {
 
   const loanRepaymentHandler = (percentage) => {
     const loanRepaymentAmount = -(loanMoney * percentage);
-    authCtx.updateMoney({value: loanRepaymentAmount, action: 'loanRepayment'})
+    authCtx.updateMoney({
+      value: loanRepaymentAmount,
+      action: "loanRepayment",
+    });
   };
 
   return (
@@ -62,12 +66,14 @@ function BankItem({ name, isDeposit, interest, isLoan, isLoanRepayment }) {
           )}
         </View>
         {isLoan ? (
-          <Text style={styles.money}>${formatNumber(loanMoney)}</Text>
+          <Text></Text>
         ) : isLoanRepayment ? (
           <Text style={styles.money}>${formatNumber(loanMoney)}</Text>
         ) : (
           <Text style={styles.money}>
-            {isDeposit ? `$${formatNumber(money)}` : `$${formatNumber(savings)}`}
+            {isDeposit
+              ? `$${formatNumber(money)}`
+              : `$${formatNumber(savings)}`}
           </Text>
         )}
       </View>

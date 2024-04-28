@@ -3,11 +3,13 @@ import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { AuthContext } from "../../../store/auth-context";
 import { useContext } from "react";
+import { formatNumber } from './../../../util/formatNumber';
+
 import ButtonItem from "../buttons/ButtonItem";
 
 function EquipmentItem({ name, money, btn }) {
   const authCtx = useContext(AuthContext);
-  const isSufficient = authCtx.userData?.money >= parseInt(money);
+  const isSufficient = authCtx.userData?.money >= money;
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -19,14 +21,14 @@ function EquipmentItem({ name, money, btn }) {
   }
 
   const buyHandler = () => {
-    const value = -parseInt(money);
+    const value = -money;
     authCtx.updateMoney({ value: value, item: name, action: "buy" });
   };
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        <Text style={styles.money}>${money}</Text>
+        <Text style={styles.money}>${formatNumber(money)}</Text>
       </View>
       <View style={styles.innerContainer}>
         {isSufficient && <ButtonItem children={btn} onPress={buyHandler} />}

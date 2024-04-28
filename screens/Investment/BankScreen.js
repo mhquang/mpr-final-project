@@ -8,6 +8,20 @@ import BankItem from "../../components/ui/items/BankItem";
 
 function BankScreen() {
   const authCtx = useContext(AuthContext);
+  const isHaveLoanRepayment = authCtx.userData?.loan > 0;
+  const loanRepaymentItemIndex = bank.findIndex(
+    (item) => item.name === "Loan Repayment"
+  );
+
+  if (isHaveLoanRepayment && loanRepaymentItemIndex === -1) {
+    bank.push({
+      name: "Loan Repayment",
+      isLoanRepayment: true,
+    });
+  } else if (!isHaveLoanRepayment && loanRepaymentItemIndex !== -1) {
+    bank.splice(loanRepaymentItemIndex, 1);
+  }
+
   return (
     <View style={styles.rootContainer}>
       <Title>Bank</Title>

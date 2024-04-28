@@ -21,7 +21,7 @@ export function MainScreen() {
     if(age === 18) {
       authCtx.updateMoney({ value: 10000 });
     }
-    const randomNum = getRandomAccidents(1, 3);
+    const randomNum = getRandomAccidents(1, 100);
     accidents.forEach((accident) => {
       if (accident.id === randomNum) {
         if (accident.title && accident.description && (accident.happiness || accident.health || accident.iq)) {

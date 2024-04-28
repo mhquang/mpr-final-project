@@ -97,16 +97,18 @@ function AuthContextProvider({ children }) {
         }
       }
       if (action === "deposit") {
-        updatedUserData["savings"] -= value;
+        const totalDeposit = value + (value * 5) / 100;
+        updatedUserData["savings"] -= totalDeposit;
       }
       if (action === "withdrawal") {
         updatedUserData["savings"] -= value;
       }
-      if (action === 'loan') {
-        updatedUserData["loan"] += value;
+      if (action === "loan") {
+        const totalLoan = value + (value * 9.9) / 100;
+        updatedUserData["loan"] += totalLoan;
       }
-      if (action === 'loanRepayment') {
-        updatedUserData["loan"] += value
+      if (action === "loanRepayment") {
+        updatedUserData["loan"] += value;
       }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));

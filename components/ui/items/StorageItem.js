@@ -1,23 +1,27 @@
 import { StyleSheet, View, Text } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
-import ButtonItem from "../buttons/ButtonItem";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { items } from "../../../data/items/items";
+
+import ButtonItem from "../buttons/ButtonItem";
+import { formatNumber } from "../../../util/formatNumber";
+
 function StorageItem({ name }) {
   const { updateMoney } = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
   });
   if (!fontsLoaded) {
     return null;
   }
   const selectedItem = items.find((item) => item.name === name);
+  const sellPrice = selectedItem.money / 2;
   const sellItemHandler = () => {
-    // updateMoney(parseInt(selectedItem.money) / 2, name, "sell");
     updateMoney({
-      value: parseInt(selectedItem.money) / 2,
+      value: sellPrice,
       item: name,
       action: "sell",
     });
@@ -27,8 +31,9 @@ function StorageItem({ name }) {
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
+        <Text style={styles.money}>${formatNumber(sellPrice)}</Text>
       </View>
-      <View>
+      <View style={styles.innerContainer}>
         <ButtonItem children={"Sell"} onPress={sellItemHandler} />
       </View>
     </View>
@@ -47,8 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     maxHeight: 200,
     marginTop: 10,
-    gap: 20,
-    flexDirection: "row",
+    gap: 10,
   },
 
   innerContainer: {
@@ -59,7 +63,13 @@ const styles = StyleSheet.create({
 
   title: {
     fontFamily: "NTSomicMedium",
-    fontSize: 15,
+    fontSize: 20,
+    flex: 1,
     color: Colors.black,
+  },
+
+  money: {
+    fontFamily: "UnboundedSemibold",
+    fontSize: 18,
   },
 });

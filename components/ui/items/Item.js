@@ -9,6 +9,7 @@ import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import * as Progress from "react-native-progress";
 import ButtonItem from "../buttons/ButtonItem";
+import { formatNumber } from "./../../../util/formatNumber";
 function Item({
   name,
   requirements,
@@ -146,10 +147,14 @@ function Item({
           {salary ? (
             <Text style={styles.moneyTitle}>Salary: </Text>
           ) : (
-            <Text style={styles.moneyTitle}>Cost: </Text>
+            <Text style={styles.moneyTitle}>Price: </Text>
           )}
           <Text style={styles.money}>
-            {salary ? `$${salary}` : money === "Free" ? "Free" : `$${money}`}
+            {salary
+              ? `$${formatNumber(salary)}`
+              : money === "Free"
+              ? "Free"
+              : `$${formatNumber(money)}`}
           </Text>
         </View>
       </View>
@@ -236,11 +241,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     width: 150,
-    flex: 4,
+    flex: 1,
   },
 
   salaryContainer: {
-    flex: 3,
+    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -254,7 +259,7 @@ const styles = StyleSheet.create({
 
   money: {
     fontFamily: "UnboundedSemibold",
-    fontSize: 18,
+    fontSize: 17,
   },
 
   progress: {

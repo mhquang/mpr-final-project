@@ -15,7 +15,7 @@ export const sports = [
     health: { isIncrease: true, index: "2" },
     iq: { isIncrease: true, index: "1" },
     happiness: { isIncrease: true, index: "2" },
-    money: "30",
+    money: 30,
   },
   {
     name: "Swimming",
@@ -24,7 +24,7 @@ export const sports = [
     health: { isIncrease: true, index: "2" },
     iq: { isIncrease: true, index: "1" },
     happiness: { isIncrease: true, index: "2" },
-    money: "40",
+    money: 40,
   },
   {
     name: "Basketball",
@@ -33,7 +33,7 @@ export const sports = [
     health: { isIncrease: true, index: "2" },
     iq: { isIncrease: true, index: "1" },
     happiness: { isIncrease: true, index: "2" },
-    money: "20",
+    money: 20,
   },
   {
     name: "Tennis",
@@ -42,7 +42,7 @@ export const sports = [
     health: { isIncrease: true, index: "2" },
     iq: { isIncrease: true, index: "1" },
     happiness: { isIncrease: true, index: "2" },
-    money: "50",
+    money:50,
   },
   {
     name: "Running",
@@ -69,7 +69,7 @@ export const sports = [
     health: { isIncrease: true, index: "2" },
     iq: { isIncrease: false, index: "0" },
     happiness: { isIncrease: true, index: "3" },
-    money: "100",
+    money: 100,
   },
   {
     name: "Badminton",
@@ -78,7 +78,7 @@ export const sports = [
     health: { isIncrease: true, index: "2" },
     iq: { isIncrease: true, index: "1" },
     happiness: { isIncrease: true, index: "2" },
-    money: "25",
+    money: 25,
   },
   {
     name: "Martial Arts",
@@ -87,6 +87,6 @@ export const sports = [
     health: { isIncrease: true, index: "3" },
     iq: { isIncrease: true, index: "2" },
     happiness: { isIncrease: true, index: "3" },
-    money: "50",
+    money: 50,
   },
 ];
