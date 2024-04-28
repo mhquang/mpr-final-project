@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, useEffect, useState } from "react";
-import { updateUserData } from "../util/firebase";
+import { updateUserData, deleteDocument } from "../util/firebase";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
+import { Alert } from "react-native";
 export const AuthContext = createContext({
   userData: undefined,
   token: "",
@@ -25,21 +26,38 @@ function AuthContextProvider({ children }) {
   const [authToken, setAuthToken] = useState();
   const [userData, setUserData] = useState();
   const [isSaving, setIsSaving] = useState(false);
-
+  const [isCreatingNewLife, setIsCreatingNewLife] = useState(false);
   useEffect(() => {
     const timer = setInterval(() => {
       if (userData) {
-        setUserData((prevUserData) => ({
-          ...prevUserData,
-          age: prevUserData.age + 1,
-          money: prevUserData.money + 100,
-          savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
-          loan: prevUserData.loan + (prevUserData.loan * 9.9) / 100,
-        }));
+        setUserData((prevUserData) => {
+          if (prevUserData.age + 1 > 5) {
+            return {
+              ...prevUserData,
+              age: prevUserData.age + 1,
+              money: prevUserData.money + 100,
+              health: prevUserData.health - 10,
+              iq: prevUserData.iq - 5,
+              happiness: prevUserData.happiness - 5,
+              savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
+              loan: prevUserData.loan + (prevUserData.loan * 9.9) / 100,
+            };
+          } else {
+            return {
+              ...prevUserData,
+              age: prevUserData.age + 1,
+              money: prevUserData.money + 100,
+              health: prevUserData.health + 5,
+              iq: prevUserData.iq + 5,
+              happiness: prevUserData.happiness + 5,
+              savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
+              loan: prevUserData.loan + (prevUserData.loan * 9.9) / 100,
+            };
+          }
+        });
         AsyncStorage.setItem("userData", JSON.stringify(userData));
       }
-    }, 720000); // 12 minute
-
+    }, 2000); // 12 minute
     return () => clearInterval(timer);
   }, [userData]);
 
@@ -236,12 +254,34 @@ function AuthContextProvider({ children }) {
   };
 
   function resetLife() {
-    setAuthToken(null);
-    setUserData(null);
-    AsyncStorage.removeItem("token");
-    AsyncStorage.removeItem("userData");
+    const email = userData?.userId;
+    async function reset() {
+      try {
+        setIsCreatingNewLife(true);
+        await deleteDocument("userCharacteristics", email);
+      } catch (error) {
+        console.log(error);
+      }
+      setAuthToken(null);
+      setUserData(null);
+      AsyncStorage.removeItem("token");
+      AsyncStorage.removeItem("userData");
+      setIsCreatingNewLife(false);
+    }
+    Alert.alert(
+      "You are dead!",
+      "You are dead! You are dead! You are dead!",
+      [
+        {
+          text: "OK",
+          onPress: () => {
+            reset();
+          },
+        },
+      ]
+    );
+    return;
   }
-
   async function logout() {
     setIsSaving(true);
     const email = userData?.userId;
@@ -278,6 +318,9 @@ function AuthContextProvider({ children }) {
 
   if (isSaving) {
     return <LoadingOverlay message="Saving your state..." />;
+  }
+  if(isCreatingNewLife) {
+    return <LoadingOverlay message="Creating a new life...Please login to continue!" />;
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

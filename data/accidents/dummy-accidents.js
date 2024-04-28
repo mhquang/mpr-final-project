@@ -3,7 +3,8 @@ export const accidents = [
         id: 1,
         title: "Opps",
         description: "Get head pooped by bird",
-        happiness: -3
+        happiness: -3,
+        health: -10,
     },
     {
         id: 2,
@@ -17,6 +18,7 @@ export const accidents = [
         title: "Opps",
         description: "Get captured by the police",
         happiness: -6,
+        health: -10,
         money: -1000
     },
     {

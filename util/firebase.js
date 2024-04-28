@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBae9o1bR-Rm3xlV74ON2VVTuHhf9dHxU8",
@@ -46,5 +46,15 @@ export async function updateUserData(collection, document, newData) {
         await updateDoc(docRef, newData);
     } catch (error) {
         return error;
+    }
+}
+export async function deleteDocument(collection, document) {
+    try {
+        const docRef = doc(firestore, collection, document);
+        await deleteDoc(docRef);
+        console.log("Document deleted successfully!");
+    } catch (error) {
+        console.error("Error deleting document: ", error);
+        throw error;
     }
 }
