@@ -88,13 +88,13 @@ function WorkItem({
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
         {type === "main" && isMainButtonShown && (
-          <ButtonItem children={"main"} onPress={onPressHandler} />
+          <ButtonItem children={btn} onPress={onPressHandler} />
         )}
         {type === "side" && !isWorking && isSideButtonShown && (
-          <ButtonItem children={"side"} onPress={onPressHandler} />
+          <ButtonItem children={btn} onPress={onPressHandler} />
         )}
         {type === "crime" && crime === "" && (
-          <ButtonItem children={"crime"} onPress={onPressHandler} />
+          <ButtonItem children={btn} onPress={onPressHandler} />
         )}
         {isWorking && <Text style={styles.require}>Working</Text>}
       </View>
