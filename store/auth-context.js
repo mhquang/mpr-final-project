@@ -212,7 +212,7 @@ function AuthContextProvider({ children }) {
       if (
         type === "main" &&
         currentMainJob === "" &&
-        currentSideJob.length < 1
+        currentSideJob.length <= 1
       ) {
         updatedUserData.currentWorking.main = name;
       }
@@ -225,7 +225,7 @@ function AuthContextProvider({ children }) {
         updatedUserData.currentWorking.side.push(name);
       }
 
-      if (type === "crime" && currentMainJob === "") {
+      if (type === "crime") {
         updatedUserData.currentWorking.crime = name;
       }
 
