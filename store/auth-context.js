@@ -15,6 +15,7 @@ export const AuthContext = createContext({
   dateFriends: (friend) => {},
   breakUpFriends: () => {},
   updateLearning: (value) => {},
+  updateWorking: (value) => {},
   resetLife: () => {},
   authenticate: (token) => {},
   logout: () => {},
@@ -201,6 +202,39 @@ function AuthContextProvider({ children }) {
     }
   };
 
+  const updateWorking = ({ name, type }) => {
+    if (userData && name) {
+      const updatedUserData = { ...userData };
+
+      const currentMainJob = updatedUserData.currentWorking.main;
+      const currentSideJob = updatedUserData.currentWorking.side;
+
+      if (
+        type === "main" &&
+        currentMainJob === "" &&
+        currentSideJob.length < 1
+      ) {
+        updatedUserData.currentWorking.main = name;
+      }
+
+      if (
+        type === "side" &&
+        currentSideJob.length < 2 &&
+        !(currentMainJob && currentSideJob.length === 1)
+      ) {
+        updatedUserData.currentWorking.side.push(name);
+      }
+
+      if (type === "crime" && currentMainJob === "") {
+        updatedUserData.currentWorking.crime = name;
+      }
+
+      console.log(updatedUserData.currentWorking);
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+
   function resetLife() {
     setAuthToken(null);
     setUserData(null);
@@ -237,6 +271,7 @@ function AuthContextProvider({ children }) {
     dateFriends: dateFriends,
     breakUpFriends: breakUpFriends,
     updateLearning: updateLearning,
+    updateWorking: updateWorking,
     resetLife: resetLife,
     logout: logout,
   };

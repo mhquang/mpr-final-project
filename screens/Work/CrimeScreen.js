@@ -1,15 +1,19 @@
 import { View, StyleSheet } from "react-native";
 import { crime } from "../../data/work/crime";
+import { useContext } from "react";
+import { AuthContext } from "../../store/auth-context";
 
-import Item from "../../components/ui/items/Item";
 import Title from "../../components/ui/Title";
+import WorkItem from "../../components/ui/items/WorkItem";
 function CrimeScreen() {
+  const authCtx = useContext(AuthContext);
+  const currentWorking = authCtx.userData?.currentWorking;
   return (
     <View style={styles.rootContainer}>
       <Title>Crime</Title>
       {crime.map((item, index) => {
         return (
-          <Item
+          <WorkItem
             key={index}
             name={item.name}
             requirements={item.requirements}
@@ -19,6 +23,8 @@ function CrimeScreen() {
             happiness={item.happiness}
             salary={item.salary}
             btn={"Apply"}
+            type={"crime"}
+            isWorking={currentWorking.crime === item.name}
           />
         );
       })}

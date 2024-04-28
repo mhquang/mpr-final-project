@@ -66,7 +66,7 @@ export const leisure = [
     requirements: ["At least 16 years old"],
   },
   {
-    name: "Take a Coffee",
+    name: "Have a Coffee",
     money: 25,
     time: "2 hour",
     happiness: { isIncrease: true, index: "3" },

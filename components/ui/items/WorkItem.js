@@ -4,17 +4,26 @@ import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/auth-context";
-import { getRandomAccidents } from "../../../util/getRandomAccidents";
 import { formatNumber } from "./../../../util/formatNumber";
 
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
 
-function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
+function WorkItem({
+  name,
+  requirements,
+  time,
+  health,
+  iq,
+  happiness,
+  salary,
+  btn,
+  type,
+  isWorking,
+}) {
   const authCtx = useContext(AuthContext);
   const userHealth = authCtx.userData?.health;
-  const isSufficient = authCtx.userData?.money >= money;
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -26,20 +35,10 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   }
 
   const onPressHandler = () => {
-    if (name === "Buy lotery tickets") {
-      authCtx.updateMoney({ value: -25 });
-      if (getRandomAccidents(1, 500) === 1) {
-        Alert.alert("Congratulation!", "You won a lotery");
-        authCtx.updateIndex({
-          money: 50000,
-          happiness: 35,
-        });
-      }
-    }
-
     const updates = {};
-    if (money) {
-      const value = money === "Free" ? 0 : -parseInt(money);
+
+    if (salary) {
+      const value = +salary;
       updates.money = value;
     }
 
@@ -70,13 +69,22 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
     }
 
     authCtx.updateIndex(updates);
+
+    authCtx.updateWorking({ name: name, type: type });
   };
 
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {(money === "Free" || isSufficient) && (
+        {/* {isButtonShown && (
+          <ButtonItem children={btn} onPress={onPressHandler} />
+        )}
+        {isWorking && <Text style={styles.require}>Working</Text>} */}
+
+        {isWorking ? (
+          <Text style={styles.require}>Working</Text>
+        ) : (
           <ButtonItem children={btn} onPress={onPressHandler} />
         )}
       </View>
@@ -120,18 +128,16 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
           )}
         </View>
 
-        <View style={styles.priceContainer}>
-          <Text style={styles.moneyTitle}>Price: </Text>
-          <Text style={styles.money}>
-            {money === "Free" ? "Free" : `$${formatNumber(money)}`}
-          </Text>
+        <View style={styles.salaryContainer}>
+          <Text style={styles.moneyTitle}>Salary: </Text>
+          <Text style={styles.money}>${formatNumber(salary)}</Text>
         </View>
       </View>
     </View>
   );
 }
 
-export default Item;
+export default WorkItem;
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -199,7 +205,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  priceContainer: {
+  salaryContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
