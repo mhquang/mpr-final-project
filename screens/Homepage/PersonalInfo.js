@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useFonts } from "expo-font";
 import { AuthContext } from "../../store/auth-context";
 import { Colors } from "../../constants/styles";
-
+import { formatNumber } from "../../util/formatNumber";
 function PersonalInfo() {
   const authCtx = useContext(AuthContext);
   const [fontsLoaded] = useFonts({
@@ -38,7 +38,7 @@ function PersonalInfo() {
           <Text style={styles.text}>{relationshipStatus}</Text>
         </Text>
         <Text style={styles.title}>
-          Net Worth: <Text style={styles.text}>${netWorth}</Text>
+          Net Worth: <Text style={styles.text}>${formatNumber(netWorth)}</Text>
         </Text>
       </View>
     </View>

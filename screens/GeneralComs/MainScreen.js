@@ -10,24 +10,22 @@ import InvestmentScreen from "../InvestmentScreen";
 import HomeScreen from "../HomeScreen";
 import { getRandomAccidents } from "../../util/getRandomAccidents";
 import { AuthContext } from "../../store/auth-context";
-import { useEffect, useContext } from "react";
+import { useLayoutEffect, useContext } from "react";
 import { Alert } from "react-native";
 import { accidents } from "../../data/accidents/dummy-accidents";
 const BottomTab = createBottomTabNavigator();
 export function MainScreen() {
   const authCtx = useContext(AuthContext);
   const age = authCtx.userData?.age;
-  useEffect(() => {
+  useLayoutEffect(() => {
     if(age === 18) {
-      authCtx.updateMoney(10000);
+      authCtx.updateMoney({ value: 10000 });
     }
-    const randomNum = getRandomAccidents(1, 70);
+    const randomNum = getRandomAccidents(1, 3);
     accidents.forEach((accident) => {
       if (accident.id === randomNum) {
-        if (accident.title && accident.description) {
+        if (accident.title && accident.description && (accident.happiness || accident.health || accident.iq)) {
           Alert.alert(accident.title, accident.description);
-        }
-        if (accident.happiness || accident.health || accident.iq) {
           authCtx.updateIndex({
             happiness: accident.happiness || 0,
             health: accident.health || 0,
@@ -38,6 +36,10 @@ export function MainScreen() {
         }
       }
     });
+    if(age > 100 || authCtx.userData?.health <= 0) {
+      Alert.alert("You are dead!", "You are dead! You are dead! You are dead!");
+      authCtx.resetLife();
+    }
   }, [age]);
   return (
     <BottomTab.Navigator
