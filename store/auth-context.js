@@ -23,6 +23,7 @@ function AuthContextProvider({ children }) {
   const [authToken, setAuthToken] = useState();
   const [userData, setUserData] = useState();
   const [isSaving, setIsSaving] = useState(false);
+
   useEffect(() => {
     const timer = setInterval(() => {
       if (userData) {
@@ -30,10 +31,12 @@ function AuthContextProvider({ children }) {
           ...prevUserData,
           age: prevUserData.age + 1,
           money: prevUserData.money + 100,
+          savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
+          loan: prevUserData.loan + (prevUserData.loan * 9.9) / 100,
         }));
         AsyncStorage.setItem("userData", JSON.stringify(userData));
       }
-    }, 30000); // 1 minute
+    }, 30000); // 12 minute
 
     return () => clearInterval(timer);
   }, [userData]);
@@ -97,15 +100,13 @@ function AuthContextProvider({ children }) {
         }
       }
       if (action === "deposit") {
-        const totalDeposit = value + (value * 5) / 100;
-        updatedUserData["savings"] -= totalDeposit;
+        updatedUserData["savings"] -= value;
       }
       if (action === "withdrawal") {
         updatedUserData["savings"] -= value;
       }
       if (action === "loan") {
-        const totalLoan = value + (value * 9.9) / 100;
-        updatedUserData["loan"] += totalLoan;
+        updatedUserData["loan"] += value;
       }
       if (action === "loanRepayment") {
         updatedUserData["loan"] += value;
@@ -130,9 +131,6 @@ function AuthContextProvider({ children }) {
   const updateFriends = (friend) => {
     if (userData) {
       const updatedUserData = { ...userData };
-      // if (!updatedUserData.friends) {
-      //   updatedUserData.friends = [];
-      // }
       updatedUserData?.friends.push(friend);
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
@@ -172,6 +170,7 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
+
   function resetLife() {
     setAuthToken(null);
     setUserData(null);
@@ -210,6 +209,7 @@ function AuthContextProvider({ children }) {
     resetLife: resetLife,
     logout: logout,
   };
+
   if (isSaving) {
     return <LoadingOverlay message="Saving your state..." />;
   }

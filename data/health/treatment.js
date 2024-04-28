@@ -1,7 +1,7 @@
 export const treatment = [
     {
         name: 'Self treatment',
-        money: '50',
+        money: 50,
         health: { isIncrease: true, index: "2" },
     },
     {
@@ -12,30 +12,30 @@ export const treatment = [
     },
     {
         name: 'Take pills',
-        money: '50',
+        money: 50,
         happiness: { isIncrease: true, index: "2" },
         health: { isIncrease: false, index: "3" },
     },
     {
         name: 'See a doctor',
-        money: '1000',
+        money: 1000,
         health: { isIncrease: true, index: "5" },
     },
     {
         name: 'Hospital stay',
-        money: '3000',
+        money: 3000,
         health: { isIncrease: true, index: "2" },
         happiness: { isIncrease: false, index: "4" }
     },
     {
         name: 'Experimental treatment',
-        money: '44000',
+        money: 44000,
         requirements: [],
         health: { isIncrease: true, index: "40" },
     },
     {
         name: 'Elixir of Youth',
-        money: '200000',
+        money: 2000000,
         requirements: ["At least 50 year old"],
         health: { isIncrease: true, index: "90" },
     },
