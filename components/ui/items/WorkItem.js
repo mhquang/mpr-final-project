@@ -9,6 +9,7 @@ import { formatNumber } from "./../../../util/formatNumber";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
+import { crime } from './../../../data/work/crime';
 
 function WorkItem({
   name,
@@ -24,6 +25,10 @@ function WorkItem({
 }) {
   const authCtx = useContext(AuthContext);
   const userHealth = authCtx.userData?.health;
+  const mainJob = authCtx.userData?.currentWorking.main;
+  const sideJob = authCtx.userData?.currentWorking.side
+
+  const isButtonShown = mainJob === "" || !!mainJob && sideJob.length < 1;
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -77,16 +82,16 @@ function WorkItem({
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {/* {isButtonShown && (
-          <ButtonItem children={btn} onPress={onPressHandler} />
+        {type === "main" && mainJob === "" && (
+          <ButtonItem children={"main"} onPress={onPressHandler} />
         )}
-        {isWorking && <Text style={styles.require}>Working</Text>} */}
-
-        {isWorking ? (
-          <Text style={styles.require}>Working</Text>
-        ) : (
-          <ButtonItem children={btn} onPress={onPressHandler} />
+        {type === "side" && isButtonShown && (
+          <ButtonItem children={"side"} onPress={onPressHandler} />
         )}
+        {type === "crime" && (
+          <ButtonItem children={"crime"} onPress={onPressHandler} />
+        )}
+        {isWorking && <Text style={styles.require}>Working</Text>}
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.requireContainer}>
