@@ -49,6 +49,10 @@ function SetupPlayerScreen() {
         friends: [],
         lover: [],
         items: [],
+        learnedDegrees: [],
+        learnedSkills: [],
+        learnedCourses: [],
+        learnedLanguages: [],
       });
       const userData = await getUserData("userCharacteristics", email);
       authCtx.getUserData(userData);

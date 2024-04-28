@@ -1,15 +1,21 @@
 import { View, StyleSheet } from "react-native";
 import { courses } from "../../data/learning/dummy-courses";
-import Item from "../../components/ui/items/Item";
+import { useContext } from "react";
+import { AuthContext } from "../../store/auth-context";
+
 import Title from "../../components/ui/Title";
+import LearningItem from "../../components/ui/items/LearningItem";
 
 function LearningCoursesList() {
+  const authCtx = useContext(AuthContext);
+  const learnedCourses = authCtx.userData?.learnedCourses;
+
   return (
     <View style={styles.rootContainer}>
       <Title>Courses</Title>
       {courses.map((course, index) => {
         return (
-          <Item
+          <LearningItem
             key={index}
             name={course.name}
             requirements={course.requirements}
@@ -18,7 +24,8 @@ function LearningCoursesList() {
             iq={course.iq}
             happiness={course.happiness}
             money={course.money}
-            btn={"Apply"}
+            isLearned={learnedCourses.includes(course.name)}
+            type={"course"}
           />
         );
       })}

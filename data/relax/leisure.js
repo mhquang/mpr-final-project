@@ -39,7 +39,6 @@ export const leisure = [
     time: "2 hours",
     requirements: ["At least 21 years old"],
     happiness: { isIncrease: true, index: "5" },
-    iq: { isIncrease: true, index: "0" },
     health: { isIncrease: false, index: "4" },
   },
   {
@@ -65,14 +64,12 @@ export const leisure = [
     money: 25,
     time: "1 hour",
     requirements: ["At least 16 years old"],
-    happiness: { isIncrease: true, index: "35"},
   },
   {
     name: "Take a Coffee",
     money: 25,
     time: "2 hour",
     happiness: { isIncrease: true, index: "3" },
-    iq: { isIncrease: true, index: "0" },
     health: { isIncrease: false, index: "1" },
   },
   {

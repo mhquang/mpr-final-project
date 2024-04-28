@@ -1,18 +1,16 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown';
 import { useFonts } from "expo-font";
 import { Colors } from "../../constants/styles";
-import { AuthContext } from "../../store/auth-context";
 
 import Button from "../ui/buttons/Button";
 import Input from "../Auth/Input";
-import IconButton from "../ui/buttons/IconButton";
 
 function SetupUser({ onSubmit, credentialsInvalid }) {
   const [enteredUserName, setEnteredUserName] = useState("");
   const [value, setValue] = useState("Male");
-  const authCtx = useContext(AuthContext);
+
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../assets/fonts/Unbounded-SemiBold.ttf"),

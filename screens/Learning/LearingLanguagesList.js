@@ -1,15 +1,21 @@
 import { View, StyleSheet } from "react-native";
 import { languages } from "../../data/learning/dummy-languages";
-import Item from "../../components/ui/items/Item";
+import { useContext } from "react";
+import { AuthContext } from "../../store/auth-context";
+
 import Title from "../../components/ui/Title";
+import LearningItem from "../../components/ui/items/LearningItem";
 
 function LearingLanguagesList() {
+  const authCtx = useContext(AuthContext);
+  const learnedLanguages = authCtx.userData?.learnedLanguages;
+
   return (
     <View style={styles.rootContainer}>
       <Title>Languages</Title>
       {languages.map((language, index) => {
         return (
-          <Item
+          <LearningItem
             key={index}
             name={language.name}
             requirements={language.requirements}
@@ -18,8 +24,8 @@ function LearingLanguagesList() {
             iq={language.iq}
             happiness={language.happiness}
             money={language.money}
-            btn={"Learn"}
-            times={language.times}
+            type={"language"}
+            isLearned={learnedLanguages.includes(language.name)}
           />
         );
       })}

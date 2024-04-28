@@ -14,6 +14,7 @@ export const AuthContext = createContext({
   removeFriends: (friend) => {},
   dateFriends: (friend) => {},
   breakUpFriends: () => {},
+  updateLearning: (value) => {},
   resetLife: () => {},
   authenticate: (token) => {},
   logout: () => {},
@@ -36,7 +37,7 @@ function AuthContextProvider({ children }) {
         }));
         AsyncStorage.setItem("userData", JSON.stringify(userData));
       }
-    }, 30000); // 12 minute
+    }, 720000); // 12 minute
 
     return () => clearInterval(timer);
   }, [userData]);
@@ -171,6 +172,35 @@ function AuthContextProvider({ children }) {
     }
   };
 
+  const updateLearning = ({ name, type }) => {
+    if (userData && name) {
+      const updatedUserData = { ...userData };
+
+      if (type === "degree" && !updatedUserData.learnedDegrees.includes(name)) {
+        updatedUserData?.learnedDegrees.push(name);
+        console.log(updatedUserData.learnedDegrees);
+      }
+      if (type === "skill" && !updatedUserData.learnedSkills.includes(name)) {
+        updatedUserData?.learnedSkills.push(name);
+        console.log(updatedUserData.learnedSkills);
+      }
+      if (type === "course" && !updatedUserData.learnedCourses.includes(name)) {
+        updatedUserData?.learnedCourses.push(name);
+        console.log(updatedUserData.learnedCourses);
+      }
+      if (
+        type === "language" &&
+        !updatedUserData.learnedLanguages.includes(name)
+      ) {
+        updatedUserData?.learnedLanguages.push(name);
+        console.log(updatedUserData.learnedLanguages);
+      }
+
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+
   function resetLife() {
     setAuthToken(null);
     setUserData(null);
@@ -206,6 +236,7 @@ function AuthContextProvider({ children }) {
     removeFriends: removeFriends,
     dateFriends: dateFriends,
     breakUpFriends: breakUpFriends,
+    updateLearning: updateLearning,
     resetLife: resetLife,
     logout: logout,
   };

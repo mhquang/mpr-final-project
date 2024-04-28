@@ -2,16 +2,17 @@ import { StyleSheet, View, Text, Alert } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { getRandomAccidents } from "../../../util/getRandomAccidents";
 import { formatNumber } from "./../../../util/formatNumber";
 
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
+import * as Progress from "react-native-progress";
 import ButtonItem from "../buttons/ButtonItem";
 
-function Item({
+function LearningItem({
   name,
   requirements,
   time,
@@ -19,12 +20,21 @@ function Item({
   iq,
   happiness,
   money,
-  salary,
-  btn,
+  times,
+  isLearned,
+  type,
 }) {
   const authCtx = useContext(AuthContext);
+  const [progress, setProgress] = useState(0);
+  const [year, setYear] = useState(0);
   const userHealth = authCtx.userData?.health;
   const isSufficient = authCtx.userData?.money >= money;
+
+  useEffect(() => {
+    if (times && year === times) {
+      authCtx.updateLearning({ name: name, type: "degree" });
+    }
+  }, [year]);
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -36,25 +46,9 @@ function Item({
   }
 
   const onPressHandler = () => {
-    if (name === "Buy lotery tickets") {
-      authCtx.updateMoney({ value: -25 });
-      if (getRandomAccidents(1, 500) === 1) {
-        Alert.alert("Congratulation!", "You won a lotery");
-        authCtx.updateIndex({
-          money: 50000,
-          happiness: 35,
-        });
-      }
-    }
-
     const updates = {};
     if (money) {
       const value = money === "Free" ? 0 : -parseInt(money);
-      updates.money = value;
-    }
-
-    if (salary) {
-      const value = +salary;
       updates.money = value;
     }
 
@@ -85,16 +79,22 @@ function Item({
     }
 
     authCtx.updateIndex(updates);
+
+    if (progress < 1 && year < times) {
+      setProgress(progress + 1 / times);
+      setYear(year + 1);
+    }
+    authCtx.updateLearning({ name: name, type: type });
   };
 
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {(money === "Free" || isSufficient) && (
-          <ButtonItem children={btn} onPress={onPressHandler} />
+        {(money === "Free" || isSufficient) && !isLearned && (
+          <ButtonItem children={"Learn"} onPress={onPressHandler} />
         )}
-        {salary && <ButtonItem children={btn} onPress={onPressHandler} />}
+        {isLearned && <Text style={styles.require}>Learned</Text>}
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.requireContainer}>
@@ -136,26 +136,32 @@ function Item({
           )}
         </View>
 
-        <View style={styles.salaryContainer}>
-          {salary ? (
-            <Text style={styles.moneyTitle}>Salary: </Text>
-          ) : (
-            <Text style={styles.moneyTitle}>Price: </Text>
-          )}
+        <View style={styles.priceContainer}>
+          <Text style={styles.moneyTitle}>Price: </Text>
           <Text style={styles.money}>
-            {salary
-              ? `$${formatNumber(salary)}`
-              : money === "Free"
-              ? "Free"
-              : `$${formatNumber(money)}`}
+            {money === "Free" ? "Free" : `$${formatNumber(money)}`}
           </Text>
         </View>
       </View>
+      {times && !isLearned && (
+        <View>
+          <Text style={styles.progress}>
+            {year}/{times}
+          </Text>
+          <Progress.Bar
+            color={Colors.blueIQ}
+            progress={progress}
+            width={null}
+            height={10}
+            borderRadius={6}
+          />
+        </View>
+      )}
     </View>
   );
 }
 
-export default Item;
+export default LearningItem;
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -223,7 +229,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  salaryContainer: {
+  priceContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
