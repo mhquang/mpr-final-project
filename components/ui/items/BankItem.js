@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text } from "react-native";
 import { Colors } from "../../../constants/styles";
 import { useFonts } from "expo-font";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { formatNumber } from "../../../util/formatNumber";
 
@@ -34,7 +34,6 @@ function BankItem({ name, isDeposit, interest, isLoan, isLoanRepayment }) {
   const depositHandler = (percentage) => {
     const depositAmount = money * percentage;
     authCtx.updateMoney({ value: -depositAmount, action: "deposit" });
-    console.log(depositAmount);
   };
 
   const loanHandler = (amount) => {

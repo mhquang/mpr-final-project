@@ -26,7 +26,7 @@ export function MainScreen() {
       authCtx.updateMoney({ value: 10000 });
     }
     const randomNum = getRandomAccidents(1, 3);
-    console.log(randomNum)
+    // console.log(randomNum)
     // accidents.forEach((accident) => {
     //   if (accident.id === randomNum) {
     //     if (

@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LoadingOverlay from "../components/ui/LoadingOverlay";
+
 import { createContext, useEffect, useState } from "react";
 import { updateUserData, deleteDocument } from "../util/firebase";
-import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { Alert } from "react-native";
 export const AuthContext = createContext({
   userData: undefined,
@@ -31,7 +32,7 @@ function AuthContextProvider({ children }) {
     const timer = setInterval(() => {
       if (userData) {
         setUserData((prevUserData) => {
-          if (prevUserData.age + 1 > 5) {
+          if (prevUserData.age + 1 > 50) {
             return {
               ...prevUserData,
               age: prevUserData.age + 1,
@@ -57,7 +58,7 @@ function AuthContextProvider({ children }) {
         });
         AsyncStorage.setItem("userData", JSON.stringify(userData));
       }
-    }, 2000); // 12 minute
+    }, 720000); // 12 minute
     return () => clearInterval(timer);
   }, [userData]);
 
@@ -197,22 +198,18 @@ function AuthContextProvider({ children }) {
 
       if (type === "degree" && !updatedUserData.learnedDegrees.includes(name)) {
         updatedUserData?.learnedDegrees.push(name);
-        console.log(updatedUserData.learnedDegrees);
       }
       if (type === "skill" && !updatedUserData.learnedSkills.includes(name)) {
         updatedUserData?.learnedSkills.push(name);
-        console.log(updatedUserData.learnedSkills);
       }
       if (type === "course" && !updatedUserData.learnedCourses.includes(name)) {
         updatedUserData?.learnedCourses.push(name);
-        console.log(updatedUserData.learnedCourses);
       }
       if (
         type === "language" &&
         !updatedUserData.learnedLanguages.includes(name)
       ) {
         updatedUserData?.learnedLanguages.push(name);
-        console.log(updatedUserData.learnedLanguages);
       }
 
       setUserData(updatedUserData);
@@ -247,7 +244,6 @@ function AuthContextProvider({ children }) {
         updatedUserData.currentWorking.crime = name;
       }
 
-      console.log(updatedUserData.currentWorking);
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
@@ -268,18 +264,14 @@ function AuthContextProvider({ children }) {
       AsyncStorage.removeItem("userData");
       setIsCreatingNewLife(false);
     }
-    Alert.alert(
-      "You are dead!",
-      "You are dead! You are dead! You are dead!",
-      [
-        {
-          text: "OK",
-          onPress: () => {
-            reset();
-          },
+    Alert.alert("You are dead!", "You are dead! You are dead! You are dead!", [
+      {
+        text: "OK",
+        onPress: () => {
+          reset();
         },
-      ]
-    );
+      },
+    ]);
     return;
   }
   async function logout() {
@@ -319,8 +311,10 @@ function AuthContextProvider({ children }) {
   if (isSaving) {
     return <LoadingOverlay message="Saving your state..." />;
   }
-  if(isCreatingNewLife) {
-    return <LoadingOverlay message="Creating a new life...Please login to continue!" />;
+  if (isCreatingNewLife) {
+    return (
+      <LoadingOverlay message="Creating a new life...Please login to continue!" />
+    );
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
