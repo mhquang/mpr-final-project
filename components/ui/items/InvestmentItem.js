@@ -1,16 +1,13 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Colors } from "../../../constants/styles";
 import { useFonts } from "expo-font";
-import { formatNumber } from './../../../util/formatNumber';
+import { formatNumber } from "./../../../util/formatNumber";
+import { useContext } from "react";
+import { AuthContext } from "./../../../store/auth-context";
 
-function InvestmentItem({
-  name,
-  code,
-  money,
-  interest,
-  isIncrease,
-  buttonText,
-}) {
+function InvestmentItem({ name, code, money, interest, isIncrease, isBought }) {
+  const authCtx = useContext(AuthContext);
+
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -19,6 +16,32 @@ function InvestmentItem({
   if (!fontsLoaded) {
     return null;
   }
+
+  const buyHandler = () => {
+    const item = {
+      name: name,
+      code: code,
+      money: money,
+      interest: interest,
+    };
+    authCtx.updateMoney({ value: -money, item: item, action: "buyStocks" });
+  };
+
+  const interestMoney = money * interest;
+  const sellPrice = money + (isIncrease ? +interestMoney : -interestMoney);
+
+  const sellHandler = () => {
+    console.log(sellPrice);
+
+    const item = {
+      name: name,
+      code: code,
+      money: money,
+      interest: interest,
+    };
+    authCtx.updateMoney({ value: sellPrice, item: item, action: "sellStocks" });
+  };
+
   return (
     <View style={styles.itemContainer}>
       <View style={styles.inforContainer}>
@@ -26,15 +49,33 @@ function InvestmentItem({
         <Text style={styles.name}>{name}</Text>
       </View>
       <View style={styles.moneyContainer}>
-        <Text style={styles.money}>${formatNumber(money)}</Text>
-        <Text style={[styles.interest, isIncrease ? styles.green : styles.red]}>
-          {isIncrease ? `+${interest}%` : `-${interest}%`}
-        </Text>
+        {isBought ? (
+          <Text style={[styles.money, { color: "red" }]}>
+            ${formatNumber(sellPrice)}
+          </Text>
+        ) : (
+          <Text style={styles.money}>${formatNumber(money)}</Text>
+        )}
+        {interest && (
+          <Text
+            style={[styles.interest, isIncrease ? styles.green : styles.red]}
+          >
+            {isIncrease ? `+${interest}%` : `-${interest}%`}
+          </Text>
+        )}
       </View>
       <Pressable
         style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+        onPress={isBought ? sellHandler : buyHandler}
       >
-        <Text style={styles.buttonText}>{buttonText}</Text>
+        <Text
+          style={[
+            styles.buttonText,
+            isBought ? { color: "red" } : { color: Colors.darkBlue },
+          ]}
+        >
+          {isBought ? "Sell" : "Buy"}
+        </Text>
       </Pressable>
     </View>
   );

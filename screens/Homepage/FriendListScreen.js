@@ -11,10 +11,14 @@ function FriendListScreen() {
 
   return (
     <View style={styles.rootContainer}>
-      <Title>Friends</Title>
-      {friends.map((friend, index) => {
-        return <FriendListItem key={index} name={friend} />;
-      })}
+      {friends.length > 0 && (
+        <>
+          <Title>Friends</Title>
+          {friends.map((friend, index) => {
+            return <FriendListItem key={index} name={friend} />;
+          })}
+        </>
+      )}
     </View>
   );
 }

@@ -16,14 +16,12 @@ function PersonalInfo() {
   const userData = authCtx.userData;
   const netWorth = userData?.money + userData?.savings;
   const lover = userData?.lover[0];
-  const relationshipStatus = !lover ? "Single" : `In a relationship with ${lover}`;
+  const relationshipStatus = !lover
+    ? "Single"
+    : `In a relationship with ${lover}`;
   return (
     <View style={styles.rootContainer}>
       <View style={styles.personalInfoContainer}>
-        <Text style={styles.title}>
-          Life Scenario:{" "}
-          <Text style={styles.text}>Becoming a Pro Programmer</Text>
-        </Text>
         <Text style={styles.title}>
           Name: <Text style={styles.text}>{userData?.name}</Text>
         </Text>
@@ -33,6 +31,20 @@ function PersonalInfo() {
         <Text style={styles.title}>
           Gender: <Text style={styles.text}>{userData?.userGender}</Text>
         </Text>
+        {userData?.currentWorking.main && (
+          <Text style={styles.title}>
+            Job:{" "}
+            <Text style={styles.text}>{userData?.currentWorking.main}</Text>
+          </Text>
+        )}
+        {userData?.currentWorking.side.length > 0 && (
+          <Text style={styles.title}>
+            Side Job:{" "}
+            <Text style={styles.text}>
+              {userData.currentWorking.side.join(", ")}
+            </Text>
+          </Text>
+        )}
         <Text style={styles.title}>
           Relationship Status:{" "}
           <Text style={styles.text}>{relationshipStatus}</Text>
