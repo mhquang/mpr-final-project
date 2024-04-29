@@ -11,10 +11,14 @@ function StorageScreen() {
 
   return (
     <View style={styles.rootContainer}>
-      <Title>Storage</Title>
-      {items.map((item, index) => {
-        return <StorageItem key={index} name={item} />;
-      })}
+      {items.length > 0 && (
+        <>
+          <Title>Storage</Title>
+          {items.map((item, index) => {
+            return <StorageItem key={index} name={item} />;
+          })}
+        </>
+      )}
     </View>
   );
 }
