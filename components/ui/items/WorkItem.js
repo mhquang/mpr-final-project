@@ -9,7 +9,7 @@ import { side_job } from "../../../data/work/side-jobs";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
-
+import { setWorkingTime } from "../../../util/setWorkingTime";
 function WorkItem({
   name,
   requirements,
@@ -29,11 +29,11 @@ function WorkItem({
   const crime = authCtx.userData?.currentWorking.crime;
 
   const isMainButtonShown =
-    (mainJob === "" && sideJob.length <= 1) ||
-    (mainJob !== "" && sideJob.length === 2);
+    (mainJob.length === 0 && sideJob.length <= 1) ||
+    (mainJob.length !== 0 && sideJob.length === 2);
 
   const isSideButtonShown =
-    (mainJob === "" || sideJob.length < 1) && sideJob.length !== 2;
+    (mainJob.length === 0 || sideJob.length < 1) && sideJob.length !== 2;
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -78,34 +78,18 @@ function WorkItem({
     }
     
     authCtx.updateWorking({ name: name, type: type });
-
-    if(sideJob.length > 0) {
-      let isCurrentJobInSideJob = false;
-      side_job.forEach((job) => {
-        if (sideJob.includes(job.name)) {
-          isCurrentJobInSideJob = true;
-          return;
-        }
-      });
-      if (isCurrentJobInSideJob) {
-        const timer = setTimeout(() => {
-          authCtx.updateIndex(updates);
-        }, parseInt(time));
-        return () => clearTimeout(timer);
+      if(sideJob.length > 0 && type === 'side') {
+        side_job.forEach((job) => {
+          if (sideJob.includes(job.name)) {
+            setWorkingTime(time, updates, authCtx, { name: name, type: type });
+          }
+        });
+      } else if(mainJob.length === 1 && type === 'main') {
+        setWorkingTime(time, updates, authCtx, { name: name, type: type });
+      } else if(crime.length === 1 && type === 'crime') {
+        setWorkingTime(time, updates, authCtx, { name: name, type: type });
       }
-    } else if (mainJob !== "") {
-        const timer = setTimeout(() => {
-          authCtx.updateIndex(updates);
-        }, parseInt(time));
-        return () => clearTimeout(timer);
-    } else if (crime !== "") {
-      const timer = setTimeout(() => {
-        authCtx.updateIndex(updates);
-      }, parseInt(time));
-      return () => clearTimeout(timer);
-  }
 };
-
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
@@ -116,7 +100,7 @@ function WorkItem({
         {type === "side" && !isWorking && isSideButtonShown && (
           <ButtonItem children={btn} onPress={onPressHandler} />
         )}
-        {type === "crime" && crime === "" && (
+        {type === "crime" && crime.length === 0 && (
           <ButtonItem children={btn} onPress={onPressHandler} />
         )}
         {isWorking && <Text style={styles.require}>Working</Text>}

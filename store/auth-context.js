@@ -1,11 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
-
 import { createContext, useEffect, useState } from "react";
 import { updateUserData, deleteDocument } from "../util/firebase";
 import { Alert } from "react-native";
-import { getRandomAccidents } from "../util/getRandomAccidents";
-import { accidents } from "../data/accidents/dummy-accidents";
 
 
 export const AuthContext = createContext({
@@ -22,6 +19,7 @@ export const AuthContext = createContext({
   breakUpFriends: () => {},
   updateLearning: (value) => {},
   updateWorking: (value) => {},
+  deleteWorking: (value) => {},
   resetLife: () => {},
   authenticate: (token) => {},
   logout: () => {},
@@ -79,9 +77,9 @@ function AuthContextProvider({ children }) {
               ...prevUserData,
               age: prevUserData.age + 1,
               money: prevUserData.money + 100,
-              health: prevUserData.health + 5 > 100 ? 100 : prevUserData.health + 5,
-              iq: prevUserData.iq + 5 > 100 ? 100 : prevUserData.iq + 5,
-              happiness: prevUserData.happiness + 5 > 100 ? 100 : prevUserData.happiness + 5,
+              health: prevUserData.health + 5 > 100 ? 100 : prevUserData.health + 3,
+              iq: prevUserData.iq + 5 > 100 ? 100 : prevUserData.iq + 3,
+              happiness: prevUserData.happiness + 5 > 100 ? 100 : prevUserData.happiness + 3,
               savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
               loan: prevUserData.loan + (prevUserData.loan * 9.9) / 100,
             };
@@ -89,7 +87,7 @@ function AuthContextProvider({ children }) {
         });
         AsyncStorage.setItem("userData", JSON.stringify(userData));
       }
-    }, 30000); // 12 minute actual: 720000
+    }, 720000); // 12 minute actual: 720000
 
     return () => clearInterval(timer);
   }, [userData]);
@@ -269,24 +267,48 @@ function AuthContextProvider({ children }) {
 
       if (
         type === "main" &&
-        currentMainJob === "" &&
-        currentSideJob.length < 1
+        currentMainJob.length === 0 &&
+        currentSideJob.length <= 1
       ) {
-        updatedUserData.currentWorking.main = name;
+        updatedUserData.currentWorking.main.push(name);
       }
 
       if (
         type === "side" &&
         currentSideJob.length < 2 &&
-        !(currentMainJob && currentSideJob.length === 1)
+        !(currentMainJob.length === 1 && currentSideJob.length === 1)
       ) {
         updatedUserData.currentWorking.side.push(name);
       }
 
-      if (type === "crime" && currentMainJob === "") {
-        updatedUserData.currentWorking.crime = name;
+      if (type === "crime") {
+        updatedUserData.currentWorking.crime.push(name);
       }
-
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+  const deleteWorking = ({ name, type }) => {
+    if (userData && name) {
+      const updatedUserData = { ...userData };
+      const currentMainJob = updatedUserData.currentWorking.main;
+      const currentSideJob = updatedUserData.currentWorking.side;
+      if (type === 'side') {
+        const jobIndex = currentSideJob.indexOf(name);
+          if (jobIndex !== -1) {
+            currentSideJob.splice(jobIndex, 1);
+      }
+      }
+        if(type === 'main') {
+          if (currentMainJob.length === 1) {
+            currentMainJob.splice(0, 1);
+          }
+        }
+        if(type === 'crime') {
+          if (updatedUserData.currentWorking.crime.length === 1) {
+            updatedUserData.currentWorking.crime.splice(0, 1);
+          }
+        }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
@@ -347,6 +369,7 @@ function AuthContextProvider({ children }) {
     breakUpFriends: breakUpFriends,
     updateLearning: updateLearning,
     updateWorking: updateWorking,
+    deleteWorking: deleteWorking,
     resetLife: resetLife,
     logout: logout,
   };

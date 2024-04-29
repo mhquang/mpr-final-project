@@ -25,7 +25,7 @@ function MainJobScreen() {
             salary={item.salary}
             btn={"Apply"}
             type={"main"}
-            isWorking={currentWorking.main === item.name}
+            isWorking={currentWorking.main.includes(item.name)}
           />
         );
       })}
