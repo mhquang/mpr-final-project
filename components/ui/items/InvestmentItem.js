@@ -1,7 +1,9 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { Colors } from "../../../constants/styles";
 import { useFonts } from "expo-font";
-import { formatNumber } from './../../../util/formatNumber';
+import { formatNumber } from "./../../../util/formatNumber";
+import { useContext } from "react";
+import { AuthContext } from "./../../../store/auth-context";
 
 function InvestmentItem({
   name,
@@ -11,6 +13,8 @@ function InvestmentItem({
   isIncrease,
   buttonText,
 }) {
+  const authCtx = useContext(AuthContext);
+
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
     UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
@@ -19,6 +23,23 @@ function InvestmentItem({
   if (!fontsLoaded) {
     return null;
   }
+
+  const buyHandler = () => {
+    const item = {
+      name: name,
+      code: code,
+      money: money,
+      interest: interest,
+      isIncrease: isIncrease,
+    };
+    authCtx.updateMoney({ value: -money, item: item, action: "buyStocks" });
+  };
+
+  const sellHandler = () => {
+    const interestMoney = money * interest;
+    console.log(money + (isIncrease ? +interestMoney : -interestMoney));
+  };
+
   return (
     <View style={styles.itemContainer}>
       <View style={styles.inforContainer}>
@@ -33,6 +54,7 @@ function InvestmentItem({
       </View>
       <Pressable
         style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+        onPress={buttonText === "Buy" ? buyHandler : sellHandler}
       >
         <Text style={styles.buttonText}>{buttonText}</Text>
       </Pressable>

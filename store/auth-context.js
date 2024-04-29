@@ -132,6 +132,9 @@ function AuthContextProvider({ children }) {
       if (action === "loanRepayment") {
         updatedUserData["loan"] += value;
       }
+      if (item && action === "buyStocks") {
+        updatedUserData?.wallet.push(item);
+      }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }

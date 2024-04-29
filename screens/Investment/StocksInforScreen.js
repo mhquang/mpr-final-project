@@ -13,7 +13,7 @@ function StocksInforScreen() {
     const timer = setInterval(() => {
       const random = randomIncrease(stocks);
       setIncreases(random);
-    }, 3000);
+    }, 30000); // 1 mins
     return () => clearInterval(timer);
   }, []);
 

@@ -1,19 +1,21 @@
 import { StyleSheet, View } from "react-native";
 import { crypto } from "./../../data/investment/crypto";
 import { randomIncrease } from "../../util/randomIncrease";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../store/auth-context";
 
 import InvestmentItem from "../../components/ui/items/InvestmentItem";
 import Title from "../../components/ui/Title";
 
 function CryptoScreen() {
   const [increases, setIncreases] = useState({});
+  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
     const timer = setInterval(() => {
       const random = randomIncrease(crypto);
       setIncreases(random);
-    }, 3000);
+    }, 30000); // 1mins
     return () => clearInterval(timer);
   }, []);
 
@@ -21,7 +23,10 @@ function CryptoScreen() {
     <View style={styles.rootContainer}>
       <Title>Crypto</Title>
       {crypto.map((item, index) => {
-        return (
+        const isBought = authCtx.userData?.wallet?.some((walletItem) =>
+          Object.values(walletItem).some((coin) => coin.name === item.name)
+        );
+        return isBought ? null : (
           <InvestmentItem
             key={index}
             name={item.name}
