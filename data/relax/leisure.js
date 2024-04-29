@@ -10,7 +10,7 @@ export const leisure = [
   {
     name: "Visit a park",
     money: 25,
-    time: "2 hours",
+    time: "2000",
     happiness: { isIncrease: true, index: "2" },
     iq: { isIncrease: true, index: "2" },
     health: { isIncrease: false, index: "1" },

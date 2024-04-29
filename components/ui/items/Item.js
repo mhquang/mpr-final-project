@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { getRandomAccidents } from "../../../util/getRandomAccidents";
 import { formatNumber } from "./../../../util/formatNumber";
-
+import { setItemTime } from "../../../util/setItemTime";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
@@ -48,10 +48,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
     }
 
     const updates = {};
-    if (money) {
       const value = money === "Free" ? 0 : -parseInt(money);
-      updates.money = value;
-    }
 
     if (health) {
       const { isIncrease, index } = health;
@@ -61,9 +58,16 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
       } else {
         Alert.alert(
           "Warning",
-          "Your health is low, you need to get treatments!"
+          "Your health is low, you need to get treatments!",
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                return;                
+              },
+            },
+          ]
         );
-        return;
       }
     }
 
@@ -78,8 +82,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
       const value = isIncrease ? parseInt(index) : -parseInt(index);
       updates.happiness = value;
     }
-
-    authCtx.updateIndex(updates);
+    setItemTime(name, time, value, updates, authCtx);
   };
 
   return (

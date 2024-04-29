@@ -12,7 +12,7 @@ export const degrees = [
     {
         name: 'Secondary',
         money: 'Free',
-        time: '9 months',
+        time: '3000',
         requirements: ['Complete Primary'],
         health: {isIncrease: false, index: "2"},
         happiness: { isIncrease: false, index: "2" },
@@ -22,7 +22,7 @@ export const degrees = [
     {
         name: 'High school',
         money: 'Free',
-        time: '6 months',
+        time: '4000',
         requirements: ['Complete Secondary'],
         health: {isIncrease: false, index: "2"},    
         happiness: { isIncrease: false, index: "2" },
