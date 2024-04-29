@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { getRandomAccidents } from "../../../util/getRandomAccidents";
 import { formatNumber } from "./../../../util/formatNumber";
-
+import { setLearningItemTime } from "../../../util/setLearningItemTime";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import * as Progress from "react-native-progress";
@@ -27,6 +27,7 @@ function LearningItem({
   const authCtx = useContext(AuthContext);
   const [progress, setProgress] = useState(0);
   const [year, setYear] = useState(0);
+  const [isLearning, setIsLearning] = useState(false);
   const userHealth = authCtx.userData?.health;
   const isSufficient = authCtx.userData?.money >= money;
 
@@ -78,8 +79,8 @@ function LearningItem({
       updates.happiness = value;
     }
 
-    authCtx.updateIndex(updates);
-
+    setLearningItemTime(name, time, money, updates, authCtx, setIsLearning);
+    
     if (progress < 1 && year < times) {
       setProgress(progress + 1 / times);
       setYear(year + 1);
@@ -94,7 +95,7 @@ function LearningItem({
         {(money === "Free" || isSufficient) && !isLearned && (
           <ButtonItem children={"Learn"} onPress={onPressHandler} />
         )}
-        {isLearned && <Text style={styles.require}>Learned</Text>}
+        {(isLearned || isLearning) && <Text style={styles.require}>{isLearning ? 'Learning' : 'Learned'}</Text>}
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.requireContainer}>
