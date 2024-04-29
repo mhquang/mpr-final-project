@@ -4,7 +4,6 @@ import { createContext, useEffect, useState } from "react";
 import { updateUserData, deleteDocument } from "../util/firebase";
 import { Alert } from "react-native";
 
-
 export const AuthContext = createContext({
   userData: undefined,
   token: "",
@@ -31,7 +30,7 @@ function AuthContextProvider({ children }) {
   const [isSaving, setIsSaving] = useState(false);
   const [isCreatingNewLife, setIsCreatingNewLife] = useState(false);
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
     const timer = setInterval(() => {
       if (userData) {
         setUserData((prevUserData) => {
@@ -77,9 +76,13 @@ function AuthContextProvider({ children }) {
               ...prevUserData,
               age: prevUserData.age + 1,
               money: prevUserData.money + 100,
-              health: prevUserData.health + 5 > 100 ? 100 : prevUserData.health + 3,
+              health:
+                prevUserData.health + 5 > 100 ? 100 : prevUserData.health + 3,
               iq: prevUserData.iq + 5 > 100 ? 100 : prevUserData.iq + 3,
-              happiness: prevUserData.happiness + 5 > 100 ? 100 : prevUserData.happiness + 3,
+              happiness:
+                prevUserData.happiness + 5 > 100
+                  ? 100
+                  : prevUserData.happiness + 3,
               savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
               loan: prevUserData.loan + (prevUserData.loan * 9.9) / 100,
             };
@@ -237,20 +240,29 @@ function AuthContextProvider({ children }) {
     if (userData && name) {
       const updatedUserData = { ...userData };
 
-      if (type === "degree" && !updatedUserData.learnedDegrees.includes(name)) {
-        updatedUserData?.learnedDegrees.push(name);
+      if (
+        type === "degree" &&
+        !updatedUserData.learned.learnedDegrees.includes(name)
+      ) {
+        updatedUserData?.learned.learnedDegrees.push(name);
       }
-      if (type === "skill" && !updatedUserData.learnedSkills.includes(name)) {
-        updatedUserData?.learnedSkills.push(name);
+      if (
+        type === "skill" &&
+        !updatedUserData.learned.learnedSkills.includes(name)
+      ) {
+        updatedUserData?.learned.learnedSkills.push(name);
       }
-      if (type === "course" && !updatedUserData.learnedCourses.includes(name)) {
-        updatedUserData?.learnedCourses.push(name);
+      if (
+        type === "course" &&
+        !updatedUserData.learned.learnedCourses.includes(name)
+      ) {
+        updatedUserData?.learned.learnedCourses.push(name);
       }
       if (
         type === "language" &&
-        !updatedUserData.learnedLanguages.includes(name)
+        !updatedUserData.learned.learnedLanguages.includes(name)
       ) {
-        updatedUserData?.learnedLanguages.push(name);
+        updatedUserData?.learned.learnedLanguages.push(name);
       }
 
       setUserData(updatedUserData);
@@ -288,27 +300,28 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
+  
   const deleteWorking = ({ name, type }) => {
     if (userData && name) {
       const updatedUserData = { ...userData };
       const currentMainJob = updatedUserData.currentWorking.main;
       const currentSideJob = updatedUserData.currentWorking.side;
-      if (type === 'side') {
+      if (type === "side") {
         const jobIndex = currentSideJob.indexOf(name);
-          if (jobIndex !== -1) {
-            currentSideJob.splice(jobIndex, 1);
-      }
-      }
-        if(type === 'main') {
-          if (currentMainJob.length === 1) {
-            currentMainJob.splice(0, 1);
-          }
+        if (jobIndex !== -1) {
+          currentSideJob.splice(jobIndex, 1);
         }
-        if(type === 'crime') {
-          if (updatedUserData.currentWorking.crime.length === 1) {
-            updatedUserData.currentWorking.crime.splice(0, 1);
-          }
+      }
+      if (type === "main") {
+        if (currentMainJob.length === 1) {
+          currentMainJob.splice(0, 1);
         }
+      }
+      if (type === "crime") {
+        if (updatedUserData.currentWorking.crime.length === 1) {
+          updatedUserData.currentWorking.crime.splice(0, 1);
+        }
+      }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }

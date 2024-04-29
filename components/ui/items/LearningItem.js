@@ -79,12 +79,19 @@ function LearningItem({
       updates.happiness = value;
     }
 
-    setLearningItemTime(name, time, money, updates, authCtx, setIsLearning);
-    
-    if (progress < 1 && year < times) {
-      setProgress(progress + 1 / times);
-      setYear(year + 1);
-    }
+    setLearningItemTime(
+      name,
+      time,
+      money,
+      progress,
+      year,
+      times,
+      updates,
+      authCtx,
+      setIsLearning,
+      setProgress,
+      setYear
+    );
     authCtx.updateLearning({ name: name, type: type });
   };
 
@@ -92,10 +99,14 @@ function LearningItem({
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {(money === "Free" || isSufficient) && !isLearned && (
+        {(money === "Free" || isSufficient) && !isLearned && !isLearning && (
           <ButtonItem children={"Learn"} onPress={onPressHandler} />
         )}
-        {(isLearned || isLearning) && <Text style={styles.require}>{isLearning ? 'Learning' : 'Learned'}</Text>}
+        {(isLearned || isLearning) && (
+          <Text style={styles.require}>
+            {isLearning ? "Learning" : "Learned"}
+          </Text>
+        )}
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.requireContainer}>

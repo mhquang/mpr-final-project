@@ -8,7 +8,7 @@ import LearningItem from "../../components/ui/items/LearningItem";
 
 function LearningSkillsList() {
   const authCtx = useContext(AuthContext);
-  const learnedSkills = authCtx.userData?.learnedSkills;
+  const learnedSkills = authCtx.userData?.learned.learnedSkills;
   return (
     <View style={styles.rootContainer}>
       <Title>Skills</Title>
