@@ -49,7 +49,6 @@ function SetupPlayerScreen() {
         "Could not log you in. Please check your credentials or try again later!"
       );
       console.log(error);
-      console.log(email);
       setIsSettingup(false);
     }
   }

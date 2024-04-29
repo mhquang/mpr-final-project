@@ -75,7 +75,6 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
                 });
               },
             },
-          },
         ]);
       }
     }
@@ -127,7 +126,6 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        { (money === "Free" || isSufficient) && (
         {!isProcessing && (money === "Free" || isSufficient) && canPlay && (
           <ButtonItem children={btn} onPress={onPressHandler} />
         )}

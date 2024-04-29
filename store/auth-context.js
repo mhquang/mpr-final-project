@@ -37,7 +37,6 @@ function AuthContextProvider({ children }) {
   const [isSaving, setIsSaving] = useState(false);
   const [isCreatingNewLife, setIsCreatingNewLife] = useState(false);
   useEffect(() => {
-    console.log(userData);
     const timer = setInterval(() => {
       if (userData) {
         setUserData((prevUserData) => {
