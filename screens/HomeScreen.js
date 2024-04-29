@@ -1,12 +1,14 @@
 import { StyleSheet, View, Image, ScrollView } from "react-native";
 import { useContext } from "react";
 import { AuthContext } from "../store/auth-context";
-import ScreenLayout from "./GeneralComs/ScreenLayout";
 import { useFonts } from "expo-font";
+
+import ScreenLayout from "./GeneralComs/ScreenLayout";
 import ItemListScreen from "./Homepage/ItemListScreen";
 import PersonalInfo from "./Homepage/PersonalInfo";
 import StorageScreen from "./Homepage/StorageScreen";
 import FriendListScreen from "./Homepage/FriendListScreen";
+
 function HomeScreen() {
   const authCtx = useContext(AuthContext);
   const age = authCtx.userData?.age;
@@ -42,11 +44,6 @@ function HomeScreen() {
   const getImageSource = (age, gender) =>
     gender === "Male" ? getMaleImage(age) : getFemaleImage(age);
 
-  const getImageDimensions = (gender) =>
-    gender === "Male"
-      ? { width: 200, height: 360 }
-      : { width: 320, height: 350 };
-
   return (
     <ScreenLayout>
       <ScrollView>
@@ -54,7 +51,7 @@ function HomeScreen() {
           <View style={styles.imageContainer}>
             <Image
               source={getImageSource(age, gender)}
-              style={[styles.image, getImageDimensions(gender)]}
+              style={styles.image}
             />
           </View>
           <PersonalInfo />
@@ -78,6 +75,7 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   imageContainer: {
+    height: 310,
     flex: 1,
     marginTop: 30,
     alignItems: "center",

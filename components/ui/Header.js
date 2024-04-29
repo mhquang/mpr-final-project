@@ -52,11 +52,15 @@ function Header() {
         </View>
         <View style={styles.moneyContainer}>
           <Ionicons name="cash" color={Colors.lightGreen} size={24} />
-          <Text style={styles.money}>${formatNumber(authCtx.userData?.money)}</Text>
+          <Text style={styles.money}>
+            ${formatNumber(authCtx.userData?.money)}
+          </Text>
         </View>
         <View style={styles.moneyContainer}>
           <MaterialIcons name="savings" color={"pink"} size={24} />
-          <Text style={styles.money}>${formatNumber(authCtx.userData?.savings)}</Text>
+          <Text style={styles.money}>
+            ${formatNumber(authCtx.userData?.savings)}
+          </Text>
         </View>
       </View>
 
@@ -114,8 +118,11 @@ function Header() {
           color={Colors.white}
         />
         <IconButton
-          icon={"logout"}
-          onPress={authCtx.logout}
+          icon={"setting"}
+          onPress={() => {
+            navigation.navigate("Landing");
+            authCtx.backToHome();
+          }}
           size={24}
           color={Colors.white}
         />

@@ -31,7 +31,7 @@ function PersonalInfo() {
         <Text style={styles.title}>
           Gender: <Text style={styles.text}>{userData?.userGender}</Text>
         </Text>
-        {userData?.currentWorking.main && (
+        {userData?.currentWorking.main.length > 0 && (
           <Text style={styles.title}>
             Job:{" "}
             <Text style={styles.text}>{userData?.currentWorking.main}</Text>

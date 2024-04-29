@@ -1,14 +1,15 @@
 import { useContext, useState } from "react";
 import { Alert } from "react-native";
-import AuthContent from "../../components/Auth/AuthContent";
-import LoadingOverlay from "../../components/ui/LoadingOverlay";
 import { AuthContext } from "../../store/auth-context";
 import { login } from "../../util/auth";
 import {
   writeDataToFirestore,
   checkIfDocExist,
-  getUserData,
+  getUserDataFirebase,
 } from "../../util/firebase";
+
+import AuthContent from "../../components/Auth/AuthContent";
+import LoadingOverlay from "../../components/ui/LoadingOverlay";
 
 function LoginScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -20,13 +21,13 @@ function LoginScreen() {
       const token = await login(email, password);
       const docExists = await checkIfDocExist("userCharacteristics", email);
       if (docExists) {
-        const userData = await getUserData("userCharacteristics", email);
+        const userData = await getUserDataFirebase("userCharacteristics", email);
         authCtx.getUserData(userData);
       } else {
         await writeDataToFirestore("userCharacteristics", email, {
           userId: email,
         });
-        const userData = await getUserData("userCharacteristics", email);
+        const userData = await getUserDataFirebase("userCharacteristics", email);
         authCtx.getUserData(userData);
       }
       authCtx.authenticate(token);
