@@ -1,8 +1,10 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { stocks } from "./../../data/investment/stocks";
 import { randomIncrease } from "../../util/randomIncrease";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../store/auth-context";
+import { Colors } from "../../constants/styles";
+import { useFonts } from "expo-font";
 
 import InvestmentItem from "../../components/ui/items/InvestmentItem";
 import Title from "../../components/ui/Title";
@@ -12,6 +14,16 @@ function StocksInforScreen() {
   const authCtx = useContext(AuthContext);
   const wallet = authCtx.userData?.wallet;
 
+  const age = authCtx.userData?.age;
+  const [isOldEnough, setIsOldEnough] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   useEffect(() => {
     const timer = setInterval(() => {
       const random = randomIncrease(stocks);
@@ -20,25 +32,34 @@ function StocksInforScreen() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const requirementsSatisfied = age >= 18;
+    setIsOldEnough(requirementsSatisfied);
+  }, [authCtx.userData]);
+
   return (
     <View style={styles.rootContainer}>
       <Title>Stocks</Title>
-      {stocks.map((item, index) => {
-        const isInWallet = wallet.some(
-          (walletItem) => walletItem.code === item.code
-        );
-        return (
-          <InvestmentItem
-            key={index}
-            name={item.name}
-            code={item.code}
-            money={item.money}
-            interest={item.interest}
-            isIncrease={increases[item.code] || false}
-            isBought={isInWallet}
-          />
-        );
-      })}
+      {isOldEnough ? (
+        stocks.map((item, index) => {
+          const isInWallet = wallet.some(
+            (walletItem) => walletItem.code === item.code
+          );
+          return (
+            <InvestmentItem
+              key={index}
+              name={item.name}
+              code={item.code}
+              money={item.money}
+              interest={item.interest}
+              isIncrease={increases[item.code] || false}
+              isBought={isInWallet}
+            />
+          );
+        })
+      ) : (
+        <Text style={styles.require}>You must be older than 18 years old!</Text>
+      )}
     </View>
   );
 }
@@ -50,5 +71,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 10,
     width: "100%",
+  },
+  require: {
+    fontFamily: "NTSomicMedium",
+    fontSize: 15,
+    color: Colors.white,
+    textAlign: "center",
+    marginTop: 20,
   },
 });
