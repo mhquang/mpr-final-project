@@ -1,13 +1,25 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { bank } from "./../../data/investment/bank";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../store/auth-context";
+import { Colors } from "../../constants/styles";
+import { useFonts } from "expo-font";
 
 import Title from "../../components/ui/Title";
 import BankItem from "../../components/ui/items/BankItem";
 
 function BankScreen() {
   const authCtx = useContext(AuthContext);
+  const age = authCtx.userData?.age;
+  const [isOldEnough, setIsOldEnough] = useState(false);
+
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   const isHaveLoanRepayment = authCtx.userData?.loan > 0;
   const loanRepaymentItemIndex = bank.findIndex(
     (item) => item.name === "Loan Repayment"
@@ -22,21 +34,32 @@ function BankScreen() {
     bank.splice(loanRepaymentItemIndex, 1);
   }
 
+  useEffect(() => {
+    const requirementsSatisfied = age >= 16;
+    setIsOldEnough(requirementsSatisfied);
+  }, [authCtx.userData]);
+
   return (
     <View style={styles.rootContainer}>
       <Title>Bank</Title>
-      {bank.map((item, index) => {
-        return (
-          <BankItem
-            key={index}
-            name={item.name}
-            isDeposit={item.isDeposit}
-            interest={item.interest}
-            isLoan={item.isLoan}
-            isLoanRepayment={item.isLoanRepayment}
-          />
-        );
-      })}
+      {isOldEnough ? (
+        bank.map((item, index) => {
+          return (
+            <BankItem
+              key={index}
+              name={item.name}
+              isDeposit={item.isDeposit}
+              interest={item.interest}
+              isLoan={item.isLoan}
+              isLoanRepayment={item.isLoanRepayment}
+            />
+          );
+        })
+      ) : (
+        <Text style={styles.require}>
+          You must be older than 16 years old!
+        </Text>
+      )}
     </View>
   );
 }
@@ -48,5 +71,12 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 10,
     width: "100%",
+  },
+  require: {
+    fontFamily: "NTSomicMedium",
+    fontSize: 15,
+    color: Colors.white,
+    textAlign: 'center',
+    marginTop: 20
   },
 });

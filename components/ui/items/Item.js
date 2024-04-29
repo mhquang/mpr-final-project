@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Alert } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { getRandomAccidents } from "../../../util/getRandomAccidents";
 import { formatNumber } from "./../../../util/formatNumber";
@@ -17,6 +17,9 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const userHealth = authCtx.userData?.health;
   const isSufficient = authCtx.userData?.money >= money;
+  const [canPlay, setCanPlay] = useState(false);
+  const items = authCtx.userData?.items;
+  const learnedLanguages = authCtx.userData?.learned.learnedLanguages;
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -26,6 +29,34 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   if (!fontsLoaded) {
     return null;
   }
+
+  const checkRequirements = () => {
+    return requirements.every((requirement) => {
+      if (requirement.startsWith("At least")) {
+        const age = parseInt(requirement.match(/\d+/)[0]);
+        return authCtx.userData?.age >= age;
+      }
+
+      if (requirement.startsWith("Have")) {
+        const wordAfterHave = requirement.split(" ").slice(1).join(" ");
+        return items.includes(wordAfterHave);
+      }
+
+      if (requirement.startsWith("Learned")) {
+        const wordAfterLearned = requirement.split(" ").slice(1).join(" ");
+        return learnedLanguages.includes(wordAfterLearned);
+      }
+      if (requirement === "") {
+        return true;
+      }
+      return false;
+    });
+  };
+
+  useEffect(() => {
+    const requirementsSatisfied = checkRequirements();
+    setCanPlay(requirementsSatisfied);
+  }, [authCtx.userData]);
 
   const onPressHandler = () => {
     if (name === "Buy lotery tickets") {
@@ -44,8 +75,8 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
                 });
               },
             },
-          ]
-        );
+          },
+        ]);
       }
     }
 
@@ -62,7 +93,15 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
       } else {
         Alert.alert(
           "Warning",
-          "Your health is low, you need to get treatments!"
+          "Your health is low, you need to get treatments!",
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                return;
+              },
+            },
+          ]
         );
         return;
       }
@@ -88,7 +127,8 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {!isProcessing && (money === "Free" || isSufficient) && (
+        { (money === "Free" || isSufficient) && (
+        {!isProcessing && (money === "Free" || isSufficient) && canPlay && (
           <ButtonItem children={btn} onPress={onPressHandler} />
         )}
         {isProcessing && (

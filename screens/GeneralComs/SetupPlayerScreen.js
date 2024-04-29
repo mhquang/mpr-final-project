@@ -46,6 +46,7 @@ function SetupPlayerScreen() {
         happiness: 15,
         money: 0,
         savings: 0,
+        loan: 0,
         friends: [],
         lover: [],
         items: [],
@@ -56,6 +57,7 @@ function SetupPlayerScreen() {
           learnedLanguages: [],
         },
         currentWorking: { main: [], side: [], crime: [] },
+        wallet: []
       });
       const userData = await getUserData("userCharacteristics", email);
       authCtx.getUserData(userData);

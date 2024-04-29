@@ -2,14 +2,16 @@ import { StyleSheet, View, Text, Alert } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { formatNumber } from "./../../../util/formatNumber";
 import { side_job } from "../../../data/work/side-jobs";
+import { setWorkingTime } from "../../../util/setWorkingTime";
+
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
-import { setWorkingTime } from "../../../util/setWorkingTime";
+
 function WorkItem({
   name,
   requirements,
@@ -23,10 +25,12 @@ function WorkItem({
   isWorking,
 }) {
   const authCtx = useContext(AuthContext);
+  const [canWork, setCanWork] = useState(false);
   const userHealth = authCtx.userData?.health;
   const mainJob = authCtx.userData?.currentWorking.main;
   const sideJob = authCtx.userData?.currentWorking.side;
   const crime = authCtx.userData?.currentWorking.crime;
+  const learnedDegrees = authCtx.userData?.learned.learnedDegrees;
 
   const isMainButtonShown =
     (mainJob.length === 0 && sideJob.length <= 1) ||
@@ -44,8 +48,34 @@ function WorkItem({
     return null;
   }
 
+  const checkRequirements = () => {
+    return requirements.every((requirement) => {
+      if (requirement.startsWith("At least")) {
+        const age = parseInt(requirement.match(/\d+/)[0]);
+        return authCtx.userData?.age >= age;
+      }
+
+      const degree = requirement
+        .split(" ")
+        .filter((word) => word !== "Have" && word !== "degree")
+        .join(" ");
+
+      if (requirement.startsWith("Have")) {
+        return learnedDegrees.includes(degree);
+      }
+
+      return false;
+    });
+  };
+
+  useEffect(() => {
+    const requirementsSatisfied = checkRequirements();
+    setCanWork(requirementsSatisfied);
+  }, [authCtx.userData, learnedDegrees]);
+
   const onPressHandler = () => {
     const updates = {};
+
     if (salary) {
       const value = salary;
       updates.money = value;
@@ -76,31 +106,31 @@ function WorkItem({
       const value = isIncrease ? parseInt(index) : -parseInt(index);
       updates.happiness = value;
     }
-    
+
     authCtx.updateWorking({ name: name, type: type });
-      if(sideJob.length > 0 && type === 'side') {
-        side_job.forEach((job) => {
-          if (sideJob.includes(job.name)) {
-            setWorkingTime(time, updates, authCtx, { name: name, type: type });
-          }
-        });
-      } else if(mainJob.length === 1 && type === 'main') {
-        setWorkingTime(time, updates, authCtx, { name: name, type: type });
-      } else if(crime.length === 1 && type === 'crime') {
-        setWorkingTime(time, updates, authCtx, { name: name, type: type });
-      }
-};
+    if (sideJob.length > 0 && type === "side") {
+      side_job.forEach((job) => {
+        if (sideJob.includes(job.name)) {
+          setWorkingTime(time, updates, authCtx, { name: name, type: type });
+        }
+      });
+    } else if (mainJob.length === 1 && type === "main") {
+      setWorkingTime(time, updates, authCtx, { name: name, type: type });
+    } else if (crime.length === 1 && type === "crime") {
+      setWorkingTime(time, updates, authCtx, { name: name, type: type });
+    }
+  };
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {type === "main" && isMainButtonShown && (
+        {canWork && type === "main" && isMainButtonShown && (
           <ButtonItem children={btn} onPress={onPressHandler} />
         )}
-        {type === "side" && !isWorking && isSideButtonShown && (
+        {canWork && type === "side" && !isWorking && isSideButtonShown && (
           <ButtonItem children={btn} onPress={onPressHandler} />
         )}
-        {type === "crime" && crime.length === 0 && (
+        {canWork && type === "crime" && crime.length === 0 && (
           <ButtonItem children={btn} onPress={onPressHandler} />
         )}
         {isWorking && <Text style={styles.require}>Working</Text>}

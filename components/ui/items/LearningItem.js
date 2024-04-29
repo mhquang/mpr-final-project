@@ -4,9 +4,9 @@ import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
-import { getRandomAccidents } from "../../../util/getRandomAccidents";
 import { formatNumber } from "./../../../util/formatNumber";
 import { setLearningItemTime } from "../../../util/setLearningItemTime";
+
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import * as Progress from "react-native-progress";
@@ -28,8 +28,10 @@ function LearningItem({
   const [progress, setProgress] = useState(0);
   const [year, setYear] = useState(0);
   const [isLearning, setIsLearning] = useState(false);
+  const [canLearn, setCanLearn] = useState(false);
   const userHealth = authCtx.userData?.health;
   const isSufficient = authCtx.userData?.money >= money;
+  const learned = authCtx.userData?.learned;
 
   useEffect(() => {
     if (times && year === times) {
@@ -45,6 +47,33 @@ function LearningItem({
   if (!fontsLoaded) {
     return null;
   }
+
+  const checkRequirements = () => {
+    return requirements.every((requirement) => {
+      if (requirement.startsWith("At least")) {
+        const age = parseInt(requirement.match(/\d+/)[0]);
+        return authCtx.userData?.age >= age;
+      }
+
+      if (requirement.startsWith("Graduated from")) {
+        const wordAfterGraduated = requirement.split(" ").slice(2).join(" ");
+        return learned.learnedDegrees.includes(wordAfterGraduated);
+      }
+
+      if (requirement.includes("Have Bachelor Degree")) {
+        return learned.learnedDegrees.some((degree) =>
+          degree.startsWith("Bachelor")
+        );
+      }
+
+      return false;
+    });
+  };
+
+  useEffect(() => {
+    const requirementsSatisfied = checkRequirements();
+    setCanLearn(requirementsSatisfied);
+  }, [authCtx.userData, learned.learnedDegrees]);
 
   const onPressHandler = () => {
     const updates = {};
@@ -92,6 +121,7 @@ function LearningItem({
       setProgress,
       setYear
     );
+
     authCtx.updateLearning({ name: name, type: type });
   };
 
@@ -99,9 +129,12 @@ function LearningItem({
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {(money === "Free" || isSufficient) && !isLearned && !isLearning && (
-          <ButtonItem children={"Learn"} onPress={onPressHandler} />
-        )}
+        {(money === "Free" || isSufficient) &&
+          !isLearned &&
+          !isLearning &&
+          canLearn && (
+            <ButtonItem children={"Learn"} onPress={onPressHandler} />
+          )}
         {(isLearned || isLearning) && (
           <Text style={styles.require}>
             {isLearning ? "Learning" : "Learned"}
