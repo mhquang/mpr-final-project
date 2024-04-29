@@ -52,7 +52,7 @@ function Header() {
         </View>
         <View style={styles.moneyContainer}>
           <Ionicons name="cash" color={Colors.lightGreen} size={24} />
-          <Text style={styles.money}>${authCtx.userData?.money}</Text>
+          <Text style={styles.money}>${formatNumber(authCtx.userData?.money)}</Text>
         </View>
         <View style={styles.moneyContainer}>
           <MaterialIcons name="savings" color={"pink"} size={24} />

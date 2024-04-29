@@ -10,6 +10,7 @@ import Title from "../../components/ui/Title";
 function CryptoScreen() {
   const [increases, setIncreases] = useState({});
   const authCtx = useContext(AuthContext);
+  const wallet = authCtx.userData?.wallet;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -23,18 +24,16 @@ function CryptoScreen() {
     <View style={styles.rootContainer}>
       <Title>Crypto</Title>
       {crypto.map((item, index) => {
-        const isBought = authCtx.userData?.wallet?.some((walletItem) =>
-          Object.values(walletItem).some((coin) => coin.name === item.name)
-        );
-        return isBought ? null : (
+        const isInWallet = wallet.some((walletItem) => walletItem.code === item.code);
+        return (
           <InvestmentItem
             key={index}
             name={item.name}
             code={item.code}
             money={item.money}
             interest={item.interest}
-            buttonText={"Buy"}
             isIncrease={increases[item.code] || false}
+            isBought={isInWallet}
           />
         );
       })}

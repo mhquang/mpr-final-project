@@ -5,14 +5,7 @@ import { formatNumber } from "./../../../util/formatNumber";
 import { useContext } from "react";
 import { AuthContext } from "./../../../store/auth-context";
 
-function InvestmentItem({
-  name,
-  code,
-  money,
-  interest,
-  isIncrease,
-  buttonText,
-}) {
+function InvestmentItem({ name, code, money, interest, isIncrease, isBought }) {
   const authCtx = useContext(AuthContext);
 
   const [fontsLoaded] = useFonts({
@@ -30,14 +23,23 @@ function InvestmentItem({
       code: code,
       money: money,
       interest: interest,
-      isIncrease: isIncrease,
     };
     authCtx.updateMoney({ value: -money, item: item, action: "buyStocks" });
   };
 
+  const interestMoney = money * interest;
+  const sellPrice = money + (isIncrease ? +interestMoney : -interestMoney);
+
   const sellHandler = () => {
-    const interestMoney = money * interest;
-    console.log(money + (isIncrease ? +interestMoney : -interestMoney));
+    console.log(sellPrice);
+
+    const item = {
+      name: name,
+      code: code,
+      money: money,
+      interest: interest,
+    };
+    authCtx.updateMoney({ value: sellPrice, item: item, action: "sellStocks" });
   };
 
   return (
@@ -47,16 +49,33 @@ function InvestmentItem({
         <Text style={styles.name}>{name}</Text>
       </View>
       <View style={styles.moneyContainer}>
-        <Text style={styles.money}>${formatNumber(money)}</Text>
-        <Text style={[styles.interest, isIncrease ? styles.green : styles.red]}>
-          {isIncrease ? `+${interest}%` : `-${interest}%`}
-        </Text>
+        {isBought ? (
+          <Text style={[styles.money, { color: "red" }]}>
+            ${formatNumber(sellPrice)}
+          </Text>
+        ) : (
+          <Text style={styles.money}>${formatNumber(money)}</Text>
+        )}
+        {interest && (
+          <Text
+            style={[styles.interest, isIncrease ? styles.green : styles.red]}
+          >
+            {isIncrease ? `+${interest}%` : `-${interest}%`}
+          </Text>
+        )}
       </View>
       <Pressable
         style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-        onPress={buttonText === "Buy" ? buyHandler : sellHandler}
+        onPress={isBought ? sellHandler : buyHandler}
       >
-        <Text style={styles.buttonText}>{buttonText}</Text>
+        <Text
+          style={[
+            styles.buttonText,
+            isBought ? { color: "red" } : { color: Colors.darkBlue },
+          ]}
+        >
+          {isBought ? "Sell" : "Buy"}
+        </Text>
       </Pressable>
     </View>
   );

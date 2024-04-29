@@ -1,13 +1,16 @@
 import { StyleSheet, View } from "react-native";
 import { stocks } from "./../../data/investment/stocks";
 import { randomIncrease } from "../../util/randomIncrease";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../store/auth-context";
 
 import InvestmentItem from "../../components/ui/items/InvestmentItem";
 import Title from "../../components/ui/Title";
 
 function StocksInforScreen() {
   const [increases, setIncreases] = useState({});
+  const authCtx = useContext(AuthContext);
+  const wallet = authCtx.userData?.wallet;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -21,6 +24,9 @@ function StocksInforScreen() {
     <View style={styles.rootContainer}>
       <Title>Stocks</Title>
       {stocks.map((item, index) => {
+        const isInWallet = wallet.some(
+          (walletItem) => walletItem.code === item.code
+        );
         return (
           <InvestmentItem
             key={index}
@@ -28,8 +34,8 @@ function StocksInforScreen() {
             code={item.code}
             money={item.money}
             interest={item.interest}
-            buttonText={"Buy"}
             isIncrease={increases[item.code] || false}
+            isBought={isInWallet}
           />
         );
       })}

@@ -135,6 +135,14 @@ function AuthContextProvider({ children }) {
       if (item && action === "buyStocks") {
         updatedUserData?.wallet.push(item);
       }
+      if (item && action === "sellStocks") {
+        const itemIndex = updatedUserData.wallet.findIndex(
+          (walletItem) => walletItem.code === item.code
+        );
+        if (itemIndex !== -1) {
+          updatedUserData.wallet.splice(itemIndex, 1);
+        }
+      }
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
