@@ -1,7 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { createContext, useEffect, useState } from "react";
-import { updateUserData, deleteDocument } from "../util/firebase";
+import {
+  updateUserData,
+  deleteDocument,
+  writeDataToFirestore,
+  getUserDataFirebase
+} from "../util/firebase";
 import { Alert } from "react-native";
 import { getRandomAccidents } from "../util/getRandomAccidents";
 export const AuthContext = createContext({
@@ -20,6 +25,7 @@ export const AuthContext = createContext({
   updateWorking: (value) => {},
   deleteWorking: (value) => {},
   resetLife: () => {},
+  backToHome: () => {},
   returnAccident: (accidents) => {},
   authenticate: (token) => {},
   logout: () => {},
@@ -275,7 +281,7 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
-  
+
   const deleteWorking = ({ name, type }) => {
     if (userData && name) {
       const updatedUserData = { ...userData };
@@ -308,12 +314,14 @@ function AuthContextProvider({ children }) {
       try {
         setIsCreatingNewLife(true);
         await deleteDocument("userCharacteristics", email);
+        await writeDataToFirestore("userCharacteristics", email, {
+          userId: email,
+        });
+        const newUserData = await getUserDataFirebase("userCharacteristics", email);
+        getUserData(newUserData);
       } catch (error) {
         console.log(error);
       }
-      setAuthToken(null);
-      setUserData(null);
-      AsyncStorage.removeItem("token");
       AsyncStorage.removeItem("userData");
       setIsCreatingNewLife(false);
     }
@@ -376,7 +384,8 @@ function AuthContextProvider({ children }) {
           ]);
         }
   }
-  async function logout() {
+
+    async function backToHome() {
     setIsSaving(true);
     const email = userData?.userId;
     try {
@@ -384,11 +393,14 @@ function AuthContextProvider({ children }) {
     } catch (error) {
       console.log(error);
     }
+    setIsSaving(false);
+  }
+
+  function logout() {
     setAuthToken(null);
     setUserData(null);
     AsyncStorage.removeItem("token");
     AsyncStorage.removeItem("userData");
-    setIsSaving(false);
   }
 
   const value = {
@@ -408,6 +420,7 @@ function AuthContextProvider({ children }) {
     updateWorking: updateWorking,
     deleteWorking: deleteWorking,
     resetLife: resetLife,
+    backToHome: backToHome,
     returnAccident: returnAccident,
     logout: logout,
   };
@@ -416,9 +429,7 @@ function AuthContextProvider({ children }) {
     return <LoadingOverlay message="Saving your state..." />;
   }
   if (isCreatingNewLife) {
-    return (
-      <LoadingOverlay message="Creating a new life...Please login to continue!" />
-    );
+    return <LoadingOverlay message="Creating a new life..." />;
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

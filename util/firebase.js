@@ -31,7 +31,7 @@ export async function checkIfDocExist(collection, document) {
         return error;
     }
 }
-export async function getUserData(collection, document) {
+export async function getUserDataFirebase(collection, document) {
     try {
         const docRef = doc(firestore, collection, document);
         const docSnap = await getDoc(docRef);

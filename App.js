@@ -13,10 +13,13 @@ import * as SplashScreen from "expo-splash-screen";
 import SetupPlayerScreen from "./screens/GeneralComs/SetupPlayerScreen";
 import MainScreen from "./screens/GeneralComs/MainScreen";
 import HowToPlayScreen from "./screens/Auth/HowToPlayScreen";
+import LandingScreen from "./screens/GeneralComs/LandingScreen";
 
 const Stack = createNativeStackNavigator();
+
 function AuthStack() {
   const navigation = useNavigation();
+
   function handlePress() {
     navigation.navigate("HowtoPlay");
   }
@@ -85,16 +88,14 @@ function Authenticated() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
         contentStyle: { backgroundColor: Colors.background },
       }}
     >
       <Stack.Screen
-        name="Setup"
-        component={SetupPlayerScreen}
+        name="Landing"
+        component={LandingScreen}
         options={{
           title: "",
-          // headerShown: true,
           headerStyle: { backgroundColor: Colors.background },
           headerShadowVisible: false,
           headerTintColor: Colors.white,
@@ -111,12 +112,24 @@ function Authenticated() {
         }}
       />
       <Stack.Screen
+        name="Setup"
+        component={SetupPlayerScreen}
+        options={{
+          title: "",
+          headerStyle: { backgroundColor: Colors.background },
+          headerShadowVisible: false,
+          headerTintColor: Colors.white,
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
         name="MainScreen"
         component={MainScreen}
         options={{
           headerLeft: () => null,
           headerBackVisible: false,
           gestureEnabled: false,
+          headerShown: false,
         }}
       />
       <Stack.Screen
