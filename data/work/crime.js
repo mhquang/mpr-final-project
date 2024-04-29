@@ -3,7 +3,7 @@ export const crime = [{
     requirements: [
         "At least 18 years old"
     ],
-    time: "1 month",
+    time: "3000",
     health: { isIncrease: false, index: "2" },
     iq: { isIncrease: false, index: "3" },
     happiness: { isIncrease: false, index: "5" },
@@ -14,7 +14,7 @@ export const crime = [{
     requirements: [
         "Cybersecurity degree"
     ],
-    time: "2 months",
+    time: "4000",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: true, index: "4" },
     happiness: { isIncrease: false, index: "3" },

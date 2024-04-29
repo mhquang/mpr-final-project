@@ -25,7 +25,7 @@ export const side_job = [{
     requirements: [
         "At least 18 years old",
     ],
-    time: "2 mins",
+    time: "3000",
     health: { isIncrease: false, index: "3" },
     iq: { isIncrease: true, index: "3" },
     happiness: { isIncrease: false, index: "3" },
@@ -36,7 +36,7 @@ export const side_job = [{
     requirements: [
         "At least 18 years old",
     ],
-    time: "2-3 mins",
+    time: "3000",
     health: { isIncrease: false, index: "4" },
     iq: { isIncrease: true, index: "2" },
     happiness: { isIncrease: false, index: "1" },
@@ -47,7 +47,7 @@ export const side_job = [{
     requirements: [
         "At least 16 years old",
     ],
-    time: "1 month",
+    time: "4000",
     health: { isIncrease: false, index: "4" },
     iq: { isIncrease: true, index: "3" },
     salary: 690

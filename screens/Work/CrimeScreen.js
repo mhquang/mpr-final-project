@@ -24,7 +24,7 @@ function CrimeScreen() {
             salary={item.salary}
             btn={"Apply"}
             type={"crime"}
-            isWorking={currentWorking.crime === item.name}
+            isWorking={currentWorking.crime.includes(item.name)}
           />
         );
       })}
