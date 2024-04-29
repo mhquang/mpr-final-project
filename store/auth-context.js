@@ -3,6 +3,10 @@ import { createContext, useEffect, useState } from "react";
 import { updateUserData, deleteDocument } from "../util/firebase";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { Alert } from "react-native";
+import { getRandomAccidents } from "../util/getRandomAccidents";
+import { accidents } from "../data/accidents/dummy-accidents";
+
+
 export const AuthContext = createContext({
   userData: undefined,
   token: "",
@@ -28,10 +32,37 @@ function AuthContextProvider({ children }) {
   const [isSaving, setIsSaving] = useState(false);
   const [isCreatingNewLife, setIsCreatingNewLife] = useState(false);
   useEffect(() => {
+    console.log(userData);
     const timer = setInterval(() => {
       if (userData) {
         setUserData((prevUserData) => {
-          if (prevUserData.age + 1 > 5) {
+          // if (prevUserData.health > 0) {
+          //   const randomNum = getRandomAccidents(1, 10);
+          //   accidents.forEach((accident) => {
+          //     if (accident.id === randomNum) {
+          //       if (
+          //         accident.title &&
+          //         accident.description &&
+          //         (accident.happiness || accident.health || accident.iq || accident.money)
+          //       ) {
+          //         Alert.alert(accident.title, accident.description);
+          //         return {
+          //           ...prevUserData,
+          //           money: prevUserData.money + accident.money,
+          //           health: prevUserData.health - accident.health,
+          //           iq: prevUserData.iq - accident.iq,
+          //           happiness: prevUserData.happiness - accident.happiness,
+          //         };
+          //       } else {
+          //         console.error(
+          //           "Happiness, health, or IQ data is missing in accident:",
+          //           accident
+          //         );
+          //       }
+          //     }
+          //   });
+          // }
+          if (prevUserData.age + 1 > 50) {
             return {
               ...prevUserData,
               age: prevUserData.age + 1,
@@ -47,9 +78,9 @@ function AuthContextProvider({ children }) {
               ...prevUserData,
               age: prevUserData.age + 1,
               money: prevUserData.money + 100,
-              health: prevUserData.health + 5,
-              iq: prevUserData.iq + 5,
-              happiness: prevUserData.happiness + 5,
+              health: prevUserData.health + 5 > 100 ? 100 : prevUserData.health + 5,
+              iq: prevUserData.iq + 5 > 100 ? 100 : prevUserData.iq + 5,
+              happiness: prevUserData.happiness + 5 > 100 ? 100 : prevUserData.happiness + 5,
               savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
               loan: prevUserData.loan + (prevUserData.loan * 9.9) / 100,
             };
@@ -57,7 +88,7 @@ function AuthContextProvider({ children }) {
         });
         AsyncStorage.setItem("userData", JSON.stringify(userData));
       }
-    }, 2000); // 12 minute
+    }, 30000); // 12 minute actual: 720000
     return () => clearInterval(timer);
   }, [userData]);
 
@@ -230,7 +261,7 @@ function AuthContextProvider({ children }) {
       if (
         type === "main" &&
         currentMainJob === "" &&
-        currentSideJob.length <= 1
+        currentSideJob.length < 1
       ) {
         updatedUserData.currentWorking.main = name;
       }
@@ -243,7 +274,7 @@ function AuthContextProvider({ children }) {
         updatedUserData.currentWorking.side.push(name);
       }
 
-      if (type === "crime") {
+      if (type === "crime" && currentMainJob === "") {
         updatedUserData.currentWorking.crime = name;
       }
 

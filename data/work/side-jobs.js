@@ -3,10 +3,10 @@ export const side_job = [{
     requirements: [
         "At least 16 years old",
     ],
-    time: "1 month",
-    health: { isIncrease: false, index: 2 },
-    iq: { isIncrease: true, index: 1 },
-    happiness: { isIncrease: false, index: 3 },
+    time: "3000",
+    health: { isIncrease: false, index: "2" },
+    iq: { isIncrease: true, index: "1" },
+    happiness: { isIncrease: false, index: "3" },
     salary: 200
 },
 {
@@ -14,10 +14,10 @@ export const side_job = [{
     requirements: [
         "At least 18 years old",
     ],
-    time: "3 months",
-    health: { isIncrease: false, index: 3 },
-    iq: { isIncrease: true, index: 1 },
-    happiness: { isIncrease: false, index: 2 },
+    time: "4000",
+    health: { isIncrease: false, index: "3" },
+    iq: { isIncrease: true, index: "1" },
+    happiness: { isIncrease: false, index: "2" },
     salary: 500
 },
 {
@@ -26,9 +26,9 @@ export const side_job = [{
         "At least 18 years old",
     ],
     time: "2 mins",
-    health: { isIncrease: false, index: 3 },
-    iq: { isIncrease: true, index: 3 },
-    happiness: { isIncrease: false, index: 3 },
+    health: { isIncrease: false, index: "3" },
+    iq: { isIncrease: true, index: "3" },
+    happiness: { isIncrease: false, index: "3" },
     salary: 800,
 },
 {
@@ -37,9 +37,9 @@ export const side_job = [{
         "At least 18 years old",
     ],
     time: "2-3 mins",
-    health: { isIncrease: false, index: 4 },
-    iq: { isIncrease: true, index: 2 },
-    happiness: { isIncrease: false, index: 1 },
+    health: { isIncrease: false, index: "4" },
+    iq: { isIncrease: true, index: "2" },
+    happiness: { isIncrease: false, index: "1" },
     salary: 980
 },
 {
@@ -48,7 +48,7 @@ export const side_job = [{
         "At least 16 years old",
     ],
     time: "1 month",
-    health: { isIncrease: false, index: 3 },
-    iq: { isIncrease: true, index: 3 },
+    health: { isIncrease: false, index: "4" },
+    iq: { isIncrease: true, index: "3" },
     salary: 690
 }]

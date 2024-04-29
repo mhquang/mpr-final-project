@@ -1,12 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../constants/styles";
-import { getRandomAccidents } from "../../util/getRandomAccidents";
 import { AuthContext } from "../../store/auth-context";
 import { useContext, useEffect } from "react";
-import { Alert } from "react-native";
-import { accidents } from "../../data/accidents/dummy-accidents";
-
 import LearningScreen from "../LearningScreen";
 import HealthScreen from "../HealthScreen";
 import WorkScreen from "../WorkScreen";
@@ -25,29 +21,6 @@ export function MainScreen() {
     if (age === 4) {
       authCtx.updateMoney({ value: 10000 });
     }
-    const randomNum = getRandomAccidents(1, 3);
-    console.log(randomNum)
-    // accidents.forEach((accident) => {
-    //   if (accident.id === randomNum) {
-    //     if (
-    //       accident.title &&
-    //       accident.description &&
-    //       (accident.happiness || accident.health || accident.iq)
-    //     ) {
-    //       Alert.alert(accident.title, accident.description);
-    //       authCtx.updateIndex({
-    //         happiness: accident.happiness || 0,
-    //         health: accident.health || 0,
-    //         iq: accident.iq || 0,
-    //       });
-    //     } else {
-    //       console.error(
-    //         "Happiness, health, or IQ data is missing in accident:",
-    //         accident
-    //       );
-    //     }
-    //   }
-    // });
     if (age > 100 || authCtx.userData?.health <= 0) {
       authCtx.resetLife();
       return;
