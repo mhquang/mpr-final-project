@@ -3,7 +3,7 @@ import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { createContext, useEffect, useState } from "react";
 import { updateUserData, deleteDocument } from "../util/firebase";
 import { Alert } from "react-native";
-
+import { getRandomAccidents } from "../util/getRandomAccidents";
 export const AuthContext = createContext({
   userData: undefined,
   token: "",
@@ -20,6 +20,7 @@ export const AuthContext = createContext({
   updateWorking: (value) => {},
   deleteWorking: (value) => {},
   resetLife: () => {},
+  returnAccident: (accidents) => {},
   authenticate: (token) => {},
   logout: () => {},
 });
@@ -30,41 +31,15 @@ function AuthContextProvider({ children }) {
   const [isSaving, setIsSaving] = useState(false);
   const [isCreatingNewLife, setIsCreatingNewLife] = useState(false);
   useEffect(() => {
-    // console.log(userData);
+    console.log(userData);
     const timer = setInterval(() => {
       if (userData) {
         setUserData((prevUserData) => {
-          // if (prevUserData.health > 0) {
-          //   const randomNum = getRandomAccidents(1, 10);
-          //   accidents.forEach((accident) => {
-          //     if (accident.id === randomNum) {
-          //       if (
-          //         accident.title &&
-          //         accident.description &&
-          //         (accident.happiness || accident.health || accident.iq || accident.money)
-          //       ) {
-          //         Alert.alert(accident.title, accident.description);
-          //         return {
-          //           ...prevUserData,
-          //           money: prevUserData.money + accident.money,
-          //           health: prevUserData.health - accident.health,
-          //           iq: prevUserData.iq - accident.iq,
-          //           happiness: prevUserData.happiness - accident.happiness,
-          //         };
-          //       } else {
-          //         console.error(
-          //           "Happiness, health, or IQ data is missing in accident:",
-          //           accident
-          //         );
-          //       }
-          //     }
-          //   });
-          // }
-          if (prevUserData.age + 1 > 50) {
+          if (prevUserData.age + 1 > 6) {
             return {
               ...prevUserData,
               age: prevUserData.age + 1,
-              money: prevUserData.money + 100,
+              money: prevUserData.money + 400,
               health: prevUserData.health - 10,
               iq: prevUserData.iq - 5,
               happiness: prevUserData.happiness - 5,
@@ -77,10 +52,10 @@ function AuthContextProvider({ children }) {
               age: prevUserData.age + 1,
               money: prevUserData.money + 100,
               health:
-                prevUserData.health + 5 > 100 ? 100 : prevUserData.health + 3,
-              iq: prevUserData.iq + 5 > 100 ? 100 : prevUserData.iq + 3,
+                prevUserData.health + 3 > 100 ? 100 : prevUserData.health + 10,
+              iq: prevUserData.iq + 3 > 100 ? 100 : prevUserData.iq + 3,
               happiness:
-                prevUserData.happiness + 5 > 100
+                prevUserData.happiness + 3 > 100
                   ? 100
                   : prevUserData.happiness + 3,
               savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
@@ -90,7 +65,7 @@ function AuthContextProvider({ children }) {
         });
         AsyncStorage.setItem("userData", JSON.stringify(userData));
       }
-    }, 720000); // 12 minute actual: 720000
+    }, 4000); // 12 minute actual: 720000
 
     return () => clearInterval(timer);
   }, [userData]);
@@ -352,6 +327,55 @@ function AuthContextProvider({ children }) {
     ]);
     return;
   }
+  function returnAccident(accidents) {
+    const randomNum = getRandomAccidents(1, 4);
+    const accident = accidents.find((accident) => {
+      return accident.id === randomNum;
+    });
+        if(accident.title && accident.description && (accident.health || accident.iq || accident.happiness || accident.money)) {
+          Alert.alert(accident.title, accident.description, [
+            {
+              text: "OK",
+              onPress: () => {
+                setUserData((prevUserData) => {
+                  const newHealth = prevUserData.health - (accident.health || 0);
+                  if (newHealth <= 0) {
+                    resetLife();
+                    return {
+                      userId: prevUserData.userId,
+                      name: prevUserData.name,
+                      age: 0,
+                      userGender: prevUserData.userGender,
+                      health: 20,
+                      iq: 10,
+                      happiness: 15,
+                      money: 0,
+                      savings: 0,
+                      friends: [],
+                      lover: [],
+                      items: [],
+                      learned: {
+                      learnedDegrees: [],
+                      learnedSkills: [],
+                      learnedCourses: [],
+                      learnedLanguages: [],
+                      },
+                      currentWorking: { main: [], side: [], crime: [] },
+                    }
+                  }
+                  return {
+                    ...prevUserData,
+                    health: newHealth <= 0 ? 0 : newHealth,
+                    iq: prevUserData.iq - (accident.iq || 0) < 0 ? 0 : prevUserData.iq - (accident.iq || 0),
+                    happiness: prevUserData.happiness - (accident.happiness || 0) < 0 ? 0 : prevUserData.happiness - (accident.happiness || 0),
+                    money: prevUserData.money - (accident.money || 0) < 0 ? 0 : prevUserData.money - (accident.money || 0),
+                  };
+                });
+              },
+            },
+          ]);
+        }
+  }
   async function logout() {
     setIsSaving(true);
     const email = userData?.userId;
@@ -384,6 +408,7 @@ function AuthContextProvider({ children }) {
     updateWorking: updateWorking,
     deleteWorking: deleteWorking,
     resetLife: resetLife,
+    returnAccident: returnAccident,
     logout: logout,
   };
 

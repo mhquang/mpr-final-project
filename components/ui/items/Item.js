@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Alert } from "react-native";
 import { useFonts } from "expo-font";
 import { Colors } from "../../../constants/styles";
 import { Ionicons } from "@expo/vector-icons";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { getRandomAccidents } from "../../../util/getRandomAccidents";
 import { formatNumber } from "./../../../util/formatNumber";
@@ -10,9 +10,11 @@ import { setItemTime } from "../../../util/setItemTime";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
+import { accidents } from "../../../data/accidents/dummy-accidents";
 
 function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const authCtx = useContext(AuthContext);
+  const [isProcessing, setIsProcessing] = useState(false);
   const userHealth = authCtx.userData?.health;
   const isSufficient = authCtx.userData?.money >= money;
 
@@ -28,7 +30,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const onPressHandler = () => {
     if (name === "Buy lotery tickets") {
       authCtx.updateMoney({ value: -25 });
-      if (getRandomAccidents(1, 100) === 1) {
+      if (getRandomAccidents(1, 300) === 1) {
         Alert.alert(
           "Congratulations!",
           "You won the lottery",
@@ -48,8 +50,10 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
     }
 
     const updates = {};
-      const value = money === "Free" ? 0 : -parseInt(money);
-
+    if (money) {
+      const value = money === "Free" ? 0 : -(money);
+      updates.money = value;
+    }
     if (health) {
       const { isIncrease, index } = health;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
@@ -58,16 +62,9 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
       } else {
         Alert.alert(
           "Warning",
-          "Your health is low, you need to get treatments!",
-          [
-            {
-              text: "OK",
-              onPress: () => {
-                return;                
-              },
-            },
-          ]
+          "Your health is low, you need to get treatments!"
         );
+        return;
       }
     }
 
@@ -82,15 +79,22 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
       const value = isIncrease ? parseInt(index) : -parseInt(index);
       updates.happiness = value;
     }
-    setItemTime(name, time, value, updates, authCtx);
+    if (name !== "Buy lotery tickets") {
+      setItemTime(name, time, money, updates, authCtx, setIsProcessing);
+    }
   };
 
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {(money === "Free" || isSufficient) && (
+        {!isProcessing && (money === "Free" || isSufficient) && (
           <ButtonItem children={btn} onPress={onPressHandler} />
+        )}
+        {isProcessing && (
+          <Text style={styles.require}>
+            Processing
+          </Text>
         )}
       </View>
       <View style={styles.innerContainer}>

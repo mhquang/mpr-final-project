@@ -10,7 +10,7 @@ import FriendsScreen from "../FriendsScreen";
 import RelaxScreen from "../RelaxScreen";
 import InvestmentScreen from "../InvestmentScreen";
 import HomeScreen from "../HomeScreen";
-
+import { accidents } from "../../data/accidents/dummy-accidents";
 const BottomTab = createBottomTabNavigator();
 
 export function MainScreen() {
@@ -18,7 +18,10 @@ export function MainScreen() {
   const age = authCtx.userData?.age;
 
   useEffect(() => {
-    if (age === 4) {
+    if (authCtx.userData?.age > 5 && authCtx.userData?.health > 0) {
+      authCtx.returnAccident(accidents);
+    }
+    if (age === 18) {
       authCtx.updateMoney({ value: 10000 });
     }
     if (age > 100 || authCtx.userData?.health <= 0) {

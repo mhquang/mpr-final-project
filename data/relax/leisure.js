@@ -2,7 +2,7 @@ export const leisure = [
   {
     name: "Take the week off",
     money: "Free",
-    time: "7 days",
+    time: "2000",
     happiness: { isIncrease: true, index: "3" },
     iq: { isIncrease: true, index: "3" },
     health: { isIncrease: false, index: "2" },
@@ -18,7 +18,7 @@ export const leisure = [
   {
     name: "Play online games",
     money: "Free",
-    time: "2 hours",
+    time: "2000",
     requirements: ["Game console"],
     happiness: { isIncrease: true, index: "3" },
     iq: { isIncrease: true, index: "1" },
@@ -27,7 +27,7 @@ export const leisure = [
   {
     name: "Watch TV",
     money: "Free",
-    time: "2 hours",
+    time: "2000",
     requirements: ["TV"],
     happiness: { isIncrease: true, index: "4" },
     iq: { isIncrease: true, index: "1" },
@@ -36,7 +36,7 @@ export const leisure = [
   {
     name: "Grab drinks",
     money: 30,
-    time: "2 hours",
+    time: "2000",
     requirements: ["At least 21 years old"],
     happiness: { isIncrease: true, index: "5" },
     health: { isIncrease: false, index: "4" },
@@ -44,7 +44,7 @@ export const leisure = [
   {
     name: "Camping",
     money: 70,
-    time: "1 day",
+    time: "2000",
     requirements: ["Camping Equipment"],
     happiness: { isIncrease: true, index: "6" },
     iq: { isIncrease: true, index: "3" },
@@ -53,7 +53,7 @@ export const leisure = [
   {
     name: "Go to a concert",
     money: 990,
-    time: "3 hours",
+    time: "2000",
     requirements: ["At least 16 years old"],
     happiness: { isIncrease: true, index: "6" },
     iq: { isIncrease: true, index: "5" },
@@ -62,20 +62,20 @@ export const leisure = [
   {
     name: "Buy lotery tickets",
     money: 25,
-    time: "1 hour",
+    time: "2000",
     requirements: ["At least 16 years old"],
   },
   {
     name: "Have a Coffee",
     money: 25,
-    time: "2 hour",
+    time: "2000",
     happiness: { isIncrease: true, index: "3" },
     health: { isIncrease: false, index: "1" },
   },
   {
     name: "Reading book",
     money: 25,
-    time: "2 hour",
+    time: "2000",
     happiness: { isIncrease: true, index: "3" },
     iq: { isIncrease: true, index: "5" },
     health: { isIncrease: false, index: "1" },
@@ -83,7 +83,7 @@ export const leisure = [
   {
     name: "Local vacation",
     money: 1100,
-    time: "2 days",
+    time: "2000",
     happiness: { isIncrease: true, index: "7" },
     iq: { isIncrease: true, index: "3" },
     health: { isIncrease: false, index: "3" },
@@ -91,7 +91,7 @@ export const leisure = [
   {
     name: "International vacation",
     money: 3000,
-    time: "2 days",
+    time: "2000",
     requirements: ["Passport"],
     happiness: { isIncrease: true, index: "10" },
     iq: { isIncrease: true, index: "4" },

@@ -49,7 +49,7 @@ function LearningItem({
   const onPressHandler = () => {
     const updates = {};
     if (money) {
-      const value = money === "Free" ? 0 : -parseInt(money);
+      const value = money === "Free" ? 0 : -money;
       updates.money = value;
     }
 

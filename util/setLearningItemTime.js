@@ -12,7 +12,7 @@ export function setLearningItemTime(
   setProgress,
   setYear
 ) {
-  authCtx.updateMoney({ value: value });
+  // authCtx.updateMoney({ value: value });
   setIsLearning(true);
   const timer = setTimeout(() => {
     Alert.alert("Congratulations", `You finished ${name}`, [

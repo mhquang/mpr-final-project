@@ -32,7 +32,7 @@ export const degrees = [
     {
         name: 'Bachelor of Artificial Intelligence',
         money: 500,
-        time: '9 months',
+        time: '4000',
         requirements: ['Complete High school'],
         health: {isIncrease: false, index: "3"},    
         happiness: { isIncrease: false, index: "3" },
@@ -42,7 +42,7 @@ export const degrees = [
     {
         name: 'Bachelor of Computer Science',
         money: 500,
-        time: '9 months',
+        time: '4000',
         requirements: ['Complete High school'],
         health: {isIncrease: false, index: "3"},    
         happiness: { isIncrease: false, index: "3" },
