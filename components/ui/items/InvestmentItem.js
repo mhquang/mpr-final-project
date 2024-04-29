@@ -31,8 +31,6 @@ function InvestmentItem({ name, code, money, interest, isIncrease, isBought }) {
   const sellPrice = money + (isIncrease ? +interestMoney : -interestMoney);
 
   const sellHandler = () => {
-    console.log(sellPrice);
-
     const item = {
       name: name,
       code: code,

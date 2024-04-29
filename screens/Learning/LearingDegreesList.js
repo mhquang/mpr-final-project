@@ -8,7 +8,7 @@ import LearningItem from "../../components/ui/items/LearningItem";
 
 function LearingDegreesList() {
   const authCtx = useContext(AuthContext);
-  const learnedDegrees = authCtx.userData?.learnedDegrees;
+  const learnedDegrees = authCtx.userData?.learned.learnedDegrees;
 
   return (
     <View style={styles.rootContainer}>
