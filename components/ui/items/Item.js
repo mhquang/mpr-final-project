@@ -28,12 +28,22 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const onPressHandler = () => {
     if (name === "Buy lotery tickets") {
       authCtx.updateMoney({ value: -25 });
-      if (getRandomAccidents(1, 500) === 1) {
-        Alert.alert("Congratulation!", "You won a lotery");
-        authCtx.updateIndex({
-          money: 50000,
-          happiness: 35,
-        });
+      if (getRandomAccidents(1, 100) === 1) {
+        Alert.alert(
+          "Congratulations!",
+          "You won the lottery",
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                authCtx.updateIndex({
+                  money: 50000,
+                  happiness: 30,
+                });
+              },
+            },
+          ]
+        );
       }
     }
 

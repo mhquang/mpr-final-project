@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useContext } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { formatNumber } from "./../../../util/formatNumber";
-
+import { side_job } from "../../../data/work/side-jobs";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
@@ -46,9 +46,8 @@ function WorkItem({
 
   const onPressHandler = () => {
     const updates = {};
-
     if (salary) {
-      const value = +salary;
+      const value = salary;
       updates.money = value;
     }
 
@@ -77,11 +76,35 @@ function WorkItem({
       const value = isIncrease ? parseInt(index) : -parseInt(index);
       updates.happiness = value;
     }
-
-    authCtx.updateIndex(updates);
-
+    
     authCtx.updateWorking({ name: name, type: type });
-  };
+
+    if(sideJob.length > 0) {
+      let isCurrentJobInSideJob = false;
+      side_job.forEach((job) => {
+        if (sideJob.includes(job.name)) {
+          isCurrentJobInSideJob = true;
+          return;
+        }
+      });
+      if (isCurrentJobInSideJob) {
+        const timer = setTimeout(() => {
+          authCtx.updateIndex(updates);
+        }, parseInt(time));
+        return () => clearTimeout(timer);
+      }
+    } else if (mainJob !== "") {
+        const timer = setTimeout(() => {
+          authCtx.updateIndex(updates);
+        }, parseInt(time));
+        return () => clearTimeout(timer);
+    } else if (crime !== "") {
+      const timer = setTimeout(() => {
+        authCtx.updateIndex(updates);
+      }, parseInt(time));
+      return () => clearTimeout(timer);
+  }
+};
 
   return (
     <View style={styles.itemContainer}>
