@@ -3,30 +3,35 @@ export const accidents = [
         id: 1,
         title: "Opps",
         description: "Get head pooped by bird",
-        happiness: -3,
-        health: -10,
+        health: 10,
+        happiness: 3,
+        iq: 0
     },
     {
         id: 2,
         title: "Hurry up",
         description: "Get traffic accident, you need to go to the hospital!",
-        health: -10,
-        happiness: -4
+        health: 10,
+        happiness: 4,
+        iq: 1
+
     },
     {
         id: 3,
         title: "Opps",
         description: "Get captured by the police",
-        happiness: -6,
-        health: -10,
-        money: -1000
+        happiness: 5,
+        money: 1000,
+        health: 10,
+        iq: 1
     },
     {
         id: 4,
         title: "Opps, i feel bad",
         description: "You get sick, you need to see doctor",
-        health: -4,
-        happiness: -4
+        health: 4,
+        iq: 1,
+        happiness: 3,
     },
     {
         id: 5,
