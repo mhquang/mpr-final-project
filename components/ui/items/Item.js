@@ -10,9 +10,11 @@ import { setItemTime } from "../../../util/setItemTime";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
+import { accidents } from "../../../data/accidents/dummy-accidents";
 
 function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const authCtx = useContext(AuthContext);
+  const [isProcessing, setIsProcessing] = useState(false);
   const userHealth = authCtx.userData?.health;
   const isSufficient = authCtx.userData?.money >= money;
   const [canPlay, setCanPlay] = useState(false);
@@ -59,15 +61,19 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const onPressHandler = () => {
     if (name === "Buy lotery tickets") {
       authCtx.updateMoney({ value: -25 });
-      if (getRandomAccidents(1, 100) === 1) {
-        Alert.alert("Congratulations!", "You won the lottery", [
-          {
-            text: "OK",
-            onPress: () => {
-              authCtx.updateIndex({
-                money: 50000,
-                happiness: 30,
-              });
+      if (getRandomAccidents(1, 300) === 1) {
+        Alert.alert(
+          "Congratulations!",
+          "You won the lottery",
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                authCtx.updateIndex({
+                  money: 50000,
+                  happiness: 30,
+                });
+              },
             },
           },
         ]);
@@ -75,8 +81,10 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
     }
 
     const updates = {};
-    const value = money === "Free" ? 0 : -parseInt(money);
-
+    if (money) {
+      const value = money === "Free" ? 0 : -(money);
+      updates.money = value;
+    }
     if (health) {
       const { isIncrease, index } = health;
       const value = isIncrease ? parseInt(index) : -parseInt(index);
@@ -95,6 +103,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
             },
           ]
         );
+        return;
       }
     }
 
@@ -109,15 +118,23 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
       const value = isIncrease ? parseInt(index) : -parseInt(index);
       updates.happiness = value;
     }
-    setItemTime(name, time, value, updates, authCtx);
+    if (name !== "Buy lotery tickets") {
+      setItemTime(name, time, money, updates, authCtx, setIsProcessing);
+    }
   };
 
   return (
     <View style={styles.itemContainer}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>{name}</Text>
-        {(money === "Free" || isSufficient) && canPlay && (
+        { (money === "Free" || isSufficient) && (
+        {!isProcessing && (money === "Free" || isSufficient) && canPlay && (
           <ButtonItem children={btn} onPress={onPressHandler} />
+        )}
+        {isProcessing && (
+          <Text style={styles.require}>
+            Processing
+          </Text>
         )}
       </View>
       <View style={styles.innerContainer}>
