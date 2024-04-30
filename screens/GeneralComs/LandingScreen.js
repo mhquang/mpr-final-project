@@ -5,6 +5,7 @@ import { useContext, useLayoutEffect } from "react";
 import { AuthContext } from "../../store/auth-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Button from "../../components/ui/buttons/Button";
+import ButtonItem from "../../components/ui/buttons/ButtonItem";
 
 function LandingScreen({ navigation }) {
   const authCtx = useContext(AuthContext);
@@ -53,8 +54,10 @@ function LandingScreen({ navigation }) {
           <Text style={styles.title2}>Developer</Text>
         </View>
         <View style={styles.buttonContainer}>
-          {isName && <Button onPress={continueGameHandler}>Continue</Button>}
-          {canBeSkip && <Button onPress={skipAgeHandler}>Skip to 18</Button>}
+          {canBeSkip && (
+            <ButtonItem onPress={skipAgeHandler}>Skip to 18</ButtonItem>
+          )}
+          {isName && <ButtonItem onPress={continueGameHandler}>Continue</ButtonItem>}
           <Button onPress={newGameHandler}>New game</Button>
         </View>
       </View>
@@ -94,5 +97,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "80%",
+    gap: 20
   },
 });
