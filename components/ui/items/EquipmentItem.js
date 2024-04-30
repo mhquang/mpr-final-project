@@ -12,15 +12,6 @@ function EquipmentItem({ name, money, requirements, btn }) {
   const isSufficient = authCtx.userData?.money >= money;
   const [canBuy, setCanBuy] = useState(false);
 
-  const [fontsLoaded] = useFonts({
-    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
-    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
-    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
-
   const checkRequirements = () => {
     return requirements.every((requirement) => {
       if (requirement.startsWith("At least")) {
@@ -34,6 +25,15 @@ function EquipmentItem({ name, money, requirements, btn }) {
     const requirementsSatisfied = checkRequirements();
     setCanBuy(requirementsSatisfied);
   }, [authCtx.userData]);
+
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
+    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const buyHandler = () => {
     const value = -money;

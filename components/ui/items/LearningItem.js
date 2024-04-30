@@ -39,15 +39,6 @@ function LearningItem({
     }
   }, [year]);
 
-  const [fontsLoaded] = useFonts({
-    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
-    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
-    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
-
   const checkRequirements = () => {
     return requirements.every((requirement) => {
       if (requirement.startsWith("At least")) {
@@ -69,11 +60,21 @@ function LearningItem({
       return false;
     });
   };
-
+  
   useEffect(() => {
     const requirementsSatisfied = checkRequirements();
     setCanLearn(requirementsSatisfied);
   }, [authCtx.userData, learned.learnedDegrees]);
+
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
+    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
 
   const onPressHandler = () => {
     const updates = {};

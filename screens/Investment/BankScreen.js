@@ -13,6 +13,11 @@ function BankScreen() {
   const age = authCtx.userData?.age;
   const [isOldEnough, setIsOldEnough] = useState(false);
 
+  useEffect(() => {
+    const requirementsSatisfied = age >= 16;
+    setIsOldEnough(requirementsSatisfied);
+  }, [authCtx.userData]);
+
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
   });
@@ -33,11 +38,6 @@ function BankScreen() {
   } else if (!isHaveLoanRepayment && loanRepaymentItemIndex !== -1) {
     bank.splice(loanRepaymentItemIndex, 1);
   }
-
-  useEffect(() => {
-    const requirementsSatisfied = age >= 16;
-    setIsOldEnough(requirementsSatisfied);
-  }, [authCtx.userData]);
 
   return (
     <View style={styles.rootContainer}>

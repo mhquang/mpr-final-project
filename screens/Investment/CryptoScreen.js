@@ -17,18 +17,12 @@ function CryptoScreen() {
   const age = authCtx.userData?.age;
   const [isOldEnough, setIsOldEnough] = useState(false);
 
-  const [fontsLoaded] = useFonts({
-    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
 
   useEffect(() => {
     const timer = setInterval(() => {
       const random = randomIncrease(crypto);
       setIncreases(random);
-    }, 30000); // 1mins
+    }, 15000); 
     return () => clearInterval(timer);
   }, []);
 
@@ -36,6 +30,13 @@ function CryptoScreen() {
     const requirementsSatisfied = age >= 21;
     setIsOldEnough(requirementsSatisfied);
   }, [authCtx.userData]);
+
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <View style={styles.rootContainer}>

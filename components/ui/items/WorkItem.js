@@ -33,22 +33,6 @@ function WorkItem({
   const learnedDegrees = authCtx.userData?.learned.learnedDegrees;
   const items = authCtx.userData?.items;
 
-  const isMainButtonShown =
-    (mainJob.length === 0 && sideJob.length <= 1) ||
-    (mainJob.length !== 0 && sideJob.length === 2);
-
-  const isSideButtonShown =
-    (mainJob.length === 0 || sideJob.length < 1) && sideJob.length !== 2;
-
-  const [fontsLoaded] = useFonts({
-    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
-    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
-    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
-
   const checkRequirements = () => {
     return requirements.every((requirement) => {
       if (requirement.startsWith("At least")) {
@@ -73,6 +57,22 @@ function WorkItem({
     const requirementsSatisfied = checkRequirements();
     setCanWork(requirementsSatisfied);
   }, [authCtx.userData, learnedDegrees]);
+
+  const isMainButtonShown =
+    (mainJob.length === 0 && sideJob.length <= 1) ||
+    (mainJob.length !== 0 && sideJob.length === 2);
+
+  const isSideButtonShown =
+    (mainJob.length === 0 || sideJob.length < 1) && sideJob.length !== 2;
+
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
+    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const onPressHandler = () => {
     const updates = {};

@@ -17,18 +17,11 @@ function StocksInforScreen() {
   const age = authCtx.userData?.age;
   const [isOldEnough, setIsOldEnough] = useState(false);
 
-  const [fontsLoaded] = useFonts({
-    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
-
   useEffect(() => {
     const timer = setInterval(() => {
       const random = randomIncrease(stocks);
       setIncreases(random);
-    }, 30000); // 1 mins
+    }, 15000); // 1 mins
     return () => clearInterval(timer);
   }, []);
 
@@ -36,6 +29,13 @@ function StocksInforScreen() {
     const requirementsSatisfied = age >= 18;
     setIsOldEnough(requirementsSatisfied);
   }, [authCtx.userData]);
+
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <View style={styles.rootContainer}>

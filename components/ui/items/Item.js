@@ -22,15 +22,6 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const learnedLanguages = authCtx.userData?.learned.learnedLanguages;
   const [isDiscount, setIsDiscount] = useState(false);
 
-  const [fontsLoaded] = useFonts({
-    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
-    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
-    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
-  });
-  if (!fontsLoaded) {
-    return null;
-  }
-
   const checkRequirements = () => {
     return requirements.every((requirement) => {
       if (requirement.startsWith("At least")) {
@@ -51,7 +42,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
       if (requirement.startsWith("Discount")) {
         setIsDiscount(items.includes("Car"));
         money = money * 0.5;
-        return items.includes("Car");
+        return true;
       }
 
       if (requirement === "") {
@@ -65,6 +56,15 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
     const requirementsSatisfied = checkRequirements();
     setCanPlay(requirementsSatisfied);
   }, [authCtx.userData]);
+
+  const [fontsLoaded] = useFonts({
+    NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
+    UnboundedSemibold: require("../../../assets/fonts/Unbounded-SemiBold.ttf"),
+    UnboundedMedium: require("../../../assets/fonts/Unbounded-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const onPressHandler = () => {
     if (name === "Buy lotery tickets") {
