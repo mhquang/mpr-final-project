@@ -84,6 +84,11 @@ function AuthStack() {
 
 function Authenticated() {
   const authCtx = useContext(AuthContext);
+  const navigation = useNavigation();
+
+  function handlePress() {
+    navigation.navigate("HowtoPlay");
+  }
 
   return (
     <Stack.Navigator
@@ -101,12 +106,20 @@ function Authenticated() {
           headerTintColor: Colors.white,
           headerBackVisible: false,
           gestureEnabled: false,
-          headerRight: () => (
+          headerLeft: () => (
             <IconButton
               icon={"logout"}
               onPress={authCtx.logout}
               size={24}
               color={Colors.white}
+            />
+          ),
+          headerRight: () => (
+            <IconButton
+              icon={"questioncircleo"}
+              size={24}
+              color={Colors.white}
+              onPress={handlePress}
             />
           ),
         }}

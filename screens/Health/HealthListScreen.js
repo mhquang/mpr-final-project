@@ -29,9 +29,23 @@ function HealthListScreen() {
         <Text style={styles.title}>
           Health:{" "}
           <Text
-            style={[styles.text, { color: health <= 50 ? "red" : "green" }]}
+            style={[
+              styles.text,
+              {
+                color:
+                  health > 50
+                    ? Colors.lightGreen
+                    : health <= 50 && health > 20
+                    ? Colors.yellowHappiness
+                    : Colors.redHealth,
+              },
+            ]}
           >
-            {health <= 50 ? "Bad" : "Good"}
+            {health > 50
+              ? "Good"
+              : health <= 50 && health > 20
+              ? "Not good"
+              : "Bad"}
           </Text>
         </Text>
       </View>

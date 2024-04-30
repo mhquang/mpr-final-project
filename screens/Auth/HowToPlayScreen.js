@@ -26,18 +26,10 @@ function HowToPlayScreen() {
         </Text>
         <Text></Text>
         <Text style={styles.text}>
-          In this game, you will be the main character starting from level 0
-          corresponding to the 0 age of the character in the game. You can also
-          skip the first 5 years since there is nothing to do or to learn during
-          this period.
-        </Text>
-        <Text></Text>
-        <Text style={styles.text}>
           As the main character, players go through educational levels like
           primary, secondary, high school, and university, making decisions
           about finances, health, and relationships. At 18, they receive $10,000
-          from parents, facing crucial choices about education, employment, and
-          housing.
+          from parents, facing crucial choices about education, employment.
         </Text>
         <Text></Text>
         <Text style={styles.text}>
@@ -104,13 +96,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "NTSomic",
-    color: "white",
+    color: Colors.lightGray,
     fontSize: 15,
   },
 
   indexText: {
     fontFamily: "NTSomicBold",
     fontSize: 17,
+    color: "white",
   },
 });
 
