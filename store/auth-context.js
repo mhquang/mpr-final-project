@@ -5,7 +5,7 @@ import {
   updateUserData,
   deleteDocument,
   writeDataToFirestore,
-  getUserDataFirebase
+  getUserDataFirebase,
 } from "../util/firebase";
 import { Alert } from "react-native";
 import { getRandomAccidents } from "../util/getRandomAccidents";
@@ -70,7 +70,7 @@ function AuthContextProvider({ children }) {
         });
         AsyncStorage.setItem("userData", JSON.stringify(userData));
       }
-    }, 4000); // 12 minute actual: 720000
+    }, 720000); // 12 minute actual: 720000
 
     return () => clearInterval(timer);
   }, [userData]);
@@ -123,6 +123,27 @@ function AuthContextProvider({ children }) {
       const updatedUserData = { ...userData };
       if (value) {
         updatedUserData["money"] += value;
+        if (
+          updatedUserData["money"] >= -1000000 &&
+          updatedUserData["money"] <= 0
+        ) {
+          updatedUserData["money"] = 0;
+          updatedUserData["happiness"] = updatedUserData["happiness"] * 0.5;
+          Alert.alert(
+            "You are bankrupt!",
+            "You are bankrupt! You are bankrupt! You are bankrupt!",
+            [
+              {
+                text: "OK",
+              },
+            ]
+          );
+        }
+
+        if (updatedUserData["money"] <= -1000000) {
+          updatedUserData["money"] = 0;
+          resetLife({ isSuicide: true });
+        }
       }
       if (item && action === "buy") {
         updatedUserData?.items.push(item);
@@ -307,7 +328,7 @@ function AuthContextProvider({ children }) {
     }
   };
 
-  function resetLife() {
+  function resetLife({ isSuicide }) {
     const email = userData?.userId;
     async function reset() {
       try {
@@ -316,7 +337,10 @@ function AuthContextProvider({ children }) {
         await writeDataToFirestore("userCharacteristics", email, {
           userId: email,
         });
-        const newUserData = await getUserDataFirebase("userCharacteristics", email);
+        const newUserData = await getUserDataFirebase(
+          "userCharacteristics",
+          email
+        );
         getUserData(newUserData);
       } catch (error) {
         console.log(error);
@@ -324,7 +348,10 @@ function AuthContextProvider({ children }) {
       AsyncStorage.removeItem("userData");
       setIsCreatingNewLife(false);
     }
-    Alert.alert("You are dead!", "You are dead! You are dead! You are dead!", [
+    const messgae = isSuicide
+      ? "You committed suicide because you were bankrupt"
+      : "You are dead! You are dead! You are dead!";
+    Alert.alert("You are dead!", messgae, [
       {
         text: "OK",
         onPress: () => {
@@ -339,52 +366,65 @@ function AuthContextProvider({ children }) {
     const accident = accidents.find((accident) => {
       return accident.id === randomNum;
     });
-        if(accident.title && accident.description && (accident.health || accident.iq || accident.happiness || accident.money)) {
-          Alert.alert(accident.title, accident.description, [
-            {
-              text: "OK",
-              onPress: () => {
-                setUserData((prevUserData) => {
-                  const newHealth = prevUserData.health - (accident.health || 0);
-                  if (newHealth <= 0) {
-                    resetLife();
-                    return {
-                      userId: prevUserData.userId,
-                      name: prevUserData.name,
-                      age: 0,
-                      userGender: prevUserData.userGender,
-                      health: 20,
-                      iq: 10,
-                      happiness: 15,
-                      money: 0,
-                      savings: 0,
-                      friends: [],
-                      lover: [],
-                      items: [],
-                      learned: {
-                      learnedDegrees: [],
-                      learnedSkills: [],
-                      learnedCourses: [],
-                      learnedLanguages: [],
-                      },
-                      currentWorking: { main: [], side: [], crime: [] },
-                    }
-                  }
-                  return {
-                    ...prevUserData,
-                    health: newHealth <= 0 ? 0 : newHealth,
-                    iq: prevUserData.iq - (accident.iq || 0) < 0 ? 0 : prevUserData.iq - (accident.iq || 0),
-                    happiness: prevUserData.happiness - (accident.happiness || 0) < 0 ? 0 : prevUserData.happiness - (accident.happiness || 0),
-                    money: prevUserData.money - (accident.money || 0) < 0 ? 0 : prevUserData.money - (accident.money || 0),
-                  };
-                });
-              },
-            },
-          ]);
-        }
+    if (
+      accident.title &&
+      accident.description &&
+      (accident.health || accident.iq || accident.happiness || accident.money)
+    ) {
+      Alert.alert(accident.title, accident.description, [
+        {
+          text: "OK",
+          onPress: () => {
+            setUserData((prevUserData) => {
+              const newHealth = prevUserData.health - (accident.health || 0);
+              if (newHealth <= 0) {
+                resetLife();
+                return {
+                  userId: prevUserData.userId,
+                  name: prevUserData.name,
+                  age: 0,
+                  userGender: prevUserData.userGender,
+                  health: 20,
+                  iq: 10,
+                  happiness: 15,
+                  money: 0,
+                  savings: 0,
+                  friends: [],
+                  lover: [],
+                  items: [],
+                  learned: {
+                    learnedDegrees: [],
+                    learnedSkills: [],
+                    learnedCourses: [],
+                    learnedLanguages: [],
+                  },
+                  currentWorking: { main: [], side: [], crime: [] },
+                };
+              }
+              return {
+                ...prevUserData,
+                health: newHealth <= 0 ? 0 : newHealth,
+                iq:
+                  prevUserData.iq - (accident.iq || 0) < 0
+                    ? 0
+                    : prevUserData.iq - (accident.iq || 0),
+                happiness:
+                  prevUserData.happiness - (accident.happiness || 0) < 0
+                    ? 0
+                    : prevUserData.happiness - (accident.happiness || 0),
+                money:
+                  prevUserData.money - (accident.money || 0) < 0
+                    ? 0
+                    : prevUserData.money - (accident.money || 0),
+              };
+            });
+          },
+        },
+      ]);
+    }
   }
 
-    async function backToHome() {
+  async function backToHome() {
     setIsSaving(true);
     const email = userData?.userId;
     try {
