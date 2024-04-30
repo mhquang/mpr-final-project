@@ -89,7 +89,7 @@ export const leisure = [
     name: "Local vacation",
     money: 1100,
     time: "2000",
-    requirements: [""],
+    requirements: ["Discount 50% if you have a car"],
     happiness: { isIncrease: true, index: "7" },
     iq: { isIncrease: true, index: "3" },
     health: { isIncrease: false, index: "3" },
