@@ -4,7 +4,7 @@ export const friends = [
         age: 7,
         gender: 'Male',
         hobbies: ['Reading', 'Painting', 'Hiking'],
-        happiness: { isIncrease: false, index: "2" }
+        happiness: { isIncrease: true, index: "2" }
     },
     {
         name: 'Jack Bauer',
@@ -18,7 +18,7 @@ export const friends = [
         age: 7,
         gender: 'Female',
         hobbies: ['Swimming', 'Dancing', 'Yoga'],
-        happiness: { isIncrease: false, index: "2" }
+        happiness: { isIncrease: true, index: "2" }
     },
     {
         name: 'Jim Halpert',
@@ -67,7 +67,7 @@ export const friends = [
         age: 28,
         gender: 'Female',
         hobbies: ['Reading', 'Painting', 'Swimming'],
-        happiness: { isIncrease: false, index: "2" }
+        happiness: { isIncrease: true, index: "2" }
     },
     {
         name: 'Michael Johnson',
