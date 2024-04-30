@@ -68,7 +68,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const onPressHandler = () => {
     if (name === "Buy lotery tickets") {
       authCtx.updateMoney({ value: -25 });
-      if (getRandomAccidents(1, 300) === 1) {
+      if (getRandomAccidents(1, 500) === 68) {
         Alert.alert("Congratulations!", "You won the lottery", [
           {
             text: "OK",
