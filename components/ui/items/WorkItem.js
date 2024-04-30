@@ -7,7 +7,7 @@ import { AuthContext } from "../../../store/auth-context";
 import { formatNumber } from "./../../../util/formatNumber";
 import { side_job } from "../../../data/work/side-jobs";
 import { setWorkingTime } from "../../../util/setWorkingTime";
-
+import { formatTime } from "../../../util/formatTime";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
@@ -147,7 +147,7 @@ function WorkItem({
         </View>
         <View style={styles.timeContainer}>
           {time && <Ionicons name="time-outline" size={20} />}
-          <Text style={styles.time}>{time}</Text>
+          <Text style={styles.time}>{formatTime(time)}</Text>
         </View>
       </View>
       <View style={styles.innerContainer}>

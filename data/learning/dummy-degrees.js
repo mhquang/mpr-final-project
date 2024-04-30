@@ -2,7 +2,7 @@ export const degrees = [
   {
     name: "Primary",
     money: "Free",
-    time: "9 months",
+    time: "540000",
     requirements: ["At least 6 years old"],
     health: { isIncrease: false, index: "2" },
     happiness: { isIncrease: false, index: "2" },
@@ -12,7 +12,7 @@ export const degrees = [
   {
     name: "Secondary",
     money: "Free",
-    time: "3000",
+    time: "540000",
     requirements: ["Graduated from Primary"],
     health: { isIncrease: false, index: "2" },
     happiness: { isIncrease: false, index: "2" },
@@ -22,7 +22,7 @@ export const degrees = [
   {
     name: "High school",
     money: "Free",
-    time: "4000",
+    time: "540000",
     requirements: ["Graduated from Secondary"],
     health: { isIncrease: false, index: "2" },
     happiness: { isIncrease: false, index: "2" },
@@ -32,7 +32,7 @@ export const degrees = [
   {
     name: "Bachelor of Artificial Intelligence",
     money: 500,
-    time: "3000",
+    time: "600000",
     requirements: ["Graduated from High school"],
     health: { isIncrease: false, index: "3" },
     happiness: { isIncrease: false, index: "3" },
@@ -42,7 +42,7 @@ export const degrees = [
   {
     name: "Bachelor of Computer Science",
     money: 500,
-    time: "4000",
+    time: "600000",
     requirements: ["Graduated from High school"],
     health: { isIncrease: false, index: "3" },
     happiness: { isIncrease: false, index: "3" },
@@ -52,7 +52,7 @@ export const degrees = [
   {
     name: "Bachelor of Software Engineering",
     money: 500,
-    time: "9 months",
+    time: "600000",
     requirements: ["Graduated from High school"],
     health: { isIncrease: false, index: "3" },
     happiness: { isIncrease: false, index: "3" },
@@ -62,7 +62,7 @@ export const degrees = [
   {
     name: "Bachelor of Cybersercurity",
     money: 500,
-    time: "9 months",
+    time: "600000",
     requirements: ["Graduated from High school"],
     health: { isIncrease: false, index: "3" },
     happiness: { isIncrease: false, index: "3" },
@@ -72,7 +72,7 @@ export const degrees = [
   {
     name: "Bachelor of Information Systems and Technology",
     money: 500,
-    time: "9 months",
+    time: "600000",
     requirements: ["Graduated from High school"],
     health: { isIncrease: false, index: "3" },
     happiness: { isIncrease: false, index: "3" },
@@ -82,7 +82,7 @@ export const degrees = [
   {
     name: "Bachelor of Data Science",
     money: 500,
-    time: "9 months",
+    time: "600000",
     requirements: ["Graduated from High school"],
     health: { isIncrease: false, index: "3" },
     happiness: { isIncrease: false, index: "3" },
@@ -92,7 +92,7 @@ export const degrees = [
   {
     name: "Bachelor of Game Development",
     money: 500,
-    time: "9 months",
+    time: "600000",
     requirements: ["Graduated from High school"],
     health: { isIncrease: false, index: "3" },
     happiness: { isIncrease: false, index: "3" },
@@ -102,7 +102,7 @@ export const degrees = [
   {
     name: "Masters",
     money: 800,
-    time: "6 months",
+    time: "720000",
     requirements: ["Have Bachelor Degree"],
     health: { isIncrease: false, index: "5" },
     happiness: { isIncrease: false, index: "5" },

@@ -3,10 +3,10 @@ export const side_job = [{
     requirements: [
         "At least 16 years old",
     ],
-    time: "3000",
-    health: { isIncrease: false, index: "2" },
-    iq: { isIncrease: true, index: "1" },
-    happiness: { isIncrease: false, index: "3" },
+    time: "60000",
+    health: { isIncrease: false, index: "3" },
+    iq: { isIncrease: true, index: "2" },
+    happiness: { isIncrease: false, index: "2" },
     salary: 200
 },
 {
@@ -14,21 +14,21 @@ export const side_job = [{
     requirements: [
         "At least 18 years old",
     ],
-    time: "4000",
-    health: { isIncrease: false, index: "3" },
+    time: "60000",
+    health: { isIncrease: false, index: "4" },
     iq: { isIncrease: true, index: "1" },
-    happiness: { isIncrease: false, index: "2" },
-    salary: 500
+    happiness: { isIncrease: false, index: "1" },
+    salary: 300
 },
 {
     name: "Tutor",
     requirements: [
         "At least 18 years old",
     ],
-    time: "3000",
+    time: "120000",
     health: { isIncrease: false, index: "3" },
-    iq: { isIncrease: true, index: "3" },
-    happiness: { isIncrease: false, index: "3" },
+    iq: { isIncrease: true, index: "4" },
+    happiness: { isIncrease: false, index: "2" },
     salary: 800,
 },
 {
@@ -36,10 +36,10 @@ export const side_job = [{
     requirements: [
         "At least 18 years old",
     ],
-    time: "3000",
-    health: { isIncrease: false, index: "4" },
+    time: "60000",
+    health: { isIncrease: false, index: "7" },
     iq: { isIncrease: true, index: "2" },
-    happiness: { isIncrease: false, index: "1" },
+    happiness: { isIncrease: false, index: "2" },
     salary: 980
 },
 {
@@ -47,8 +47,9 @@ export const side_job = [{
     requirements: [
         "At least 16 years old",
     ],
-    time: "4000",
-    health: { isIncrease: false, index: "4" },
-    iq: { isIncrease: true, index: "3" },
-    salary: 690
+    time: "28000",
+    health: { isIncrease: false, index: "3" },
+    iq: { isIncrease: false, index: "7" },
+    happiness: { isIncrease: false, index: "2" },
+    salary: 500
 }]

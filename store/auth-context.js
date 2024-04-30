@@ -40,14 +40,14 @@ function AuthContextProvider({ children }) {
     const timer = setInterval(() => {
       if (userData) {
         setUserData((prevUserData) => {
-          if (prevUserData.age + 1 > 6) {
+          if (prevUserData.age + 1 > 60) {
             return {
               ...prevUserData,
               age: prevUserData.age + 1,
               money: prevUserData.money + 400,
-              health: prevUserData.health - 10,
-              iq: prevUserData.iq - 5,
-              happiness: prevUserData.happiness - 5,
+              health: prevUserData.health - 5,
+              iq: prevUserData.iq - 4,
+              happiness: prevUserData.happiness - 4,
               savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
               loan: prevUserData.loan + (prevUserData.loan * 9.9) / 100,
             };
@@ -57,12 +57,12 @@ function AuthContextProvider({ children }) {
               age: prevUserData.age + 1,
               money: prevUserData.money + 100,
               health:
-                prevUserData.health + 3 > 100 ? 100 : prevUserData.health + 10,
-              iq: prevUserData.iq + 3 > 100 ? 100 : prevUserData.iq + 3,
+                prevUserData.health + 3 > 100 ? 100 : prevUserData.health + 4,
+              iq: prevUserData.iq + 3 > 100 ? 100 : prevUserData.iq + 4,
               happiness:
                 prevUserData.happiness + 3 > 100
                   ? 100
-                  : prevUserData.happiness + 3,
+                  : prevUserData.happiness + 4,
               savings: prevUserData.savings + (prevUserData.savings * 5) / 100,
               loan: prevUserData.loan + (prevUserData.loan * 9.9) / 100,
             };
@@ -117,7 +117,6 @@ function AuthContextProvider({ children }) {
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
   };
-
   const updateMoney = ({ value, item, action }) => {
     if (userData) {
       const updatedUserData = { ...userData };
@@ -362,66 +361,53 @@ function AuthContextProvider({ children }) {
     return;
   }
   function returnAccident(accidents) {
-    const randomNum = getRandomAccidents(1, 4);
+    const randomNum = getRandomAccidents(1, 200);
     const accident = accidents.find((accident) => {
       return accident.id === randomNum;
     });
-    if (
-      accident.title &&
-      accident.description &&
-      (accident.health || accident.iq || accident.happiness || accident.money)
-    ) {
-      Alert.alert(accident.title, accident.description, [
-        {
-          text: "OK",
-          onPress: () => {
-            setUserData((prevUserData) => {
-              const newHealth = prevUserData.health - (accident.health || 0);
-              if (newHealth <= 0) {
-                resetLife();
-                return {
-                  userId: prevUserData.userId,
-                  name: prevUserData.name,
-                  age: 0,
-                  userGender: prevUserData.userGender,
-                  health: 20,
-                  iq: 10,
-                  happiness: 15,
-                  money: 0,
-                  savings: 0,
-                  friends: [],
-                  lover: [],
-                  items: [],
-                  learned: {
-                    learnedDegrees: [],
-                    learnedSkills: [],
-                    learnedCourses: [],
-                    learnedLanguages: [],
-                  },
-                  currentWorking: { main: [], side: [], crime: [] },
-                };
-              }
-              return {
-                ...prevUserData,
-                health: newHealth <= 0 ? 0 : newHealth,
-                iq:
-                  prevUserData.iq - (accident.iq || 0) < 0
-                    ? 0
-                    : prevUserData.iq - (accident.iq || 0),
-                happiness:
-                  prevUserData.happiness - (accident.happiness || 0) < 0
-                    ? 0
-                    : prevUserData.happiness - (accident.happiness || 0),
-                money:
-                  prevUserData.money - (accident.money || 0) < 0
-                    ? 0
-                    : prevUserData.money - (accident.money || 0),
-              };
-            });
-          },
-        },
-      ]);
-    }
+        if(accident && accident.title && accident.description && (accident.health || accident.iq || accident.happiness || accident.money)) {
+          Alert.alert(accident.title, accident.description, [
+            {
+              text: "OK",
+              onPress: () => {
+                setUserData((prevUserData) => {
+                  const newHealth = prevUserData.health - (accident.health || 0);
+                  if (newHealth <= 0) {
+                    resetLife();
+                    return {
+                      userId: prevUserData.userId,
+                      name: prevUserData.name,
+                      age: 0,
+                      userGender: prevUserData.userGender,
+                      health: 20,
+                      iq: 10,
+                      happiness: 15,
+                      money: 0,
+                      savings: 0,
+                      friends: [],
+                      lover: [],
+                      items: [],
+                      learned: {
+                      learnedDegrees: [],
+                      learnedSkills: [],
+                      learnedCourses: [],
+                      learnedLanguages: [],
+                      },
+                      currentWorking: { main: [], side: [], crime: [] },
+                    }
+                  }
+                  return {
+                    ...prevUserData,
+                    health: newHealth <= 0 ? 0 : newHealth,
+                    iq: prevUserData.iq - (accident.iq || 0) < 0 ? 0 : prevUserData.iq - (accident.iq || 0),
+                    happiness: prevUserData.happiness - (accident.happiness || 0) < 0 ? 0 : prevUserData.happiness - (accident.happiness || 0),
+                    money: prevUserData.money - (accident.money || 0) < 0 ? 0 : prevUserData.money - (accident.money || 0),
+                  };
+                });
+              },
+            },
+          ]);
+        }
   }
 
   async function backToHome() {
