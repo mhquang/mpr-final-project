@@ -25,7 +25,7 @@ export function MainScreen() {
       authCtx.updateMoney({ value: 10000 });
     }
     if (age > 100 || authCtx.userData?.health <= 0) {
-      authCtx.resetLife();
+      authCtx.resetLife({ isSuicide: false });
       return;
     }
   }, [age]);

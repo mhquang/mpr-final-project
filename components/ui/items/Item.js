@@ -15,11 +15,12 @@ import { formatTime } from "../../../util/formatTime";
 function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const authCtx = useContext(AuthContext);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [canPlay, setCanPlay] = useState(false);
   const userHealth = authCtx.userData?.health;
   const isSufficient = authCtx.userData?.money >= money;
-  const [canPlay, setCanPlay] = useState(false);
   const items = authCtx.userData?.items;
   const learnedLanguages = authCtx.userData?.learned.learnedLanguages;
+  const [isDiscount, setIsDiscount] = useState(false);
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../../assets/fonts/NTSomic-Medium.ttf"),
@@ -46,6 +47,13 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
         const wordAfterLearned = requirement.split(" ").slice(1).join(" ");
         return learnedLanguages.includes(wordAfterLearned);
       }
+
+      if (requirement.startsWith("Discount")) {
+        setIsDiscount(items.includes("Car"));
+        money = money * 0.5;
+        return items.includes("Car");
+      }
+
       if (requirement === "") {
         return true;
       }
@@ -61,27 +69,24 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const onPressHandler = () => {
     if (name === "Buy lotery tickets") {
       authCtx.updateMoney({ value: -25 });
-      if (getRandomAccidents(1, 300) === 1) {
-        Alert.alert(
-          "Congratulations!",
-          "You won the lottery",
-          [
-            {
-              text: "OK",
-              onPress: () => {
-                authCtx.updateIndex({
-                  money: 50000,
-                  happiness: 30,
-                });
-              },
+      if (getRandomAccidents(1, 500) === 68) {
+        Alert.alert("Congratulations!", "You won the lottery", [
+          {
+            text: "OK",
+            onPress: () => {
+              authCtx.updateIndex({
+                money: 50000,
+                happiness: 30,
+              });
             },
+          },
         ]);
       }
     }
 
     const updates = {};
     if (money) {
-      const value = money === "Free" ? 0 : -(money);
+      const value = money === "Free" ? 0 : -money;
       updates.money = value;
     }
     if (health) {
@@ -129,11 +134,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
         {!isProcessing && (money === "Free" || isSufficient) && canPlay && (
           <ButtonItem children={btn} onPress={onPressHandler} />
         )}
-        {isProcessing && (
-          <Text style={styles.require}>
-            Processing
-          </Text>
-        )}
+        {isProcessing && <Text style={styles.require}>Processing</Text>}
       </View>
       <View style={styles.innerContainer}>
         <View style={styles.requireContainer}>
@@ -178,7 +179,11 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
         <View style={styles.priceContainer}>
           <Text style={styles.moneyTitle}>Price: </Text>
           <Text style={styles.money}>
-            {money === "Free" ? "Free" : `$${formatNumber(money)}`}
+            {money === "Free"
+              ? "Free"
+              : isDiscount
+              ? `$${formatNumber(money * 0.5)}`
+              : `$${formatNumber(money)}`}
           </Text>
         </View>
       </View>

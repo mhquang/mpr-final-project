@@ -20,6 +20,7 @@ function ItemListScreen() {
               key={index}
               name={item.name}
               money={item.money}
+              requirements={item.requirements}
               btn={"Buy"}
             />
           );
@@ -30,6 +31,7 @@ function ItemListScreen() {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,

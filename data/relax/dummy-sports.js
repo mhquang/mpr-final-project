@@ -58,7 +58,6 @@ export const sports = [
     requirements: ["At least 5 years old"],
     time: "1000",
     health: { isIncrease: true, index: "2" },
-    iq: { isIncrease: true, index: "1" },
     happiness: { isIncrease: true, index: "2" },
     money: "Free",
   },

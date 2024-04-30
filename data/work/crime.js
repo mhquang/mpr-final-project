@@ -10,7 +10,7 @@ export const crime = [
   },
   {
     name: "Hacking",
-    requirements: ["Have Bachelor of Cybersecurity degree"],
+    requirements: ["Have Laptop"],
     time: "60000",
     health: { isIncrease: false, index: "4" },
     iq: { isIncrease: false, index: "5" },
