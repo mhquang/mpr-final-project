@@ -16,7 +16,7 @@ function BankScreen() {
   useEffect(() => {
     const requirementsSatisfied = age >= 16;
     setIsOldEnough(requirementsSatisfied);
-  }, [authCtx.userData]);
+  }, [authCtx?.userData]);
 
   const [fontsLoaded] = useFonts({
     NTSomicMedium: require("../../assets/fonts/NTSomic-Medium.ttf"),

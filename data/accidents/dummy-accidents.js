@@ -11,8 +11,8 @@ export const accidents = [
         id: 2,
         title: "Hurry up",
         description: "Get traffic accident, you need to go to the hospital!",
-        health: 0,
-        happiness: 4,
+        health: 10,
+        happiness: 3,
         iq: 1
 
     },
@@ -29,31 +29,23 @@ export const accidents = [
         id: 4,
         title: "Opps, i feel bad",
         description: "You get sick, you need to see doctor",
-        health: 0,
+        health: 3,
         iq: 1,
         happiness: 3,
-    },
-    {
-        id: 5,
-        title: "I feel tired",
-        description: "You get sick, you need to see doctor",
-        health: 4,
-        happiness: 3,
-        iq: 1
     },
     {
         id: 6,
         title: "Warning",
         description: "You got a mental issues, you need to relax now",
         health: 2,
-        happiness: 3,
+        happiness: 4,
         iq: 4
     },
     {
         id: 7,
         title: "This is so slipery",
         description: "You slip over",
-        health: 2,
+        health: 1,
         happiness: 2,
         iq: 0
     },

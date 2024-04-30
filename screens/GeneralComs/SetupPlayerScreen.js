@@ -46,7 +46,7 @@ function SetupPlayerScreen() {
     } catch (error) {
       Alert.alert(
         "Set up failed!",
-        "Could not log you in. Please check your credentials or try again later!"
+        "Please check your input or try again later!"
       );
       console.log(error);
       setIsSettingup(false);

@@ -9,6 +9,15 @@ export const sports = [
     money: "Free",
   },
   {
+    name: "Gym",
+    requirements: ["At least 15 years old"],
+    time: "60000",
+    health: { isIncrease: true, index: "5" },
+    iq: { isIncrease: true, index: "2" },
+    happiness: { isIncrease: true, index: "3" },
+    money: 110,
+  },
+  {
     name: "Volleyball",
     requirements: ["At least 12 years old"],
     time: "1000",

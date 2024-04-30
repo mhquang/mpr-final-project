@@ -8,7 +8,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 function HowToPlayScreen() {
   const [fontsLoaded] = useFonts({
     Oddval: require("../../assets/fonts/oddval.semibold.ttf"),
-    NTSomiBold: require("../../assets/fonts/NTSomic-Bold.ttf"),
+    NTSomicBold: require("../../assets/fonts/NTSomic-Bold.ttf"),
     NTSomic: require("../../assets/fonts/NTSomic-Regular.ttf"),
   });
   if (!fontsLoaded) {

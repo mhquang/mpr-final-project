@@ -13,7 +13,7 @@ function PersonalInfo() {
   if (!fontsLoaded) {
     return null;
   }
-  const userData = authCtx.userData;
+  const userData = authCtx?.userData;
   const netWorth = userData?.money + userData?.savings;
   const lover = userData?.lover[0];
   const relationshipStatus = !lover
@@ -34,10 +34,10 @@ function PersonalInfo() {
         {userData?.currentWorking.main.length > 0 && (
           <Text style={styles.title}>
             Job:{" "}
-            <Text style={styles.text}>{userData?.currentWorking.main}</Text>
+            <Text style={styles.text}>{userData?.currentWorking?.main}</Text>
           </Text>
         )}
-        {userData?.currentWorking.side.length > 0 && (
+        {userData?.currentWorking?.side.length > 0 && (
           <Text style={styles.title}>
             Side Job:{" "}
             <Text style={styles.text}>
