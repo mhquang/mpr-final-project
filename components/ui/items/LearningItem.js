@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../store/auth-context";
 import { formatNumber } from "./../../../util/formatNumber";
 import { setLearningItemTime } from "../../../util/setLearningItemTime";
-
+import { formatTime } from "../../../util/formatTime";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import * as Progress from "react-native-progress";
@@ -152,7 +152,7 @@ function LearningItem({
         </View>
         <View style={styles.timeContainer}>
           {time && <Ionicons name="time-outline" size={20} />}
-          <Text style={styles.time}>{time}</Text>
+          <Text style={styles.time}>{formatTime(time)}</Text>
         </View>
       </View>
       <View style={styles.innerContainer}>

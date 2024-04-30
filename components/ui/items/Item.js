@@ -10,7 +10,7 @@ import { setItemTime } from "../../../util/setItemTime";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 import IndexText from "../IndexText";
 import ButtonItem from "../buttons/ButtonItem";
-import { accidents } from "../../../data/accidents/dummy-accidents";
+import { formatTime } from "../../../util/formatTime";
 
 function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
   const authCtx = useContext(AuthContext);
@@ -146,7 +146,7 @@ function Item({ name, requirements, time, health, iq, happiness, money, btn }) {
         </View>
         <View style={styles.timeContainer}>
           {time && <Ionicons name="time-outline" size={20} />}
-          <Text style={styles.time}>{time}</Text>
+          <Text style={styles.time}>{formatTime(time)}</Text>
         </View>
       </View>
       <View style={styles.innerContainer}>

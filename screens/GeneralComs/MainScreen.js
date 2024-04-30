@@ -18,7 +18,7 @@ export function MainScreen() {
   const age = authCtx.userData?.age;
 
   useEffect(() => {
-    if (authCtx.userData?.age > 5 && authCtx.userData?.health > 0) {
+    if (authCtx.userData?.age > 12 && authCtx.userData?.health > 0) {
       authCtx.returnAccident(accidents);
     }
     if (age === 18) {
