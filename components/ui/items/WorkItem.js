@@ -31,6 +31,7 @@ function WorkItem({
   const sideJob = authCtx.userData?.currentWorking.side;
   const crime = authCtx.userData?.currentWorking.crime;
   const learnedDegrees = authCtx.userData?.learned.learnedDegrees;
+  const items = authCtx.userData?.items;
 
   const isMainButtonShown =
     (mainJob.length === 0 && sideJob.length <= 1) ||
@@ -61,7 +62,7 @@ function WorkItem({
         .join(" ");
 
       if (requirement.startsWith("Have")) {
-        return learnedDegrees.includes(degree);
+        return learnedDegrees.includes(degree) || items.includes("Laptop");
       }
 
       return false;
