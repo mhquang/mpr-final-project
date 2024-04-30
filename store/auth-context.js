@@ -15,6 +15,7 @@ export const AuthContext = createContext({
   isAuthenticated: false,
   getUserData: (userData) => {},
   updateIndex: (indexUpdates) => {},
+  skipAge: () => {},
   updateMoney: (value) => {},
   sellItem: (item) => {},
   updateFriends: (friend) => {},
@@ -113,6 +114,14 @@ function AuthContextProvider({ children }) {
           }
         }
       }
+      setUserData(updatedUserData);
+      AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
+    }
+  };
+  const skipAge = () => {
+    if (userData) {
+      const updatedUserData = { ...userData };
+      updatedUserData["age"] = 18;
       setUserData(updatedUserData);
       AsyncStorage.setItem("userData", JSON.stringify(updatedUserData));
     }
@@ -435,6 +444,7 @@ function AuthContextProvider({ children }) {
     authenticate: authenticate,
     getUserData: getUserData,
     updateIndex: updateIndex,
+    skipAge: skipAge,
     updateMoney: updateMoney,
     sellItem: sellItem,
     updateFriends: updateFriends,

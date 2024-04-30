@@ -25,7 +25,7 @@ function LandingScreen({ navigation }) {
 
   const name = authCtx.userData?.name;
   const isName = !!name;
-
+  const canBeSkip = authCtx.userData?.age < 18;
   const [fontsLoaded] = useFonts({
     Oddval: require("../../assets/fonts/oddval.semibold.ttf"),
   });
@@ -40,6 +40,10 @@ function LandingScreen({ navigation }) {
   const continueGameHandler = () => {
     navigation.navigate("MainScreen");
   };
+  const skipAgeHandler = () => {
+    authCtx.skipAge();
+    navigation.navigate("MainScreen");
+  };
 
   return (
     <View style={styles.container}>
@@ -50,6 +54,7 @@ function LandingScreen({ navigation }) {
         </View>
         <View style={styles.buttonContainer}>
           {isName && <Button onPress={continueGameHandler}>Continue</Button>}
+          {canBeSkip && <Button onPress={skipAgeHandler}>Skip to 18</Button>}
           <Button onPress={newGameHandler}>New game</Button>
         </View>
       </View>
