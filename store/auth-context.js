@@ -13,23 +13,23 @@ export const AuthContext = createContext({
   userData: undefined,
   token: "",
   isAuthenticated: false,
-  getUserData: (userData) => {},
-  updateIndex: (indexUpdates) => {},
-  skipAge: () => {},
-  updateMoney: (value) => {},
-  sellItem: (item) => {},
-  updateFriends: (friend) => {},
-  removeFriends: (friend) => {},
-  dateFriends: (friend) => {},
-  breakUpFriends: () => {},
-  updateLearning: (value) => {},
-  updateWorking: (value) => {},
-  deleteWorking: (value) => {},
-  resetLife: () => {},
-  backToHome: () => {},
-  returnAccident: (accidents) => {},
-  authenticate: (token) => {},
-  logout: () => {},
+  getUserData: (userData) => { },
+  updateIndex: (indexUpdates) => { },
+  skipAge: () => { },
+  updateMoney: (value) => { },
+  sellItem: (item) => { },
+  updateFriends: (friend) => { },
+  removeFriends: (friend) => { },
+  dateFriends: (friend) => { },
+  breakUpFriends: () => { },
+  updateLearning: (value) => { },
+  updateWorking: (value) => { },
+  deleteWorking: (value) => { },
+  resetLife: () => { },
+  backToHome: () => { },
+  returnAccident: (accidents) => { },
+  authenticate: (token) => { },
+  logout: () => { },
 });
 
 function AuthContextProvider({ children }) {
@@ -374,49 +374,49 @@ function AuthContextProvider({ children }) {
     const accident = accidents.find((accident) => {
       return accident.id === randomNum;
     });
-        if(accident && accident.title && accident.description && (accident.health || accident.iq || accident.happiness || accident.money)) {
-          Alert.alert(accident.title, accident.description, [
-            {
-              text: "OK",
-              onPress: () => {
-                setUserData((prevUserData) => {
-                  const newHealth = prevUserData.health - (accident.health || 0);
-                  if (newHealth <= 0) {
-                    resetLife();
-                    return {
-                      userId: prevUserData.userId,
-                      name: prevUserData.name,
-                      age: 0,
-                      userGender: prevUserData.userGender,
-                      health: 20,
-                      iq: 10,
-                      happiness: 15,
-                      money: 0,
-                      savings: 0,
-                      friends: [],
-                      lover: [],
-                      items: [],
-                      learned: {
-                      learnedDegrees: [],
-                      learnedSkills: [],
-                      learnedCourses: [],
-                      learnedLanguages: [],
-                      },
-                      currentWorking: { main: [], side: [], crime: [] },
-                    }
-                  }
-                  return {
-                    ...prevUserData,
-                    health: newHealth <= 0 ? 0 : newHealth,
-                    iq: prevUserData.iq - (accident.iq || 0) < 0 ? 0 : prevUserData.iq - (accident.iq || 0),
-                    happiness: prevUserData.happiness - (accident.happiness || 0) < 0 ? 0 : prevUserData.happiness - (accident.happiness || 0),
-                    money: prevUserData.money - (accident.money || 0) < 0 ? 0 : prevUserData.money - (accident.money || 0),
-                  };
-                });
-              },
-            },
-          ]);
-        }
+    if (accident && accident.title && accident.description && (accident.health || accident.iq || accident.happiness || accident.money)) {
+      Alert.alert(accident.title, accident.description, [
+        {
+          text: "OK",
+          onPress: () => {
+            setUserData((prevUserData) => {
+              const newHealth = prevUserData.health - (accident.health || 0);
+              if (newHealth <= 0) {
+                resetLife();
+                return {
+                  userId: prevUserData.userId,
+                  name: prevUserData.name,
+                  age: 0,
+                  userGender: prevUserData.userGender,
+                  health: 20,
+                  iq: 10,
+                  happiness: 15,
+                  money: 0,
+                  savings: 0,
+                  friends: [],
+                  lover: [],
+                  items: [],
+                  learned: {
+                    learnedDegrees: [],
+                    learnedSkills: [],
+                    learnedCourses: [],
+                    learnedLanguages: [],
+                  },
+                  currentWorking: { main: [], side: [], crime: [] },
+                }
+              }
+              return {
+                ...prevUserData,
+                health: newHealth <= 0 ? 0 : newHealth,
+                iq: prevUserData.iq - (accident.iq || 0) < 0 ? 0 : prevUserData.iq - (accident.iq || 0),
+                happiness: prevUserData.happiness - (accident.happiness || 0) < 0 ? 0 : prevUserData.happiness - (accident.happiness || 0),
+                money: prevUserData.money - (accident.money || 0) < 0 ? 0 : prevUserData.money - (accident.money || 0),
+              };
+            });
+          },
+        },
+      ]);
+    }
   }
 
   async function backToHome() {
